@@ -1,4 +1,3 @@
-//Missing: Two Events in the same Time-Slot don't collide, just write themselves over each other. The second (third etc) one should get the platform nr 0.
 // Save and Load is not included but even though not necessary.
 // function stop doesn't end the game properly. Its just stops the gameLoop.
 // Balancing isn't done at all.
@@ -31,7 +30,7 @@ function start () { //Start program
 		gameState[3][2]= createNewContract (2, gameState[6]);
 		gameState[6]++;
 		displayContractsOffert();
-		createEvents ();
+                createEvents ();
 		createTable ();
 		displayTable ();
 		alert ("Have Fun!");
@@ -236,10 +235,47 @@ function createNewContract (type, lineNr){ //Create new Contract, displayed at c
 	return contract;
 }
 
-function createDayTraffic (){ //Create Day Traffic, which works without contracts.
-//Add random events to event list!	
+function createDayTraffic (){ //Create Day Traffic, save it to gameState[10]. Use function only once every day.
+    var nr = Math.floor((Math.random() * 10) + 1);
+    for (var i=0; i<=nr; i++){ //i==events
+        gameState[10][i] = new Array ();
+        var time = 3 * (Math.floor((Math.random() * 100) + 1));
+        gameState[10][i][0] = displayTrain(3)+"<br>"+nr;
+        gameState[10][i][1] = time;
+        gameState[10][i][2] = 0; //platform
+        gameState[10][i][3] = 0; // lineNr
+        gameState[10][i][4] = 400; //reward Day Traffic
+        gameState[10][i][5] = 1000; //fee day traffic
+        //alert(i);
+    }
 }
-
+function addDayTraffic (){ //add day traffic to events
+    var add = gameState[9].length; //enter last contract
+    //add = add+1;
+    gameState[9][add]=new Array ();
+    //alert (gameState[10].length);
+    for (var i=0; i<gameState[10].length; i++){
+        gameState[9][add][i] = new Array ();
+        gameState[9][add][i][0] = gameState[10][i][0];
+        gameState[9][add][i][1] = gameState[10][i][1];
+        gameState[9][add][i][2] = gameState[10][i][2];
+        gameState[9][add][i][3] = gameState[10][i][3];
+        gameState[9][add][i][4] = gameState[10][i][4];
+        gameState[9][add][i][5] = gameState[10][i][5];
+        //alert(gameState[9][add][i]);
+    }
+}
+function checkCollision (a, b){ //Check collision of trains on platforms
+    for (var i=0; i<gameState[9].length; i++){ //for every contract
+        for (var j=0; j<gameState[9][i].length; j++){ //for every event 
+            if (gameState[9][i][j]!==gameState[9][a][b]){
+                if (gameState[9][i][j][1]===gameState[9][a][b][1] && gameState[9][i][j][2]===gameState[9][a][b][2]){
+                    gameState[9][i][j][2]=0;
+                }
+            }
+        }
+    }
+}
 function createTable (){ //Create main table. Without any Data
 	var table = new Array();
 	for (var i=0; i<=gameState[4]; i++){ //Build table Array with row arrays without content.
@@ -287,11 +323,12 @@ function createEvents () { //Create Events out of contracts.
 			gameState[9][j][z][3]= lineNr; //lineNr
 			gameState[9][j][z][4] = reward; //reward
 			gameState[9][j][z][5] = fee; //fee
-		//	alert (gameState[9][j][z][1]);
+                        checkCollision(j, z);
 			z++;
 
 		}
 	}
+        addDayTraffic();
 }//Event (== gameState[9][contractNr][EventNr])[0]=display, [1]=time, [2]= platform, [3]= lineNr, [4]= reward, [5] = fee
 
 function insertTableData (){ //Insert Data in Table Array 
@@ -354,6 +391,7 @@ function changeDay(day){ //Change Day value and display
 if (day===1){
 	gameState[1]= gameState[1] + day; // set day counter to new day
 	document.getElementById("day").innerHTML = gameState[1]; //replace day display to new day
+        createDayTraffic ();
 	}
 	else { alert("somthing wrong (changeDay)");
 	}
@@ -386,11 +424,11 @@ function changePlatformNrEvent(i, j){ //Change Platform Number of an single Even
 		}
 	}
 	gameState[9][i][j][2] = check;
-	alert(gameState[9][i][j][2]);
+	//alert(gameState[9][i][j][2]);
 	displayContracts();
 	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
 	displayTable();
-	alert(gameState[9][i][j][2]);
+	//alert(gameState[9][i][j][2]);
 }
 function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new platforms
 	gameState[4]= gameState[4] +1;
@@ -486,6 +524,9 @@ function displayTrain(train){
 		case 2:
 		type = "RB";
 		break;
+                case 3:
+		type = "ST";
+		break;
 	}
 	return type;
 }
@@ -524,7 +565,7 @@ function gameLoopCalc (){ //Calculate everything
 	}
 }
 //Global variable
-// gameState Array: 0=accepted contracts, 1= days played, 2= money, 3= contracts offert, 4=platform, 5= game stopped?, 6=next Line Number to be taken 7= gameSpeed,8 = table, 9 = Events.
+// gameState Array: 0=accepted contracts, 1= days played, 2= money, 3= contracts offert, 4=platform, 5= game stopped?, 6=next Line Number to be taken 7= gameSpeed,8 = table, 9 = Events, 10 = dayTraffic.
 // In 0 (accepted contracts) are all contracts. Contracts are Arrays. In 0 = type (in gameState[0][nr][0]), 1 = line nr, 2= reward, 3=fee, 4=refuse fee, 5= accept reward, 6= tact, 7 = starting time (in Numbers. Math see displayTime()), 8 = platform, 
 // gameState[0][0] could be undefined!
 var gameState = new Array ();
@@ -537,5 +578,6 @@ gameState[0] = new Array ();
 gameState[3] = new Array ();
 gameState[8] = new Array ();
 gameState[9] = new Array ();
+gameState[10] = new Array ();
 var time = 0;
 fchangespeed ();

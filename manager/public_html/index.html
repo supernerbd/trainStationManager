@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Train Station Manager</title>
+<style>
+div {border: 1px solid black;}
+#top {float: left; width: 90%; height: 4%; }
+#moneydisplay {float: right; width: 20%;}
+#days {float: right; width: 20%;}
+#time {float: left; width: 79%;}
+#noplatform {float: left; width: 90%; height: 10%; margin-top: 10px;}
+#table {float: left; width: 90%; height: 70%; overflow:auto; }
+#contracts {float: left; width: 90%; height: 10%; }
+#contractsoffert {float: left; width: 49%;overflow:auto;}
+#contractstaken {float: right; width: 50%;overflow:auto;}
+#buttons {float: left; width: 90%; height: 5%; margin-top: 10px}
+table, td, th { border: 1px solid black; }
+</style>
+<script src="manager.js"></script>
+</head>
+<body>
+<h3>Train Station Manager</h3>
+<div id="top">
+<div id="time">
+	<form name="changespeed">
+	<fieldset>
+		<input type="radio" id="t0.5" name="timer" value="0.5"><label for="t0.5">0.5</label>
+		<input type="radio" id="t1" name="timer" value="1" checked><label for="t1">1</label>
+		<input type="radio" id="t2" name="timer" value="2" ><label for="t2">2</label>
+		<input type="radio" id="t5" name="timer" value="5" ><label for="t5">5</label>
+		<input type="radio" id="t10" name="timer" value="10" ><label for="t10">10</label>
+		<button type="button" id="changespeed" onclick="fchangespeed()">Change Speed</button>
+	</fieldset>
+	</form>
+</div>
+<div id="moneydisplay">
+Money: <b id="money">0</b>
+</div>
+<div id="days">
+Day: <b id="day">0</b>
+</div>
+</div>
+<div id="noplatform">
+content
+</div>
+
+<div id="table">
+	<table>
+		<tr><th id="0.0">con</th><th id="0.1">con</th><th id="0.2">con</th><th id="0.3">con</th><th id="0.4">con</th><th id="0.5">con</th><th id="0.6">con</th><th id="0.7">con</th><th id="0.8">con</th><th id="0.9">con</th><th id="0.10">con</th><th id="0.11">con</th></tr>
+		<tr><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td></tr>
+		<tr><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td></tr>
+		<tr><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td></tr>
+		<tr><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td><td>con</td></tr>
+	</table>
+</div>
+<div id="contracts">
+<div id="contractsoffert">
+<!--content
+<script>
+document.write(createNewContract (0, gameState[6]))
+</script>-->
+</div>
+<div id="contractstaken">
+content
+</div>
+</div>
+<div id="buttons">
+<button type="button" id="start" onclick="start ()">Start</button><button type="button" id="save" onclick="save ()">Save</button><button type="button" id="load" onclick="load ()">Load</button><button type="button" id="stop" onclick="stop ()">Stop</button><button type="button" id="addPlatform" onclick="addNewPlatform()">Add New Platform</button><button type="button" id="test" onclick="test ()">Test</button>
+</div>
+</body>
+</html>

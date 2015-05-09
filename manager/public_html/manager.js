@@ -158,8 +158,16 @@ function displayTime(nr){
 	return result;
 }
 //Game Play functions
-function delay() {
-return 0; //ToDo think of an algorithm to define delays.
+function delay(t) { //t = time
+    t=t+2;
+    for (var i=0; i<gameState[9].length; i++){ //for every contract
+        for (var j=0; j<gameState[9][i].length; j++){ //for every event 
+            if (gameState[9][i][j][1]===t || gameState[9][i][j][1]===(t+1) || gameState[9][i][j][1]===(t+2) || gameState[9][i][j][1]===(t+3) || gameState[9][i][j][1]===(t+4) || gameState[9][i][j][1]===(t+5) || gameState[9][i][j][1]===(t+6) || gameState[9][i][j][1]===(t+7) || gameState[9][i][j][1]===(t+8)){
+                
+                
+            }
+        }
+    }
 }
 
 function createNewContract (type, lineNr){ //Create new Contract, displayed at contractsoffert.

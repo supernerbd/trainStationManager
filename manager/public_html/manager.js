@@ -5,7 +5,7 @@
 
 //Buttons
 function start () { //Start program
-	if (gameState[5] == false){ //is game stopped or still running?
+	if (gameState[5] === false){ //is game stopped or still running?
 		alert ("already startet");
 	}
 	else {
@@ -55,7 +55,7 @@ function save () { //save
 }
 
 function load () { //load
-	alert ("Not Working (load)")
+	alert ("Not Working (load)");
 }
 function test () { //test things
 	displayTable (); 
@@ -237,7 +237,7 @@ function createNewContract (type, lineNr){ //Create new Contract, displayed at c
 }
 
 function createDayTraffic (){ //Create Day Traffic, which works without contracts.
-	
+//Add random events to event list!	
 }
 
 function createTable (){ //Create main table. Without any Data
@@ -245,7 +245,7 @@ function createTable (){ //Create main table. Without any Data
 	for (var i=0; i<=gameState[4]; i++){ //Build table Array with row arrays without content.
 		table[i]= new Array();
 		for (var j=0; j<=380; j++){
-			if (i==0){
+			if (i===0){
 				table[i][j]=false;
 			}
 			else {
@@ -302,7 +302,7 @@ function insertTableData (){ //Insert Data in Table Array
 				var platform = gameState[9][i][j][2];
 				var time = gameState[9][i][j][1];
 				var display = gameState[9][i][j][0];
-				if (platform==0){
+				if (platform===0){
 					var lineNr = gameState[9][i][j][3];
 					gameState[8][platform][time] = "<button type='button' id='platformChangeEvent' onclick='changePlatformNrEvent("+i+","+j+")'>Line ("+lineNr+" "+ displayTime(time) +")</button>";
 				}
@@ -322,9 +322,9 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 	content = content + "</tr>";
 	//Build <td>
 	for (var i=0; i<gameState[8].length; i++){
-		if (i==0){
+		if (i===0){
 			for (var j=0; j<gameState[8][i].length; j++){
-				if (gameState[8][i][j]!=false){
+				if (gameState[8][i][j]!==false){
 					content0 = content0 + gameState[8][i][j];//gameState[8][i]; //ToDo sort for what is intended to be displayed
 				}
 			}
@@ -351,7 +351,7 @@ function changeMoney(amount){ //Change Money value and display and loosing condi
 }
 
 function changeDay(day){ //Change Day value and display
-if (day==1){
+if (day===1){
 	gameState[1]= gameState[1] + day; // set day counter to new day
 	document.getElementById("day").innerHTML = gameState[1]; //replace day display to new day
 	}
@@ -405,11 +405,11 @@ function displayContracts(){ ////Responsible for display of Contracts taken
 	for (var i=0; i<gameState[0].length; i++){
 		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='platformChange' onclick='changePlatformNr("+(gameState[0][i][1]-1)+")'>Platform (Change)</button></th></tr><tr>";
 		for (var j=0; j<gameState[0][i].length; j++){
-			if (j==0 || j==7){
-				if (j==0){
+			if (j===0 || j===7){
+				if (j===0){
 				content = content + "<td>" + displayTrain(gameState[0][i][j]) + "</td>";
 				}
-				if (j==7){
+				if (j===7){
 				content = content + "<td>" + displayTime(gameState[0][i][j]) + "</td>";
 				}
 			}
@@ -426,11 +426,11 @@ function displayContractsOffert(){ //Responsible for display of Contracts offert
 	for (var i=0; i<gameState[3].length; i++){
 		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='acceptContract("+gameState[3][i]+")'>Accept</button></th></tr><tr>";
 		for (var j=0; j<gameState[3][i].length; j++){
-			if (j==0 || j==7){
-				if (j==0){
+			if (j===0 || j===7){
+				if (j===0){
 				content = content + "<td>" + displayTrain(gameState[0][i][j]) + "</td>";
 			}
-				if (j==7){
+				if (j===7){
 				content = content + "<td>" + displayTime(gameState[3][i][j]) + "</td>";
 				}
 			}
@@ -491,10 +491,10 @@ function displayTrain(train){
 }
 //Game Loop functions
 function gameLoop (){ //Set Timeout
-	setTimeout(function (){gameLoopCalc()}, 3000/gameState[7]);
+	setTimeout(function (){gameLoopCalc();}, 3000/gameState[7]);
 }
 function gameLoopCalc (){ //Calculate everything
-	if (gameState[5]==true){
+	if (gameState[5]===true){
 		
 	}
 	else{
@@ -502,12 +502,12 @@ function gameLoopCalc (){ //Calculate everything
 			timeColor(time);
 			for (var i = 0; i<gameState[9].length; i++){ //actual calc things
 				for (var j = 0; j<gameState[9][i].length; j++){
-					if (time==gameState[9][i][j][1]){
-						if (gameState[9][i][j][2]!=0){
-							changeMoney(gameState[9][i][j][4])
+					if (time===gameState[9][i][j][1]){
+						if (gameState[9][i][j][2]!==0){
+							changeMoney(gameState[9][i][j][4]);
 						}
 						else{
-							changeMoney(-gameState[9][i][j][5])
+							changeMoney(-gameState[9][i][j][5]);
 						}
 					}
 				}

@@ -74,6 +74,12 @@ function fchangespeed () { //Change Real-Time running of Game-Loop
 function advanceTimeslider(t) {
 	window.location.assign("#0." + t);
 	window.location.assign("#1." + t);
+
+	if ((time * 3) % ((getNumSlotsDisplayed() - 4) * 3) == 0) {
+		scrollToPercent(20);
+	}
+
+	document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
 }
 
 function timeColor(x){
@@ -593,10 +599,13 @@ function gameLoopCalc (){ //Calculate everything
 
 function tracksTrackScroll() {
 	document.getElementById("timeline").scrollLeft = document.getElementById("gleise").scrollLeft;
+	document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
+
 }
 
 function timelineTrackScroll() {
 	document.getElementById("gleise").scrollLeft = document.getElementById("timeline").scrollLeft;
+	document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
 }
 
 //Global variable

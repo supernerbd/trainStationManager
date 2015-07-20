@@ -30,6 +30,7 @@ function go () { //Start program
 		gameState[6]++;
 		gameState[3][2]= createNewContract (2, gameState[6]);
 		gameState[6]++;
+                createDayTraffic ();
 		displayContractsOffert();
                 createEvents ();
 		createTable ();
@@ -251,8 +252,14 @@ function createDayTraffic (){ //Create Day Traffic, save it to gameState[10]. Us
     }
 }
 function addDayTraffic (){ //add day traffic to events
+    if (gameState[1]===1){
     var add = gameState[9].length; //enter last contract
     //add = add+1;
+    }
+    else {
+        var add = gameState[9].length;
+        add = add - 1;
+    }
     gameState[9][add]=new Array ();
     //alert (gameState[10].length);
     for (var i=0; i<gameState[10].length; i++){
@@ -392,7 +399,7 @@ function changeDay(day){ //Change Day value and display
 if (day===1){
 	gameState[1]= gameState[1] + day; // set day counter to new day
 	document.getElementById("day").innerHTML = gameState[1]; //replace day display to new day
-        createDayTraffic ();
+        
 	}
 	else { alert("somthing wrong (changeDay)");
 	}
@@ -560,9 +567,13 @@ function gameLoopCalc (){ //Calculate everything
 			time++;
 			gameLoop();
 		}
-		else{
+		else{ //to new day..
 			time=0;
 			changeDay(1);
+                        createDayTraffic ();
+                        createEvents ();
+                        createTable ();
+                        displayTable ();
 			gameLoop();
 
 		}

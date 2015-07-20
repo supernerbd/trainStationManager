@@ -42,7 +42,7 @@ td.slot {
 
 <div id="main" style="width: 100%; height: 100%; position: absolute; border: 1px solid black; top: 0; left: 0;">
 
-	<div id="timeline" style="width: 100%; height: 10%; position: absolute; top: 0; left: 0; border: 1px solid red;">
+	<div id="timeline" style="width: 100%; height: 10%; position: absolute; top: 0; left: 0; overflow-x: auto; border: 1px solid red;" onscroll="timelineTrackScroll()">
 		Timeline goes here
 	</div>
 
@@ -50,7 +50,7 @@ td.slot {
 		<div id="noplatform">gleis0</div>
 	</div>
 
-	<div id="gleise" style="width: 100%; height: 70%; position: absolute; top: 20%; left: 0; border: 1px solid blue; overflow-y: auto; overflow-x: auto;">
+	<div id="gleise" style="width: 100%; height: 70%; position: absolute; top: 20%; left: 0; border: 1px solid blue; overflow-y: auto; overflow-x: auto;" onscroll="tracksTrackScroll()">
 		<div id="table">
 		</div>
 	</div>

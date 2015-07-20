@@ -590,6 +590,15 @@ function gameLoopCalc (){ //Calculate everything
 		}
 	}
 }
+
+function tracksTrackScroll() {
+	document.getElementById("timeline").scrollLeft = document.getElementById("gleise").scrollLeft;
+}
+
+function timelineTrackScroll() {
+	document.getElementById("gleise").scrollLeft = document.getElementById("timeline").scrollLeft;
+}
+
 //Global variable
 // gameState Array: 0=accepted contracts, 1= days played, 2= money, 3= contracts offert, 4=platform, 5= game stopped?, 6=next Line Number to be taken 7= gameSpeed,8 = table, 9 = Events, 10 = dayTraffic.
 // In 0 (accepted contracts) are all contracts. Contracts are Arrays. In 0 = type (in gameState[0][nr][0]), 1 = line nr, 2= reward, 3=fee, 4=refuse fee, 5= accept reward, 6= tact, 7 = starting time (in Numbers. Math see displayTime()), 8 = platform, 

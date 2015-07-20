@@ -1,4 +1,5 @@
 // Save and Load is not included but even though not necessary.
+// Save and Load is not included but even though not necessary.
 // function stop doesn't end the game properly. Its just stops the gameLoop.
 // Balancing isn't done at all.
 

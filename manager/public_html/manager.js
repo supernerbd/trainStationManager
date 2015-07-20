@@ -70,7 +70,12 @@ function fchangespeed () { //Change Real-Time running of Game-Loop
 		}
 	gameState[7] = y; //set speed into gameState
 }
-// Time functions
+
+function advanceTimeslider(t) {
+	window.location.assign("#0." + t);
+	window.location.assign("#1." + t);
+}
+
 function timeColor(x){
 	var i=x;
 	var i2 = i-1;
@@ -553,7 +558,9 @@ function gameLoopCalc (){ //Calculate everything
 	else{
 		if (time<=380){
 			timeColor(time);
-                        var ilength = gameState[9].length;
+			advanceTimeslider(time);
+
+			var ilength = gameState[9].length;
                         
 			for (var i = 0; i<ilength; i++){ //actual calc things
 				var jlength = gameState[9][i].length;

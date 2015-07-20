@@ -542,8 +542,11 @@ function gameLoopCalc (){ //Calculate everything
 	else{
 		if (time<=380){
 			timeColor(time);
-			for (var i = 0; i<gameState[9].length; i++){ //actual calc things
-				for (var j = 0; j<gameState[9][i].length; j++){
+                        var ilength = gameState[9].length;
+                        
+			for (var i = 0; i<ilength; i++){ //actual calc things
+				var jlength = gameState[9][i].length;
+                                    for (var j = 0; j<jlength; j++){
 					if (time===gameState[9][i][j][1]){
 						if (gameState[9][i][j][2]!==0){
 							changeMoney(gameState[9][i][j][4]);

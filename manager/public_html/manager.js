@@ -4,7 +4,7 @@
 // Balancing isn't done at all.
 
 //Buttons
-function start () { //Start program
+function go () { //Start program
 	if (gameState[5] === false){ //is game stopped or still running?
 		alert ("already startet");
 	}

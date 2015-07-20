@@ -2,8 +2,12 @@
 <html>
 <head>
     <script src="display.js"></script>
+<<<<<<< HEAD
+    <script src="manager.js"></script>
+=======
     <meta charset="utf-8">
     <title>Train Station Manager</title>
+>>>>>>> 0b506e7b19bf0585cf0b8b3b4f7569f204e1110b
 </head>
 <body>
 
@@ -40,8 +44,13 @@
 	</div>
 
 	<div id="control" style="width: 100%; height: 10%; position: absolute; top: 90%; left: 0; border: 1px solid grey;">
+<<<<<<< HEAD
+        <form name="changespeed">
+=======
 		<form name="changespeed" style="position: relative; float: left;">
+>>>>>>> 0b506e7b19bf0585cf0b8b3b4f7569f204e1110b
 	<fieldset>
+                <button type="button" id="start" onclick="start ()">Start</button> 
 		<input type="radio" id="t0.5" name="timer" value="0.5"><label for="t0.5">0.5</label>
 		<input type="radio" id="t1" name="timer" value="1" checked><label for="t1">1</label>
 		<input type="radio" id="t2" name="timer" value="2" ><label for="t2">2</label>
@@ -65,13 +74,18 @@
 <div id="shop" style="width: 80%; height: 80%; position: absolute; top: 10%; left: 10%; z-index: 2; border: 1px solid yellow; background-color: #eeeeee;" class="invisible">
 	<div id="shop-title" style="position: relative; float: left; width: 90%; height: 10%;"><b>Shop</b></div>
 	<div id="shop-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeShop()"><b>X Close</b></div>
-	Here goes the shop
+	<button type="button" id="addPlatform" onclick="addNewPlatform()">Add New Platform</button>
 </div>
 
 <div id="contracts" style="width: 80%; height: 80%; position: absolute; top: 10%; left: 10%; z-index: 2; border: 1px solid red; background-color: #eeeeee;" class="invisible">
-	<div id="shop-title" style="position: relative; float: left; width: 90%; height: 10%;"><b>Contracts</b></div>
-	<div id="shop-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeContracts()"><b>X Close</b></div>
-	Here goes the contract screen
+	<div id="contract-title" style="position: relative; float: left; width: 90%; height: 10%;"><b>Contracts</b></div>
+	<div id="contract-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeContracts()"><b>X Close</b></div>
+	<div id="contractsoffert">
+        content
+        </div>
+        <div id="contractstaken">
+        content
+        </div>
 </div>
 
 </div>

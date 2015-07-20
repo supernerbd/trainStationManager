@@ -440,7 +440,7 @@ function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new p
 	//alert ("The new platform will be available tomorrow"); //ToDO: Bug!!! I can set platform value to not existing platform
 }
 function displayContracts(){ ////Responsible for display of Contracts taken
-	var content ="";
+	var content ="<h3>Your Contracts</h3><br>";
 	for (var i=0; i<gameState[0].length; i++){
 		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='platformChange' onclick='changePlatformNr("+(gameState[0][i][1]-1)+")'>Platform (Change)</button></th></tr><tr>";
 		for (var j=0; j<gameState[0][i].length; j++){
@@ -461,7 +461,7 @@ function displayContracts(){ ////Responsible for display of Contracts taken
 	document.getElementById("contractstaken").innerHTML = content;
 }
 function displayContractsOffert(){ //Responsible for display of Contracts offert
-	var content ="";
+	var content ="<h3>Contracts Offert</h3><br>";
 	for (var i=0; i<gameState[3].length; i++){
 		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='acceptContract("+gameState[3][i]+")'>Accept</button></th></tr><tr>";
 		for (var j=0; j<gameState[3][i].length; j++){

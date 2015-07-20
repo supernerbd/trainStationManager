@@ -1,13 +1,13 @@
 function openContracts (){
-    
+    document.getElementById("contracts").style.setProperty("display", "inherit");
 }
 function openShop (){
-    
+    document.getElementById("shop").style.setProperty("display", "inherit");
 }
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+function closeContracts (){
+    document.getElementById("contracts").style.setProperty("display", "none");
+}
+function closeShop (){
+    document.getElementById("shop").style.setProperty("display", "none");
+}
 

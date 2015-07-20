@@ -360,12 +360,16 @@ function insertTableData (){ //Insert Data in Table Array
 }
 function displayTable (){ //Display main table. ToDo: Changeable Platforms
 	var content = "<table><tr>";
-	var content0 ="";
-	for (var i=0; i<=380; i++){ //Build <th>
-		content = content + "<th id='0."+ i +"'>" + displayTime(i) + "</th>";
+	var content0 = "";
+
+	var timeline = document.getElementById("timeline");
+	var timeline_html = "<table><tr>";
+	for (var i=0; i<=380; i++) {
+		timeline_html += "<th id='0." + i + "' class='slot'>" + displayTime(i) + "</th>";
 	}
-	content = content + "</tr>";
-	//Build <td>
+	timeline_html += "</tr></table>";
+	timeline.innerHTML = timeline_html;
+
 	for (var i=0; i<gameState[8].length; i++){
 		if (i===0){
 			for (var j=0; j<gameState[8][i].length; j++){

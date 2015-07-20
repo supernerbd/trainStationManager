@@ -374,19 +374,19 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 		if (i===0){
 			for (var j=0; j<gameState[8][i].length; j++){
 				if (gameState[8][i][j]!==false){
-					content0 = content0 + gameState[8][i][j];//gameState[8][i]; //ToDo sort for what is intended to be displayed
+					content0 += gameState[8][i][j];//gameState[8][i]; //ToDo sort for what is intended to be displayed
 				}
 			}
 		}
 		else {
-			content = content + "<tr>";
+			content += "<tr>";
 			for (var j=0; j<gameState[8][i].length; j++){
-				content = content + "<td id='" + i +"." + j +"'>" + gameState[8][i][j] + "</td>";
+				content += "<td id='" + i +"." + j + "' class='slot'>" + gameState[8][i][j] + "</td>";
 			}
-			content = content + "</tr>";
+			content += "</tr>";
 		}
 	}
-	content = content +"</table>";
+	content += "</table>";
 	document.getElementById("table").innerHTML = content; 
 	document.getElementById("noplatform").innerHTML = content0; 
 }

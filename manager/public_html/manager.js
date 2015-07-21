@@ -370,11 +370,11 @@ function insertTableData (){ //Insert Data in Table Array
 	}
 }
 function displayTable (){ //Display main table. ToDo: Changeable Platforms
-	var content = "<table><tr>";
+	var content = "<table class='slot'><tr>";
 	var content0 = "";
 
 	var timeline = document.getElementById("timeline");
-	var timeline_html = "<table><tr>";
+	var timeline_html = "<table class='slot'><tr>";
 	for (var i=0; i<=380; i++) {
 		timeline_html += "<th id='0." + i + "' class='slot'>" + displayTime(i) + "</th>";
 	}

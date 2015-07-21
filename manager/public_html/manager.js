@@ -61,13 +61,13 @@ function load () { //load
 function test () { //test things
 	displayTable (); 
 }
-function fchangespeed () { //Change Real-Time running of Game-Loop
-	var y = 1;
-	var x = document.getElementsByName("timer");
-		for (var i=0; i<x.length; i++){
-			if (x[i].checked) 
-				y = x[i].value;
-		}
+function fchangespeed (y) { //Change Real-Time running of Game-Loop
+	//var y = 1;
+	//var x = document.getElementsByName("timer");
+	//	for (var i=0; i<x.length; i++){
+	//		if (x[i].checked) 
+	//			y = x[i].value;
+	//	}
 	gameState[7] = y; //set speed into gameState
 }
 
@@ -626,4 +626,4 @@ gameState[8] = new Array ();
 gameState[9] = new Array ();
 gameState[10] = new Array ();
 var time = 0;
-fchangespeed ();
+fchangespeed (5);

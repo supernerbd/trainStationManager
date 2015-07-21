@@ -14,4 +14,3 @@ function closeShop (){
     document.getElementById("shop").style.setProperty("display", "none");
     document.getElementById("control").style.setProperty("display", "inherit");
 }
-

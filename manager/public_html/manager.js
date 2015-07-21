@@ -370,8 +370,8 @@ function insertTableData (){ //Insert Data in Table Array
 	}
 }
 function displayTable (){ //Display main table. ToDo: Changeable Platforms
-	var content = "<table class='slot'><tr>";
-	var content0 = "";
+	var content = "<table class='slot'><tbody id='tablebodyplatforms'><tr>";
+	var content0 = "<ul id='track0'>";
 
 	var timeline = document.getElementById("timeline");
 	var timeline_html = "<table class='slot'><tr>";
@@ -385,19 +385,21 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 		if (i===0){
 			for (var j=0; j<gameState[8][i].length; j++){
 				if (gameState[8][i][j]!==false){
-					content0 += gameState[8][i][j];//gameState[8][i]; //ToDo sort for what is intended to be displayed
+					content0 += '<li>' + gameState[8][i][j] + '</li>';
+					//gameState[8][i]; //ToDo sort for what is intended to be displayed
 				}
 			}
 		}
 		else {
-			content += "<tr>";
+			content += "<tr class='column' id='track" + i + "'>";
 			for (var j=0; j<gameState[8][i].length; j++){
 				content += "<td id='" + i +"." + j + "' class='slot'>" + gameState[8][i][j] + "</td>";
 			}
 			content += "</tr>";
 		}
 	}
-	content += "</table>";
+	content += "</tbody></table>";
+	content0 += "</ul>";
 	document.getElementById("table").innerHTML = content; 
 	document.getElementById("noplatform").innerHTML = content0; 
 }

@@ -10,4 +10,3 @@ function closeContracts (){
 function closeShop (){
     document.getElementById("shop").style.setProperty("display", "none");
 }
-

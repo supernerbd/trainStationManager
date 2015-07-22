@@ -360,7 +360,7 @@ function insertTableData (){ //Insert Data in Table Array
 				var display = gameState[9][i][j][0];
 				if (platform===0){
 					var lineNr = gameState[9][i][j][3];
-					gameState[8][platform][time] = "<button type='button' id='platformChangeEvent' onclick='changePlatformNrEvent("+i+","+j+")'>Line ("+lineNr+" "+ displayTime(time) +")</button>";
+					gameState[8][platform][time] = "<button type='button' id='platformChangeEvent' onclick='selectPlatformEvent("+i+","+j+")'>Line ("+lineNr+" "+ displayTime(time) +")</button>";
 				}
 				else{
 				gameState[8][platform][time]=display;
@@ -426,33 +426,35 @@ function startPlaformNr(nr){ //change platform value
 	gameState[4]= nr; //
 }
 
-function changePlatformNr(nr){ //Change Platform Number of an Line. Bug: Wenn LineNr nicht fortlaufend, dann falsche zuordnung in gameState[o][nr].
-	var check = prompt("Platform Number for this Line", "");
-	if (gameState[4]<check){
-		check = prompt ("Enter a valid Platform Number","");
-		if (gameState[4]<check){
-			check = 1;
-		}
-	}
+function changePlatformNr(nr, check){ //Change Platform Number of an Line. Bug: Wenn LineNr nicht fortlaufend, dann falsche zuordnung in gameState[o][nr].
+	//var check = prompt("Platform Number for this Line", "");
+	//if (gameState[4]<check){
+	//	check = prompt ("Enter a valid Platform Number","");
+	//	if (gameState[4]<check){
+	//		check = 1;
+	//	}
+	//}
 	gameState[0][nr][8] = check;
 	displayContracts();
 	createEvents ();
 	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
 	displayTable();
+        closeSelectPlatform ();
 }
-function changePlatformNrEvent(i, j){ //Change Platform Number of an single Event. i and j are similar to i and j in insertTableData()
-	var check = prompt("Platform Number for this Line", "");
-	if (gameState[4]<check){
-		check = prompt ("Enter a valid Platform Number","");
-		if (gameState[4]<check){
-			check = 1;
-		}
-	}
+function changePlatformNrEvent(i, j, check){ //Change Platform Number of an single Event. i and j are similar to i and j in insertTableData()
+	//var check = prompt("Platform Number for this Line", "");
+	//if (gameState[4]<check){
+	//	check = prompt ("Enter a valid Platform Number","");
+	//	if (gameState[4]<check){
+	//		check = 1;
+	//	}
+	//}
 	gameState[9][i][j][2] = check;
 	//alert(gameState[9][i][j][2]);
 	displayContracts();
 	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
 	displayTable();
+        closeSelectPlatform ();
 	//alert(gameState[9][i][j][2]);
 }
 function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new platforms
@@ -466,7 +468,7 @@ function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new p
 function displayContracts(){ ////Responsible for display of Contracts taken
 	var content ="<h3>Your Contracts</h3><br>";
 	for (var i=0; i<gameState[0].length; i++){
-		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='platformChange' onclick='changePlatformNr("+(gameState[0][i][1]-1)+")'>Platform (Change)</button></th></tr><tr>";
+		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='platformChange' onclick='selectPlatform ("+(gameState[0][i][1]-1)+")'>Platform (Change)</button></th></tr><tr>";
 		for (var j=0; j<gameState[0][i].length; j++){
 			if (j===0 || j===7){
 				if (j===0){
@@ -487,7 +489,7 @@ function displayContracts(){ ////Responsible for display of Contracts taken
 function displayContractsOffert(){ //Responsible for display of Contracts offert
 	var content ="<h3>Contracts Offert</h3><br>";
 	for (var i=0; i<gameState[3].length; i++){
-		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='acceptContract("+gameState[3][i]+")'>Accept</button></th></tr><tr>";
+		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='selectPlatformContract("+gameState[3][i]+")'>Accept</button></th></tr><tr>";
 		for (var j=0; j<gameState[3][i].length; j++){
 			if (j===0 || j===7){
 				if (j===0){
@@ -505,14 +507,14 @@ function displayContractsOffert(){ //Responsible for display of Contracts offert
 	}
 	document.getElementById("contractsoffert").innerHTML = content;
 }
-function acceptContract(nr){ //Accept Contract
-	var check = prompt("Platform Number for this Line", "1");
-	if (gameState[4]<check){
-		check = prompt ("Enter a valid Platform Number","");
-		if (gameState[4]<check){
-			check = 1;
-		}
-	}
+function acceptContract(nr, check){ //Accept Contract
+	//var check = prompt("Platform Number for this Line", "1");
+	//if (gameState[4]<check){
+	//	check = prompt ("Enter a valid Platform Number","");
+	//	if (gameState[4]<check){
+	//		check = 1;
+	//	}
+	//}
 	var tomove = gameState[3][nr];
 	var length = gameState[0].length;
 	gameState[3][nr] = createNewContract (tomove[0], gameState[6]);
@@ -526,9 +528,9 @@ function acceptContract(nr){ //Accept Contract
 	createEvents ();
 	createTable ();
 	displayTable ();
+        closeSelectPlatform ();
 	//ToDO: Update Table!
 }
-
 function refuseContract (nr){ //Refuse Contract
 	var tomove = gameState[3][nr];
 	gameState[3][nr] = createNewContract (tomove[0], gameState[6]);
@@ -536,7 +538,36 @@ function refuseContract (nr){ //Refuse Contract
 	changeMoney(-tomove[4]);
 	displayContractsOffert();
 }
-
+function selectPlatformContract (nr){
+    openSelectPlatform ();
+    var plnr = gameState[4];
+    var content = "<table><tr>";
+    for (var i=1; i<=plnr; i++){
+        content = content + "<td onclick='acceptContract("+nr+","+i+")'>"+i+"</td>";
+    }
+    content = content + "</tr></table>";
+    document.getElementById("selectPlatform-inner").innerHTML = content;
+}
+function selectPlatform (nr){
+    openSelectPlatform ();
+    var plnr = gameState[4];
+    var content = "<table><tr>";
+    for (var i=1; i<=plnr; i++){
+        content = content + "<td onclick='changePlatformNr("+nr+","+i+")'>"+i+"</td>";
+    }
+    content = content + "</tr></table>";
+    document.getElementById("selectPlatform-inner").innerHTML = content;
+}
+function selectPlatformEvent (i, j){
+    openSelectPlatform ();
+    var plnr = gameState[4];
+    var content = "<table><tr>";
+    for (var x=1; x<=plnr; x++){
+        content = content + "<td onclick='changePlatformNrEvent("+i+","+j+","+x+")'>"+x+"</td>";
+    }
+    content = content + "</tr></table>";
+    document.getElementById("selectPlatform-inner").innerHTML = content;
+}
 function displayTrain(train){
 	var type;
 	switch (train){

@@ -504,7 +504,7 @@ function displayContractsOffert(){ //Responsible for display of Contracts offere
 		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='selectPlatformContract(" + gameState.offeredContracts[i]+")'>Accept</button></th></tr><tr>";
 		for (var j=0; j<gameState.offeredContracts[i].length; j++){
 			if (j===0) {
-				content += "<td>" + displayTrain(gameState.acceptedContracts[i][j]) + "</td>";
+				content += "<td>" + displayTrain(gameState.offeredContracts[i][j]) + "</td>";
 			} else if (j===7) {
 				content += "<td>" + displayTime(gameState.offeredContracts[i][j]) + "</td>";
 			} else {

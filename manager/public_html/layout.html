@@ -43,28 +43,16 @@
 	</div>
 
 	<div id="control">
-		<form name="menu" id="menu">
-	<fieldset>
-                <div id="buttons">
-                <button type="button" id="start" onclick="go ()">Start</button> 
-		<!-- <input type="radio" id="t0.5" name="timer" value="0.5"><label for="t0.5">0.5</label>
-		<input type="radio" id="t1" name="timer" value="1" checked><label for="t1">1</label>
-		<input type="radio" id="t2" name="timer" value="2" ><label for="t2">2</label>
-		<input type="radio" id="t5" name="timer" value="5" ><label for="t5">5</label>
-		<input type="radio" id="t10" name="timer" value="10" ><label for="t10">10</label>
-		<button type="button" id="changespeed" onclick="fchangespeed()">Change Speed</button> -->
-                <button type="button" onclick="openContracts ()">Contracts</button>
-                <button type="button" onclick="openShop ()">Shop</button>
-                </div>
-	</fieldset>
-		</form>
+                <div class="button" id="start" onclick="go ()">Start</div>
+                <div class="button" onclick="openContracts ()">Contracts</div>
+                <div class="button" onclick="openShop ()">Shop</div>
             <div class="slider">
                 <label for="amount">Speed</label>
                 <input type="text" id="amount" readonly>
                 <div id="slider"></div>
-       		<div id="moneydisplay">Money: <b id="money">0</b></div>
-		<div id="days">Day: <b id="day">0</b></div>
             </div>
+            <div id="moneydisplay">Money: <b id="money">0</b></div>
+            <div id="days">Day: <b id="day">0</b></div>
 	</div>
 </div>
 

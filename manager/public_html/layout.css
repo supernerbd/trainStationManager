@@ -1,3 +1,9 @@
+body {
+    background-color: black;
+    color: white;
+    
+}
+/* color auf weiß? Slider Hintergrund und Button Hintergrund auf schwarz background-color von tr#track1.column verändern!*/
 .invisible {
 	display: none;
 }
@@ -7,8 +13,19 @@
 }
 
 .slider {
-        float: right; 
-        width: 70%;
+        border: 1px solid red;
+        float: left; 
+        position: relative;
+        width: 40%;
+        height: 100%;
+}
+
+.button{
+    position: relative;
+    float: left;
+    border: 1px solid red;
+    width: 10%;
+    height: 100%;
 }
 
 table.slot {
@@ -18,18 +35,22 @@ table.slot {
 	width: 1300em;
 }
 
+/*tr#track1.column {
+    background-color: blue;
+}*/
+
 th.slot, td.slot {
 	display: inline-block;
 }
 
 th.slot {
 	width: 3em;
-	border: 2px solid black;
+	border: 2px solid white;
 }
 
 td.slot {
 	width: 3em;
-	border: 2px solid black;
+	border: 2px solid blue;
 }
 
 #track0 {
@@ -103,22 +124,30 @@ td.slot {
 }
 
 #amount {
+        background-color: black;
         border:0; 
-        color:#f6931f; 
+        color:white; 
         font-weight:bold;
 }
 
 #slider {
-        width: 20%; 
+        background-color: white;
+        width: 100%; 
         padding: 1px
 }
 
 #moneydisplay {
+    border: 1px solid red;
+        width: 10%;
+        height: 100%;
         position: relative; 
         float: right;
 }
 
 #days {
+    border: 1px solid red;
+        width: 10%;
+        height: 100%;
         position: relative; 
         float: right;
 }
@@ -148,7 +177,7 @@ td.slot {
         left: 10%; 
         z-index: 2; 
         border: 1px solid yellow; 
-        background-color: #eeeeee;
+        background-color: black;
 }
 
 #shop-title {
@@ -173,7 +202,7 @@ td.slot {
         left: 10%; 
         z-index: 3; 
         border: 1px solid blue; 
-        background-color: #eeeeee;
+        background-color: black;
 }
 
 #selectPlatform-close {
@@ -196,7 +225,7 @@ td.slot {
         left: 10%; 
         z-index: 2; 
         border: 1px solid red; 
-        background-color: #eeeeee;
+        background-color: black;
 }
 
 #contract-title {

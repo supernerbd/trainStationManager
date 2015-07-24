@@ -17,7 +17,7 @@ function getNumSlotsDisplayed() {
 
 function getCurrentSlotAbsPos() {
 
-	return document.getElementById("0." + time).offsetLeft
+	return document.getElementById("0." + gameState.time).offsetLeft
 		- document.getElementById("timeline").scrollLeft;
 }
 
@@ -31,5 +31,5 @@ function scrollToPercent(x) {
 	var advance = window.innerWidth / 100 * x;
 	var sw = getSlotWidth();
 
-	tl.scrollLeft = tracks.scrollLeft = time * sw + advance;
+	tl.scrollLeft = tracks.scrollLeft = gameState.time * sw + advance;
 }

@@ -480,21 +480,23 @@ function displayContracts() {
 	var content = "<h3>Your Contracts</h3><br>";
 
 	for (var i=0; i<gameState.acceptedContracts.length; i++){
+                var c = gameState.acceptedContracts[i];
 		content += "<table><tr><th>Type</th><th>Line Nr</th>"
                             + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
                             + "<th>Tact</th><th>Starting Time</th>"
                             + "<th><button type='button' id='platformChange' onclick='selectPlatform ("
-                            + (gameState.acceptedContracts[i].lineNo - 1) + ")'>Platform (Change)</button></th></tr><tr>";
+                            + (c.lineNo - 1) + ")'>Platform (Change)</button></th></tr><tr>";
+
+                content += "<td>" + displayTrain(c.type) + "</td>"
+                            + "<td>" + c.lineNo + "</td>"
+                            + "<td>" + c.reward + "</td>"
+                            + "<td>" + c.fee + "</td>"
+                            + "<td>" + c.refusePunishment + "</td>"
+                            + "<td>" + c.acceptReward + "</td>"
+                            + "<td>" + c.tact + "</td>"
+                            + "<td>" + displayTime(c.startingTime) + "</td>"
+                            + "<td>" + c.platform + "</td>";
                     
-		for (var j=0; j<gameState.acceptedContracts[i].length; j++){
-			if (j===0) {
-				content += "<td>" + displayTrain(gameState.acceptedContracts[i][j]) + "</td>";
-			} else if (j===7) {
-				content += "<td>" + displayTime(gameState.acceptedContracts[i][j]) + "</td>";
-			} else {
-				content += "<td>" + gameState.acceptedContracts[i][j] + "</td>";
-			}
-		}
 		content += "</tr></table>";
 	}
 	document.getElementById("contractstaken").innerHTML = content;

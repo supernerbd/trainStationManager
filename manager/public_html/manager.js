@@ -29,7 +29,7 @@ function go () { //Start program
 
 		displayContracts();
 
-		//Create 3 offert contracts.
+		//Create 3 offered contracts.
 		gameState.offeredContracts[0] = createNewContract (0, gameState.nextLine);
 		gameState.nextLine++;
 
@@ -40,7 +40,7 @@ function go () { //Start program
 		gameState.nextLine++;
 
                 createDayTraffic ();
-		displayContractsOffert();
+		displayContractsOffered();
                 createEvents ();
 		createTable ();
 		displayTable ();
@@ -182,7 +182,7 @@ function delay() {
 return 0; //ToDo think of an algorithm to define delays.
 }
 
-function createNewContract (type, lineNr){ //Create new Contract, displayed at contractsoffert.
+function createNewContract (type, lineNr){ //Create new Contract, displayed at contractsoffered.
 	var contract = new Array (type, lineNr);
 	switch (type){
 	case 0: //ICE
@@ -497,7 +497,7 @@ function displayContracts(){ ////Responsible for display of Contracts taken
 	document.getElementById("contractstaken").innerHTML = content;
 }
 
-function displayContractsOffert(){ //Responsible for display of Contracts offered
+function displayContractsOffered(){ //Responsible for display of Contracts offered
 	var content ="<h3>Contracts Offered</h3><br>";
 
 	for (var i=0; i<gameState.offeredContracts.length; i++){
@@ -513,7 +513,7 @@ function displayContractsOffert(){ //Responsible for display of Contracts offere
 		}
 		content += "<td><button type='button' id='refuse' onclick='refuseContract(" + gameState.acceptedContracts[i] + ")'>Refuse</button></td></tr></table>";
 	}
-	document.getElementById("contractsoffert").innerHTML = content;
+	document.getElementById("contractsoffered").innerHTML = content;
 }
 
 function acceptContract(nr, check){ //Accept Contract
@@ -534,7 +534,7 @@ function acceptContract(nr, check){ //Accept Contract
 	gameState.acceptedContracts[length][8] = check;
 	changeMoney(tomove[5]);
 	displayContracts();
-	displayContractsOffert();
+	displayContractsOffered();
 	createEvents ();
 	createTable ();
 	displayTable ();
@@ -548,7 +548,7 @@ function refuseContract (nr){ //Refuse Contract
 	gameState.offeredContracts[nr] = createNewContract(tomove[0], gameState.nextLine);
 	gameState.nextLine++;
 	changeMoney(-tomove[4]);
-	displayContractsOffert();
+	displayContractsOffered();
 }
 
 function selectPlatformContract (nr){

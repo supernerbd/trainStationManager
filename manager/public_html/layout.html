@@ -7,6 +7,7 @@
     <script src="jquery-1.10.2.js"></script>
     <script src="jquery-ui.js"></script>
     <link href="jquery-ui.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
     <script>
     $(function() {    
         $( "#slider" ).slider({ //Rebuild
@@ -26,72 +27,23 @@
     <title>Train Station Manager</title>
 </head>
 <body>
+<div id="main">
 
-<style>
-.invisible {
-	display: none;
-}
-
-.visible {
-	display: inherit;
-}
-
-table.slot {
-	position: relative;
-	float: left;
-	table-layout: fixed;
-	width: 1300em;
-}
-
-th.slot, td.slot {
-	display: inline-block;
-}
-
-th.slot {
-	width: 3em;
-	border: 2px solid black;
-}
-
-td.slot {
-	width: 3em;
-	border: 2px solid black;
-}
-
-#track0 {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-}
-
-#track0 li {
-	margin: 3px 3px 3px 0;
-	padding: 1px;
-	float: left;
-	width: 8em;
-	height: 4em;
-	text-align: center;
-}
-
-</style>
-
-<div id="main" style="width: 100%; height: 100%; position: absolute; border: 1px solid black; top: 0; left: 0;">
-
-	<div id="timeline" style="width: 100%; height: 10%; position: absolute; top: 0; left: 0; overflow-x: auto; border: 1px solid red;" onscroll="timelineTrackScroll()">
+	<div id="timeline" onscroll="timelineTrackScroll()">
 		Timeline goes here
 	</div>
 
-	<div id="gleis0" style="width: 100%; height: 10%; position: absolute; top: 10%; left: 0; border: 1px solid green;">
+	<div id="gleis0">
 		<div id="noplatform">gleis0</div>
 	</div>
 
-	<div id="gleise" style="width: 100%; height: 70%; position: absolute; top: 20%; left: 0; border: 1px solid blue; overflow-y: auto; overflow-x: auto;" onscroll="tracksTrackScroll()">
+	<div id="gleise" onscroll="tracksTrackScroll()">
 		<div id="table">
 		</div>
 	</div>
 
-	<div id="control" style="width: 100%; height: 10%; position: absolute; top: 90%; left: 0; border: 1px solid grey;">
-		<form name="menu" style="position: relative; float: left; width: 29%;">
+	<div id="control">
+		<form name="menu" id="menu">
 	<fieldset>
                 <div id="buttons">
                 <button type="button" id="start" onclick="go ()">Start</button> 
@@ -106,40 +58,40 @@ td.slot {
                 </div>
 	</fieldset>
 		</form>
-            <div class="slider" style="float: right; width: 70%;">
+            <div class="slider">
                 <label for="amount">Speed</label>
-                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                <div id="slider" style="width: 20%; padding: 1px"></div>
-       		<div id="moneydisplay" style="position: relative; float: right;">Money: <b id="money">0</b></div>
-		<div id="days" style="position: relative; float: right;">Day: <b id="day">0</b></div>
+                <input type="text" id="amount" readonly>
+                <div id="slider"></div>
+       		<div id="moneydisplay">Money: <b id="money">0</b></div>
+		<div id="days">Day: <b id="day">0</b></div>
             </div>
 	</div>
 </div>
 
-<div id="timeslider" style="width: 100%; height: 90%; position: absolute; top: 0; left: 0; z-index: -1;">
-	<div id="timeslider-slider" style="width: 10px; background-color: red; height: 100%; position: relative; z-index: 1;"></div>
+<div id="timeslider">
+	<div id="timeslider-slider"></div>
 </div>
 
-<div id="shop" style="width: 80%; height: 80%; position: absolute; top: 10%; left: 10%; z-index: 2; border: 1px solid yellow; background-color: #eeeeee;" class="invisible">
-	<div id="shop-title" style="position: relative; float: left; width: 90%; height: 10%;"><b>Shop</b></div>
-	<div id="shop-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeShop()"><b>X Close</b></div>
+<div id="shop" class="invisible">
+	<div id="shop-title"><b>Shop</b></div>
+	<div id="shop-close" onclick="closeShop()"><b>X Close</b></div>
 	<button type="button" id="addPlatform" onclick="addNewPlatform()">Add New Platform</button>
 </div>
-<div id="selectPlatform" style="width: 40%; height: 40%; position: absolute; top: 10%; left: 10%; z-index: 3; border: 1px solid blue; background-color: #eeeeee;" class="invisible">
-        <div id="selectPlatform-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeSelectPlatform ()"><b>X Close</b></div>
-        <div id="selectPlatform-inner" style="width: 100%; height: 80%"> </div>
+<div id="selectPlatform" class="invisible">
+        <div id="selectPlatform-close" onclick="closeSelectPlatform ()"><b>X Close</b></div>
+        <div id="selectPlatform-inner"> </div>
 </div>
-<div id="contracts" style="width: 80%; height: 80%; position: absolute; top: 10%; left: 10%; z-index: 2; border: 1px solid red; background-color: #eeeeee;" class="invisible">
+<div id="contracts" class="invisible">
 	<!--<div id="selectPlatform" style="width: 40%; height: 40%; position: absolute; top: 10%; left: 10%; z-index: 3; border: 1px solid blue; background-color: #eeeeee;" class="invisible">
         <div id="selectPlatform-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeSelectPlatform ()"><b>X Close</b></div>
         <div id="selectPlatform-inner" style="width: 100%; height: 80%"> </div>
         </div>-->
-        <div id="contract-title" style="position: relative; float: left; width: 90%; height: 10%;"><b>Contracts</b></div>
-	<div id="contract-close" style="position: relative; float: right; width: 10%; height: 10%;" onclick="closeContracts()"><b>X Close</b></div>
-	<div id="contractsoffert" style="float: left; width: 49%;overflow:auto;">
+        <div id="contract-title"><b>Contracts</b></div>
+	<div id="contract-close" onclick="closeContracts()"><b>X Close</b></div>
+	<div id="contractsoffert">
         content
         </div>
-        <div id="contractstaken" style="float: left; width: 49%; height: 80%; overflow:auto;">
+        <div id="contractstaken">
         content
         </div>
 </div>

@@ -533,12 +533,12 @@ function acceptContract(n, platform) {
 	var tomove = gameState.offeredContracts[n];
 	var length = gameState.acceptedContracts.length;
 
-	gameState.offeredContracts[n] = createNewContract (tomove[0], gameState.nextLine);
+	gameState.offeredContracts[n] = createNewContract(tomove.type, gameState.nextLine);
 	gameState.nextLine++;
 	gameState.acceptedContracts[length] = new Array ();
 	gameState.acceptedContracts[length] = tomove;
 	gameState.acceptedContracts[length].platform = platform;
-	changeMoney(tomove[5]);
+	changeMoney(tomove.acceptReward);
 	displayContracts();
 	displayContractsOffered();
 	createEvents ();
@@ -551,9 +551,9 @@ function acceptContract(n, platform) {
 function refuseContract(n) {
 	var tomove = gameState.offeredContracts[n];
 
-	gameState.offeredContracts[n] = createNewContract(tomove[0], gameState.nextLine);
+	gameState.offeredContracts[n] = createNewContract(tomove.type, gameState.nextLine);
 	gameState.nextLine++;
-	changeMoney(-tomove[4]);
+	changeMoney(-tomove.refusePunishment);
 	displayContractsOffered();
 }
 

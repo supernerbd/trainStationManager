@@ -445,7 +445,7 @@ function changePlatformNr(nr, check){ //Change Platform Number of an Line. Bug: 
 	//	}
 	//}
 	//
-	gameState.acceptedContracs[nr][8] = check;
+	gameState.acceptedContracts[nr][8] = check;
 	displayContracts();
 	createEvents ();
 	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.

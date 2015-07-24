@@ -664,8 +664,6 @@ function timelineTrackScroll() {
 	document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
 }
 
-//Global variable
-// In acceptedContracts are all contracts. Contracts are Arrays. In 0 = type (in gameState[0][nr][0]), 1 = line nr, 2= reward, 3=fee, 4=refuse fee, 5= accept reward, 6= tact, 7 = starting time (in Numbers. Math see displayTime()), 8 = platform, 
 // gameState.acceptedContracts[0] could be undefined!
 window.gameState = new GameState();
 fchangespeed (5);

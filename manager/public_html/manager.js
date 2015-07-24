@@ -14,15 +14,15 @@ function go () { //Start program
 
 		//Create 3 taken contracts and give them platforms;
 		gameState.acceptedContracts[0] = createNewContract (0, gameState.nextLine);
-		gameState.acceptedContracts[0][8]=3;
+		gameState.acceptedContracts[0].platform = 3;
 		gameState.nextLine++;
 
 		gameState.acceptedContracts[1] = createNewContract (1, gameState.nextLine);
-		gameState.acceptedContracts[1][8]=2;
+		gameState.acceptedContracts[1].platform = 2;
 		gameState.nextLine++;
 
 		gameState.acceptedContracts[2] = createNewContract (2, gameState.nextLine);
-		gameState.acceptedContracts[2][8]=1;
+		gameState.acceptedContracts[2].platform = 1;
 		gameState.nextLine++;
 
 		displayContracts();
@@ -180,27 +180,28 @@ function delay() {
 return 0; //ToDo think of an algorithm to define delays.
 }
 
-function createNewContract (type, lineNr){ //Create new Contract, displayed at contractsoffered.
-	var contract = new Array (type, lineNr);
-	switch (type){
+function createNewContract (type, lineNo){ //Create new Contract, displayed at contractsoffered.
+	var contract = new Contract(type, lineNo);
+
+        switch (type){
 	case 0: //ICE
-	contract [2] = 300; //money success 
-	contract [3] = 3000; // money punishment
-	contract [4] = 3000; //refuse punishment
-	contract [5] = 100; //accept reward
-	break;
+            contract.successReward = 300;
+            contract.punishment = 3000;
+            contract.refusePunishment = 3000;
+            contract.acceptReward = 100;
+            break;
 	case 1: //RE
-	contract [2] = 200; //money success 
-	contract [3] = 2000; // money punishment
-	contract [4] = 2000; //refuse punishment
-	contract [5] = 0; //accept reward
-	break;
+            contract.successReward = 200;
+            contract.punishment = 2000;
+            contract.refusePunishment = 2000;
+            contract.acceptReward = 0;
+            break;
 	case 2: //RB
-	contract [2] = 100; //money success 
-	contract [3] = 1000; // money punishment
-	contract [4] = 1000; //refuse punishment
-	contract [5] = 0; //accept reward
-	break;
+            contract.successReward = 100; 
+            contract.punishment = 1000;
+            contract.refusePunishment = 1000;
+            contract.acceptReward = 0;
+            break;
 	}
 	//tact and start time
 	var tact;
@@ -208,81 +209,83 @@ function createNewContract (type, lineNr){ //Create new Contract, displayed at c
 	var v = Math.floor((Math.random() * 10) + 1);
 	switch (v){
 		case 1:
-		tact = 0.5;
-		startTime = Math.floor((Math.random() * 100) + 1);
-		break;
+                    tact = 0.5;
+                    startTime = Math.floor((Math.random() * 100) + 1);
+                    break;
 		case 2:
-		tact = 2;
-		startTime = Math.floor((Math.random() * 100) + 1);
-		break;
+                    tact = 2;
+                    startTime = Math.floor((Math.random() * 100) + 1);
+                    break;
 		case 3:
-		tact = 2;
-		startTime = Math.floor((Math.random() * 100) + 1);
-		break;
+                    tact = 2;
+                    startTime = Math.floor((Math.random() * 100) + 1);
+                    break;
 		case 4:
-		tact = 3;
-		startTime = Math.floor((Math.random() * 100) + 1) + 30;
-		break;
+                    tact = 3;
+                    startTime = Math.floor((Math.random() * 100) + 1) + 30;
+                    break;
 		case 5:
-		tact = 4;
-		startTime = Math.floor((Math.random() * 100) + 1) + 30;
-		break;
+                    tact = 4;
+                    startTime = Math.floor((Math.random() * 100) + 1) + 30;
+                    break;
 		case 6:
-		tact = 5;
-		startTime = 2 * (Math.floor((Math.random() * 100) + 1));
-		break;
+                    tact = 5;
+                    startTime = 2 * (Math.floor((Math.random() * 100) + 1));
+                    break;
 		case 7:
-		tact = 6;
-		startTime = 2 * (Math.floor((Math.random() * 100) + 1));
-		break;
+                    tact = 6;
+                    startTime = 2 * (Math.floor((Math.random() * 100) + 1));
+                    break;
 		case 8: 
-		tact = 1;
-		startTime = Math.floor((Math.random() * 100) + 1);
-		break;
+                    tact = 1;
+                    startTime = Math.floor((Math.random() * 100) + 1);
+                    break;
 		case 9: 
-		tact = 1;
-		startTime = Math.floor((Math.random() * 100) + 1);
-		break;
+                    tact = 1;
+                    startTime = Math.floor((Math.random() * 100) + 1);
+                    break;
 		case 10: 
-		tact = 1;
-		startTime = Math.floor((Math.random() * 100) + 1);
-		break;
+                    tact = 1;
+                    startTime = Math.floor((Math.random() * 100) + 1);
+                    break;
 	}
-	contract [6] = tact;
-	contract [7] = startTime;
+	contract.tact = tact;
+	contract.startingTime = startTime;
 	return contract;
 }
 
-function createDayTraffic (){ //Create Day Traffic, save it to gameState. Use function only once every day.
-    var nr = Math.floor((Math.random() * 10) + 1);
-
-    for (var i=0; i<=nr; i++){ //i==events
-        gameState.dayTraffic[i] = new Array ();
-        gameState.dayTraffic[i][0] = displayTrain(3)+"<br>"+nr;
-        gameState.dayTraffic[i][1] = 3 * (Math.floor((Math.random() * 100) + 1));
-        gameState.dayTraffic[i][2] = 0; //platform
-        gameState.dayTraffic[i][3] = 0; // lineNr
-        gameState.dayTraffic[i][4] = 400; //reward Day Traffic
-        gameState.dayTraffic[i][5] = 1000; //fee day traffic
-        //alert(i);
+function createDayTraffic(){ //Create Day Traffic, save it to gameState. Use function only once every day.
+    var n = Math.floor((Math.random() * 10) + 1);
+    
+    for (var i = 0; i <= n; i++) {
+        var e = gameState.dayTraffic[i] = new TrainEvent();
+        
+        e.html = displayTrain(3) + "<br>" + n;
+        e.time = 3 * (Math.floor((Math.random() * 100) + 1));
+        e.platform = 0;
+        e.lineNo = 0;
+        e.reward = 400;
+        e.fee = 1000;
     }
 }
-function addDayTraffic (){ //add day traffic to events
-    var add;
-
+function addDayTraffic() {
+    var add = gameState.events.length - 1;
     if (gameState.daysPlayed === 1) {
-	add = gameState.events.length; //enter last contract
-    } else {
-        add = gameState.events.length;
-        add--;
+        gameState.events.length;
     }
 
-    gameState.events[add]=new Array ();
-    for (var i=0; i<gameState.dayTraffic.length; i++){
-        gameState.events[add][i] = new Array ();
-	for (var j=0; j < 6; j++) {
-	        gameState.events[add][i][j] = gameState.dayTraffic[i][j];
-	}
+    gameState.events[add] = new Array();
+    for (var i = 0; i < gameState.dayTraffic.length; i++) {
+        var e = gameState.events[add][i] = new TrainEvent();
+        var t = gameState.dayTraffic[i];
+        
+        e.html = t.html;
+        e.time = t.time;
+        e.platform = t.platform;
+        e.lineNo = t.lineNo;
+        e.reward = t.reward;
+        e.fee = t.fee;
+        e.type = t.type;
     }
 }
 
@@ -290,9 +293,10 @@ function checkCollision (a, b){ //Check collision of trains on platforms
 
     for (var i=0; i<gameState.events.length; i++){ //for every contract
         for (var j=0; j<gameState.events[i].length; j++){ //for every event 
-            if (gameState.events[i][j]!==gameState.events[a][b]){
-                if (gameState.events[i][j][1]===gameState.events[a][b][1] && gameState.events[i][j][2]===gameState.events[a][b][2]){
-                    gameState.events[i][j][2]=0;
+            if (gameState.events[i][j] !== gameState.events[a][b]) {
+                if (gameState.events[i][j].time === gameState.events[a][b].time
+                    && gameState.events[i][j].platform === gameState.events[a][b].platform) {
+                    gameState.events[i][j].platform = 0;
                 }
             }
         }
@@ -316,20 +320,14 @@ function createTable (){ //Create main table. Without any Data
 	insertTableData ();
 }
 
-function createEvents () { //Create Events out of contracts. 
+function createEvents() { 
 
 	for (var j=0; j<gameState.acceptedContracts.length; j++){ //Search through all taken contracts, j == contract number
 		var z = 0; // EventNr in Events for that contract
 		gameState.events[j] = new Array ();
-		var startingTime = gameState.acceptedContracts[j][7];
-		var tact = gameState.acceptedContracts[j][6];
-		var platform = gameState.acceptedContracts[j][8];
-		var type = gameState.acceptedContracts[j][0];
-		var lineNr = gameState.acceptedContracts[j][1];
-		var reward = gameState.acceptedContracts[j][2];
-		var fee = gameState.acceptedContracts[j][3];
 
-		for (var x =startingTime; x<=380; x=x+(20*tact)){ //Time Position--> every Event
+                var c = gameState.acceptedContracts[j]; 
+		for (var x = c.startingTime; x <= 380; x += (20 * c.tact)) { //Time Position--> every Event
 			// Sort out doubles on one time slot, doesent work
 		//	if (j>=1){ 
 		//	for (var i= 0; x<gameState[9].length; i++){
@@ -340,35 +338,37 @@ function createEvents () { //Create Events out of contracts.
 		//			}
 		//		}
 		//	}
-		//	}
-			//until here
-			gameState.events[j][z] = new Array ();
-			gameState.events[j][z][0] =displayTrain(type)+"<br>"+lineNr; //display
-			gameState.events[j][z][1] = x; //time
-			gameState.events[j][z][2] = platform; //platform
-			gameState.events[j][z][3] = lineNr; //lineNr
-			gameState.events[j][z][4] = reward; //reward
-			gameState.events[j][z][5] = fee; //fee
+
+			var e = gameState.events[j][z] = new TrainEvent();
+			e.html = displayTrain(c.type) + "<br>" + c.lineNo;
+			e.time = x;
+                        e.platform = c.platform;
+                        e.lineNo = c.lineNo;
+                        e.reward = c.reward;
+                        e.fee = c.fee;
+                        e.type = c.type;
+
                         checkCollision(j, z);
 			z++;
 		}
 	}
         addDayTraffic();
-}//Event (== gameState.events[contractNr][EventNr])[0]=display, [1]=time, [2]= platform, [3]= lineNr, [4]= reward, [5] = fee
+}
 
-function insertTableData (){ //Insert Data in Table Array 
+function insertTableData() { 
 
 	for (var i = 0; i<gameState.events.length; i++){ //For every contract
 		//In Tabelle eintragen gameState.table[x][y]
-		for (var j =0; j<gameState.events[i].length; j++){ //for every event in contract
-			var platform = gameState.events[i][j][2];
-			var time = gameState.events[i][j][1];
-			var display = gameState.events[i][j][0];
-			if (platform===0) {
-				var lineNr = gameState.events[i][j][3];
-				gameState.table[platform][time] = "<button type='button' id='platformChangeEvent' onclick='selectPlatformEvent("+i+","+j+")'>Line ("+lineNr+" "+ displayTime(time) +")</button>";
+		for (var j = 0; j < gameState.events[i].length; j++){ //for every event in contract
+			var platform = gameState.events[i][j].platform;
+			var time = gameState.events[i][j].time;
+			if (platform === 0) {
+				gameState.table[platform][time] = "<button type='button' id='platformChangeEvent' onclick='selectPlatformEvent("
+                                                                    + i + "," + j + ")'>Line ("
+                                                                    + gameState.events[i][j].lineNo
+                                                                    + " " + displayTime(time) +")</button>";
 			} else {
-				gameState.table[platform][time] = display;
+				gameState.table[platform][time] = gameState.events[i][j].html;
 			}
 			//platform und time bestimmen platz in der Tabelle, display ist inhalt der eigefügt werden soll 
 		}
@@ -434,7 +434,7 @@ function startPlaformNr(nr){ //change platform value
 	gameState.numPlatforms = nr; //
 }
 
-function changePlatformNr(nr, check){ //Change Platform Number of an Line. Bug: Wenn LineNr nicht fortlaufend, dann falsche zuordnung in gameState.acceptedContracs[nr].
+function changePlatformNr(n, check){ //Change Platform Number of an Line. Bug: Wenn LineNr nicht fortlaufend, dann falsche zuordnung in gameState.acceptedContracs[nr].
 	//var check = prompt("Platform Number for this Line", "");
 	//if (gameState[4]<check){
 	//	check = prompt ("Enter a valid Platform Number","");
@@ -443,7 +443,7 @@ function changePlatformNr(nr, check){ //Change Platform Number of an Line. Bug: 
 	//	}
 	//}
 	//
-	gameState.acceptedContracts[nr][8] = check;
+	gameState.acceptedContracts[n].platform = check;
 	displayContracts();
 	createEvents ();
 	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
@@ -459,7 +459,7 @@ function changePlatformNrEvent(i, j, check){ //Change Platform Number of an sing
 	//		check = 1;
 	//	}
 	//}
-	gameState.events[i][j][2] = check;
+	gameState.events[i][j].platform = check;
 	displayContracts();
 	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
 	displayTable();
@@ -476,60 +476,66 @@ function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new p
 	//alert ("The new platform will be available tomorrow"); //ToDO: Bug!!! I can set platform value to not existing platform
 }
 
-function displayContracts(){ ////Responsible for display of Contracts taken
-	var content ="<h3>Your Contracts</h3><br>";
+function displayContracts() {
+	var content = "<h3>Your Contracts</h3><br>";
 
 	for (var i=0; i<gameState.acceptedContracts.length; i++){
-		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='platformChange' onclick='selectPlatform ("+(gameState.acceptedContracts[i][1]-1)+")'>Platform (Change)</button></th></tr><tr>";
+		content += "<table><tr><th>Type</th><th>Line Nr</th>"
+                            + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
+                            + "<th>Tact</th><th>Starting Time</th>"
+                            + "<th><button type='button' id='platformChange' onclick='selectPlatform ("
+                            + (gameState.acceptedContracts[i].lineNo - 1) + ")'>Platform (Change)</button></th></tr><tr>";
+                    
 		for (var j=0; j<gameState.acceptedContracts[i].length; j++){
 			if (j===0) {
-				content = content + "<td>" + displayTrain(gameState.acceptedContracts[i][j]) + "</td>";
+				content += "<td>" + displayTrain(gameState.acceptedContracts[i][j]) + "</td>";
 			} else if (j===7) {
-				content = content + "<td>" + displayTime(gameState.acceptedContracts[i][j]) + "</td>";
+				content += "<td>" + displayTime(gameState.acceptedContracts[i][j]) + "</td>";
 			} else {
-				content = content + "<td>" + gameState.acceptedContracts[i][j] + "</td>";
+				content += "<td>" + gameState.acceptedContracts[i][j] + "</td>";
 			}
 		}
-		content = content + "</tr></table>";
+		content += "</tr></table>";
 	}
 	document.getElementById("contractstaken").innerHTML = content;
 }
 
-function displayContractsOffered(){ //Responsible for display of Contracts offered
-	var content ="<h3>Contracts Offered</h3><br>";
+function displayContractsOffered() {
+	var content = "<h3>Contracts Offered</h3><br>";
 
 	for (var i=0; i<gameState.offeredContracts.length; i++){
-		content = content + "<table><tr><th>Type</th><th>Line Nr</th><th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th><th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='selectPlatformContract(" + gameState.offeredContracts[i]+")'>Accept</button></th></tr><tr>";
-		for (var j=0; j<gameState.offeredContracts[i].length; j++){
-			if (j===0) {
-				content += "<td>" + displayTrain(gameState.offeredContracts[i][j]) + "</td>";
-			} else if (j===7) {
-				content += "<td>" + displayTime(gameState.offeredContracts[i][j]) + "</td>";
-			} else {
-				content += "<td>" + gameState.offeredContracts[i][j] + "</td>";
-			}
-		}
-		content += "<td><button type='button' id='refuse' onclick='refuseContract(" + gameState.acceptedContracts[i] + ")'>Refuse</button></td></tr></table>";
+                var c = gameState.offeredContracts[i];
+                
+		content += "<table><tr><th>Type</th><th>Line Nr</th>"
+                            + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
+                            + "<th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='selectPlatformContract("
+                            + i + ")'>Accept</button></th></tr><tr>";
+                
+                content += "<td>" + displayTrain(c.type) + "</td>"
+                            + "<td>" + c.lineNo + "</td>"
+                            + "<td>" + c.reward + "</td>"
+                            + "<td>" + c.fee + "</td>"
+                            + "<td>" + c.refusePunishment + "</td>"
+                            + "<td>" + c.acceptReward + "</td>"
+                            + "<td>" + c.tact + "</td>"
+                            + "<td>" + displayTime(c.startingTime) + "</td>";
+                        
+		content += "<td><button type='button' id='refuse' onclick='refuseContract("
+                            + i + ")'>Refuse</button></td></tr></table>";
 	}
+        
 	document.getElementById("contractsoffered").innerHTML = content;
 }
 
-function acceptContract(nr, check){ //Accept Contract
-	//var check = prompt("Platform Number for this Line", "1");
-	//if (gameState[4]<check){
-	//	check = prompt ("Enter a valid Platform Number","");
-	//	if (gameState[4]<check){
-	//		check = 1;
-	//	}
-	//}
-	var tomove = gameState.offeredContracts[nr];
+function acceptContract(n, platform) {
+	var tomove = gameState.offeredContracts[n];
 	var length = gameState.acceptedContracts.length;
 
-	gameState.offeredContracts[nr] = createNewContract (tomove[0], gameState.nextLine);
+	gameState.offeredContracts[n] = createNewContract (tomove[0], gameState.nextLine);
 	gameState.nextLine++;
 	gameState.acceptedContracts[length] = new Array ();
 	gameState.acceptedContracts[length] = tomove;
-	gameState.acceptedContracts[length][8] = check;
+	gameState.acceptedContracts[length].platform = platform;
 	changeMoney(tomove[5]);
 	displayContracts();
 	displayContractsOffered();
@@ -540,46 +546,42 @@ function acceptContract(nr, check){ //Accept Contract
 	//ToDO: Update Table!
 }
 
-function refuseContract (nr){ //Refuse Contract
-	var tomove = gameState.offeredContracts[nr];
+function refuseContract(n) {
+	var tomove = gameState.offeredContracts[n];
 
-	gameState.offeredContracts[nr] = createNewContract(tomove[0], gameState.nextLine);
+	gameState.offeredContracts[n] = createNewContract(tomove[0], gameState.nextLine);
 	gameState.nextLine++;
 	changeMoney(-tomove[4]);
 	displayContractsOffered();
 }
 
-function selectPlatformContract (nr){
+function selectPlatformContract(n) {
     var content = "<table><tr>";
 
     openSelectPlatform();
-    var plnr = gameState.numPlatforms;
-
-    for (var i=1; i<=plnr; i++){
-        content += "<td onclick='acceptContract(" + nr + "," + i+ ")'>" + i + "</td>";
+    for (var i=1; i <= gameState.numPlatforms; i++){
+        content += "<td onclick='acceptContract(" + n + "," + i+ ")'>" + i + "</td>";
     }
     content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
-function selectPlatform (nr){
+function selectPlatform(n) {
     var content = "<table><tr>";
 
     openSelectPlatform ();
-    var plnr = gameState.numPlatforms;
-    for (var i=1; i<=plnr; i++){
-        content += "<td onclick='changePlatformNr(" + nr + "," + i + ")'>" + i + "</td>";
+    for (var i=1; i <= gameState.numPlatforms; i++){
+        content += "<td onclick='changePlatformNr(" + n + "," + i + ")'>" + i + "</td>";
     }
     content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
-function selectPlatformEvent (i, j){
+function selectPlatformEvent(i, j){
     var content = "<table><tr>";
 
     openSelectPlatform();
-    var plnr = gameState.numPlatforms;
-    for (var x=1; x<=plnr; x++){
+    for (var x=1; x <= gameState.numPlatforms; x++){
         content += "<td onclick='changePlatformNrEvent(" + i + "," + j + "," + x + ")'>" + x + "</td>";
     }
     content += "</tr></table>";
@@ -625,11 +627,11 @@ function gameLoopCalc (){ //Calculate everything
 			for (var i = 0; i<ilength; i++){ //actual calc things
 				var jlength = gameState.events[i].length;
 				for (var j = 0; j<jlength; j++){
-					if (gameState.time===gameState.events[i][j][1]){
-						if (gameState.events[i][j][2]!==0){
-							changeMoney(gameState.events[i][j][4]);
+					if (gameState.time === gameState.events[i][j].time){
+						if (gameState.events[i][j].platform !== 0){
+							changeMoney(gameState.events[i][j].reward);
 						} else {
-							changeMoney(-gameState.events[i][j][5]);
+							changeMoney(-gameState.events[i][j].fee);
 						}
 					}
 				}

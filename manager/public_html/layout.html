@@ -48,14 +48,14 @@
 
 	<div id="control">
                 <div class="button" id="start" onclick="go ()">Start</div>
-                <div class="button" onclick="openContracts ()">Contracts</div>
-                <div class="button" onclick="openShop ()">Shop</div>
+                <div class="button" id="openContracts" onclick="openContracts ()"></div>
+                <div class="button" id="openShop" onclick="openShop ()"></div>
             <div class="slider">
                 <label for="amount">Speed</label>
                 <input type="text" id="amount" readonly>
                 <div id="slider"></div>
             </div>
-            <div id="toggleautoscroll" onclick="toggleAutoscroll()">Autoscroll</div>
+            <div id="toggleautoscroll" onclick="toggleAutoscroll()"></div>
             <div id="moneydisplay">Money: <b id="money">0</b></div>
             <div id="days">Day: <b id="day">0</b></div>
 	</div>

@@ -290,3 +290,24 @@ td.slot {
         height: 80%; 
         overflow:auto;
 }
+
+#openContracts {
+    background-image: url(pic/contract.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:100px 100px ;
+}
+
+#openShop {
+    background-image: url(pic/upgrade.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:100px 100px ;
+}
+
+#toggleautoscroll {
+    background-image: url(pic/autoscroll-on.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:100px 100px ;
+}

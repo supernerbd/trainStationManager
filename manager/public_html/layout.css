@@ -153,6 +153,19 @@ td.slot {
         margin: 5px;
 }
 
+#toggleautoscroll {
+    border: 1px solid red;
+    width: 8%;
+    /*
+        XXX/ToDo: because border of surroundings is 1px which is added to width,
+                  usually 10%, which does add to over 100%.
+        Solution: use inner divs to achieve borders
+     */
+    height: 100%;
+    position: relative;
+    float: left;
+}
+
 #moneydisplay {
     border: 1px solid red;
         width: 10%;

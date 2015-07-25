@@ -12,5 +12,7 @@ function GameState() {
 	this.dayTraffic = new Array();
 	this.time = 0;
 
+        this.autoScroll = true;
+        
 	return this;
 }

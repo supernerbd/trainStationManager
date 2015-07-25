@@ -20,3 +20,6 @@ function closeShop (){
 function closeSelectPlatform (){
     document.getElementById("selectPlatform").style.setProperty("display", "none");
 }
+function toggleAutoscroll() {
+    gameState.autoScroll = gameState.autoScroll ? false : true;
+}

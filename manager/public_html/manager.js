@@ -77,14 +77,19 @@ function fchangespeed (y) { //Change Real-Time running of Game-Loop
 }
 
 function advanceTimeslider(t) {
+        
+        document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
+
+        if (!gameState.autoScroll) {
+            return;
+        }
+        
 	window.location.assign("#0." + t);
 	window.location.assign("#1." + t);
 
 	if ((gameState.time * 3) % ((getNumSlotsDisplayed() - 4) * 3) == 0) {
 		scrollToPercent(20);
 	}
-
-	document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
 }
 
 function timeColor(x){

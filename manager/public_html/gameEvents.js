@@ -6,6 +6,7 @@ function dayChangeEvent() {
     createEvents();
     createTable();
     displayTable();
+    setUpSortable();
 }
 
 function timeChangeEvent() {

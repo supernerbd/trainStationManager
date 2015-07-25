@@ -23,3 +23,10 @@ function closeSelectPlatform (){
 function toggleAutoscroll() {
     gameState.autoScroll = gameState.autoScroll ? false : true;
 }
+function setUpSortable() {
+    for (var i = 0; i < gameState.numPlatforms; i++) {
+        $("#track" + i).sortable({
+            connectWith: ".column"
+        });
+    }
+}

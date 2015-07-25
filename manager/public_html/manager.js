@@ -4,48 +4,33 @@
 //Buttons
 function go () { //Start program
 
-	if (gameState.stopped === false){ //is game stopped or still running?
-		alert ("already startet");
-	}
-	else {
-		changeDay(1); //Set number of days to 1 and display.
-		changeMoney(10100); //Set starting money and display.
-		startPlaformNr(3); //Set platform number to 2.
+    if (gameState.stopped === false) {
+        alert ("already started");
+        return;
+    }
 
-		//Create 3 taken contracts and give them platforms;
-		gameState.acceptedContracts[0] = createNewContract (0, gameState.nextLine);
-		gameState.acceptedContracts[0].platform = 3;
-		gameState.nextLine++;
+    changeMoney(10100);
+    startPlaformNr(3);
 
-		gameState.acceptedContracts[1] = createNewContract (1, gameState.nextLine);
-		gameState.acceptedContracts[1].platform = 2;
-		gameState.nextLine++;
+    var n = 3;
+    for (var i = 0; i < n; i++) {
+        gameState.acceptedContracts[i] = createNewContract (i, gameState.nextLine);
+        gameState.acceptedContracts[i].platform = n - i;
+        gameState.nextLine++;
+    }
+    displayContracts();
 
-		gameState.acceptedContracts[2] = createNewContract (2, gameState.nextLine);
-		gameState.acceptedContracts[2].platform = 1;
-		gameState.nextLine++;
+    for (var i = 0; i < 3; i++) {
+        gameState.offeredContracts[i] = createNewContract (i, gameState.nextLine);
+        gameState.nextLine++;
+    }
+    displayContractsOffered();
 
-		displayContracts();
+    gameState.stopped = false;
+    dayChangeEvent();
 
-		//Create 3 offered contracts.
-		gameState.offeredContracts[0] = createNewContract (0, gameState.nextLine);
-		gameState.nextLine++;
-
-		gameState.offeredContracts[1] = createNewContract (1, gameState.nextLine);
-		gameState.nextLine++;
-
-		gameState.offeredContracts[2] = createNewContract (2, gameState.nextLine);
-		gameState.nextLine++;
-
-                createDayTraffic ();
-		displayContractsOffered();
-                createEvents ();
-		createTable ();
-		displayTable ();
-		alert ("Have Fun!");
-		gameState.stopped = false;
-		gameLoop ();
-	}
+    alert ("Have Fun!");
+    gameLoop();
 }
 
 function stop () { //Stop program

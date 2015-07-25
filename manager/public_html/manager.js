@@ -274,10 +274,7 @@ function createDayTraffic(){ //Create Day Traffic, save it to gameState. Use fun
     }
 }
 function addDayTraffic() {
-    var add = gameState.events.length - 1;
-    if (gameState.daysPlayed === 1) {
-        gameState.events.length;
-    }
+    var add = gameState.events.length;
 
     gameState.events[add] = new Array();
     for (var i = 0; i < gameState.dayTraffic.length; i++) {

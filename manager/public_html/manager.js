@@ -621,41 +621,18 @@ function gameLoop (){ //Set Timeout
 	setTimeout(function (){gameLoopCalc();}, 3000/window.gameState.speed);
 }
 
-function gameLoopCalc (){ //Calculate everything
+function gameLoopCalc() {
 
-	if (gameState.stopped===true){
-		
-	} else {
-		if (gameState.time<=380){
-			timeColor(gameState.time);
-			advanceTimeslider(gameState.time);
+    if (gameState.stopped===true) {
+        return;
+    }
 
-			var ilength = gameState.events.length;
-			for (var i = 0; i<ilength; i++){ //actual calc things
-				var jlength = gameState.events[i].length;
-				for (var j = 0; j<jlength; j++){
-					if (gameState.time === gameState.events[i][j].time){
-						if (gameState.events[i][j].platform !== 0){
-							changeMoney(gameState.events[i][j].reward);
-						} else {
-							changeMoney(-gameState.events[i][j].fee);
-						}
-					}
-				}
-			}
-			gameState.time++;
-			gameLoop();
-		} else {
-			//to new day..
-			gameState.time=0;
-			changeDay(1);
-                        createDayTraffic ();
-                        createEvents ();
-                        createTable ();
-                        displayTable ();
-			gameLoop();
-		}
-	}
+    if (gameState.time<=380) {
+        timeChangeEvent();
+    } else {
+        dayChangeEvent();
+    }
+    gameLoop();
 }
 
 function tracksTrackScroll() {

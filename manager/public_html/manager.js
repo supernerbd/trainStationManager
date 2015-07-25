@@ -486,8 +486,8 @@ function displayContracts() {
 		content += "<table><tr><th>Type</th><th>Line Nr</th>"
                             + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
                             + "<th>Tact</th><th>Starting Time</th>"
-                            + "<th><button type='button' id='platformChange' onclick='selectPlatform ("
-                            + (c.lineNo - 1) + ")'>Platform (Change)</button></th></tr><tr>";
+                            + "<th><div class='buttonTable' id='platformChange' onclick='selectPlatform ("
+                            + (c.lineNo - 1) + ")'>Platform (Change)</div></th></tr><tr>";
 
                 content += "<td>" + displayTrain(c.type) + "</td>"
                             + "<td>" + c.lineNo + "</td>"
@@ -512,8 +512,8 @@ function displayContractsOffered() {
                 
 		content += "<table><tr><th>Type</th><th>Line Nr</th>"
                             + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
-                            + "<th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='selectPlatformContract("
-                            + i + ")'>Accept</button></th></tr><tr>";
+                            + "<th>Tact</th><th>Starting Time</th><th><div class='buttonTable' id='accept' onclick='selectPlatformContract("
+                            + i + ")'>Accept</div></th></tr><tr>";
                 
                 content += "<td>" + displayTrain(c.type) + "</td>"
                             + "<td>" + c.lineNo + "</td>"
@@ -524,8 +524,8 @@ function displayContractsOffered() {
                             + "<td>" + c.tact + "</td>"
                             + "<td>" + displayTime(c.startingTime) + "</td>";
                         
-		content += "<td><button type='button' id='refuse' onclick='refuseContract("
-                            + i + ")'>Refuse</button></td></tr></table>";
+		content += "<td><div class='buttonTable' id='refuse' onclick='refuseContract("
+                            + i + ")'>Refuse</div></td></tr></table>";
 	}
         
 	document.getElementById("contractsoffered").innerHTML = content;

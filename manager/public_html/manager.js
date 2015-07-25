@@ -291,14 +291,20 @@ function addDayTraffic() {
     }
 }
 
-function checkCollision (a, b){ //Check collision of trains on platforms
+function checkCollision(contract, event) {
+    var r = gameState.events[contract][event];
 
     for (var i=0; i<gameState.events.length; i++){ //for every contract
-        for (var j=0; j<gameState.events[i].length; j++){ //for every event 
-            if (gameState.events[i][j] !== gameState.events[a][b]) {
-                if (gameState.events[i][j].time === gameState.events[a][b].time
-                    && gameState.events[i][j].platform === gameState.events[a][b].platform) {
-                    gameState.events[i][j].platform = 0;
+        for (var j=0; j<gameState.events[i].length; j++){ //for every event
+            var e = gameState.events[i][j];
+            if (e !== r) {
+                if (e.time === r.time && e.platform === r.platform) {
+                    alert("Collision @ platform " + r.platform
+                            + " for timeslot " + r.time + " detected."
+                            + " Trains " + r.type + "-" + r.lineNo
+                            + " and " + e.type + "-" + r.lineNo
+                            + " involved.");
+                    e.platform = 0;
                 }
             }
         }
@@ -329,18 +335,17 @@ function createEvents() {
 		gameState.events[j] = new Array ();
 
                 var c = gameState.acceptedContracts[j]; 
-		for (var x = c.startingTime; x <= 380; x += (20 * c.tact)) { //Time Position--> every Event
-			// Sort out doubles on one time slot, doesent work
-		//	if (j>=1){ 
-		//	for (var i= 0; x<gameState[9].length; i++){
-		//		for (var y=0; y<gameState[9][i].length; y++){
-		//			if (gameState[9][i][y][1]==x && gameState[9][x][y][2]==platform){
-		//				platform=0;
-		//				alert(gameState[9][i][y]);
-		//			}
-		//		}
-		//	}
+		for (var x = c.startingTime; x <= 380; x += (20 * c.tact)) {
 
+                        for (var a = 0; a < gameState.events.length; a++) {
+                            for (var b = 0; b < gameState.events[a].length; b++) {
+                                if (gameState.events[a][b].time == x &&
+                                    gameState.events[a][b].platform == c.platform) {
+                                    alert("collision @  " + c.platform + "." + displayTime(x));
+                                }
+                            }
+                        }
+                        
 			var e = gameState.events[j][z] = new TrainEvent();
 			e.html = displayTrain(c.type) + "<br>" + c.lineNo;
 			e.time = x;

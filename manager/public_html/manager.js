@@ -458,19 +458,14 @@ function changePlatformNr(n, check){ //Change Platform Number of an Line. Bug: W
         closeSelectPlatform ();
 }
 
-function changePlatformNrEvent(i, j, check){ //Change Platform Number of an single Event. i and j are similar to i and j in insertTableData()
-	//var check = prompt("Platform Number for this Line", "");
-	//if (gameState[4]<check){
-	//	check = prompt ("Enter a valid Platform Number","");
-	//	if (gameState[4]<check){
-	//		check = 1;
-	//	}
-	//}
-	gameState.events[i][j].platform = check;
+function changePlatformNrEvent(contract, event, newplatform) {
+    
+	gameState.events[contract][event].platform = newplatform;
+        checkCollision(contract, event);
 	displayContracts();
-	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
+	createTable();
 	displayTable();
-        closeSelectPlatform ();
+        closeSelectPlatform();
 }
 
 function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new platforms

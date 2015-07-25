@@ -363,10 +363,10 @@ function insertTableData() {
 			var platform = gameState.events[i][j].platform;
 			var time = gameState.events[i][j].time;
 			if (platform === 0) {
-				gameState.table[platform][time] = "<button type='button' id='platformChangeEvent' onclick='selectPlatformEvent("
+				gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
                                                                     + i + "," + j + ")'>Line ("
                                                                     + gameState.events[i][j].lineNo
-                                                                    + " " + displayTime(time) +")</button>";
+                                                                    + " " + displayTime(time) +")</div>";
 			} else {
 				gameState.table[platform][time] = gameState.events[i][j].html;
 			}
@@ -391,7 +391,7 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 		if (i===0){
 			for (var j=0; j<gameState.table[i].length; j++){
 				if (gameState.table[i][j]!==false){
-					content0 += '<li>' + gameState.table[i][j] + '</li>';
+					content0 += '<div class="buttondiv">' + gameState.table[i][j] + '</div>';
 					//gameState.table[i]; //ToDo sort for what is intended to be displayed
 				}
 			}
@@ -406,7 +406,7 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 	content += "</tbody></table>";
 	content0 += "</ul>";
 	document.getElementById("table").innerHTML = content; 
-	document.getElementById("noplatform").innerHTML = content0; 
+	document.getElementById("gleis0").innerHTML = content0; 
 }
 
 function changeMoney(amount){ //Change Money value and display and loosing condition 

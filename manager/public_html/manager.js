@@ -545,35 +545,30 @@ function refuseContract(n) {
 }
 
 function selectPlatformContract(n) {
-    var content = "<table><tr>";
+    var content = "";
 
     openSelectPlatform();
     for (var i=1; i <= gameState.numPlatforms; i++){
-        content += "<td onclick='acceptContract(" + n + "," + i+ ")'>" + i + "</td>";
+        content += "<div class='buttonpl' onclick='acceptContract(" + n + "," + i+ ")'>" + i + "</div>";
     }
-    content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
 function selectPlatform(n) {
-    var content = "<table><tr>";
-
+    var content = "";
     openSelectPlatform ();
     for (var i=1; i <= gameState.numPlatforms; i++){
-        content += "<td onclick='changePlatformNr(" + n + "," + i + ")'>" + i + "</td>";
+        content += "<div class='buttonpl' onclick='changePlatformNr(" + n + "," + i + ")'>" + i + "</div>";
     }
-    content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
 function selectPlatformEvent(i, j){
-    var content = "<table><tr>";
-
+    var content = "";
     openSelectPlatform();
     for (var x=1; x <= gameState.numPlatforms; x++){
-        content += "<td onclick='changePlatformNrEvent(" + i + "," + j + "," + x + ")'>" + x + "</td>";
+        content += "<div class='buttonpl' onclick='changePlatformNrEvent(" + i + "," + j + "," + x + ")'>" + x + "</div>";
     }
-    content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 

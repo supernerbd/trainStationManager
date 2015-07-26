@@ -332,7 +332,7 @@ function createEvents() {
                         }
                         
 			var e = gameState.events[j][z] = new TrainEvent();
-			e.html = displayTrain(c.type) + "<br>" + c.lineNo;
+			e.html = displayTrain(c.type) + "<br>" + c.lineNo; //Add here showInfo(j) in ShowInfo. Nochmal mit Niklas sprechen, weil hier ein div nötig wird. Oder an id sortable anhängen, nur wo wird das vergeben? Abruf von gameState.acceptedContracts[j]...
 			e.time = x;
                         e.platform = c.platform;
                         e.lineNo = c.lineNo;

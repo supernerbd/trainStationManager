@@ -48,6 +48,26 @@ div.buttonpl0{
     border: 1px solid red;
 }
 
+.buttonStart {
+    border: 1px solid red;
+    width: 90%;
+    height: 20%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 3%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.linkColor:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.linkColor:link {
+    color: white;
+    text-decoration: none;
+}
 /*.buttondiv{
     position: relative;
     float: left;
@@ -79,6 +99,21 @@ th.slot {
 td.slot {
 	width: 3em;
 	border: 2px solid blue;
+}
+
+#leftSlot{
+    float: left;
+    width: 33%;
+    height: 100%;
+}
+
+#startMenu {
+    border: 1px solid red;
+    float: left;
+    width: 33%;
+    text-align: center;
+    margin-top: 7%;
+    padding-bottom: 10px;
 }
 
 #track0 {

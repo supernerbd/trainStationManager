@@ -356,9 +356,9 @@ function insertTableData() {
 			var time = gameState.events[i][j].time;
 			if (platform === 0) {
 				gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
-                                                                    + i + "," + j + ")'>Line ("
+                                                                    + i + "," + j + ")'><small>Line"
                                                                     + gameState.events[i][j].lineNo
-                                                                    + " " + displayTime(time) +")</div>";
+                                                                    + "<br>" + displayTime(time) +"</small></div>";
 			} else {
 				gameState.table[platform][time] = gameState.events[i][j].html;
 			}
@@ -369,7 +369,7 @@ function insertTableData() {
 
 function displayTable (){ //Display main table. ToDo: Changeable Platforms
 	var content = "<table class='slot'><tbody id='tablebodyplatforms'><tr>";
-	var content0 = "<ul id='track0'>";
+	var content0 = "<table class='slot'><tbody><tr>";
 
 	var timeline = document.getElementById("timeline");
 	var timeline_html = "<table class='slot'><tr>";
@@ -381,10 +381,10 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 
 	for (var i=0; i<gameState.table.length; i++){
 		if (i===0){
+                        content0 += "<tr class='column' id='track" + i + "'>";
 			for (var j=0; j<gameState.table[i].length; j++){
-				if (gameState.table[i][j]!==false){
-					content0 += '<div class="buttondiv">' + gameState.table[i][j] + '</div>';
-					//gameState.table[i]; //ToDo sort for what is intended to be displayed
+				if (gameState.table[i][j] !== false) {
+					content0 += '<td id="' + i + "." + j + '"class="slot">' + gameState.table[i][j] + '</td>';
 				}
 			}
 		} else {
@@ -396,7 +396,7 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 		}
 	}
 	content += "</tbody></table>";
-	content0 += "</ul>";
+	content0 += "</tr></tbody></table>";
 	document.getElementById("table").innerHTML = content; 
 	document.getElementById("gleis0").innerHTML = content0; 
 }

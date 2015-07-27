@@ -48,9 +48,7 @@ function save () { //save
 function load () { //load
 	alert ("Not Working (load)");
 }
-function test () { //test things
-	displayTable (); 
-}
+
 function fchangespeed (y) { //Change Real-Time running of Game-Loop
 	//var y = 1;
 	//var x = document.getElementsByName("timer");

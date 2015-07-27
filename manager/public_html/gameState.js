@@ -14,5 +14,10 @@ function GameState() {
 
         this.autoScroll = true;
         
+        this.lastTrackChangeTrackStart = null;
+        this.lastTrackChangeTrackStop = null;
+        this.lastTrackChangeSlotStart = null;
+        this.lastTrackChangeSlotStop = null;
+        
 	return this;
 }

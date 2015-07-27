@@ -370,9 +370,9 @@ function insertTableData() {
 	}
 }
 
-function displayTable (){ //Display main table. ToDo: Changeable Platforms
+function displayTable() { 
 	var content = "<table class='slot'><tbody id='tablebodyplatforms'><tr>";
-	var content0 = "<table class='slot'><tbody><tr>";
+	var content0 = "<table class='slot'><tbody>";
 
 	var timeline = document.getElementById("timeline");
 	var timeline_html = "<table class='slot'><tr>";
@@ -390,6 +390,7 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 					content0 += '<td id="' + i + "." + j + '"class="slot">' + gameState.table[i][j] + '</td>';
 				}
 			}
+                        content0 += "</tr>";
 		} else {
 			content += "<tr class='column' id='track" + i + "'>"; 
 			for (var j=0; j<gameState.table[i].length; j++){
@@ -399,7 +400,7 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 		}
 	}
 	content += "</tbody></table>";
-	content0 += "</tr></tbody></table>";
+	content0 += "</tbody></table>";
 	document.getElementById("table").innerHTML = content; 
 	document.getElementById("gleis0").innerHTML = content0; 
 }

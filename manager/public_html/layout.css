@@ -28,7 +28,8 @@ body {
     height: 100%;
 }
 
-div.buttonpl0{
+div.buttonpl0 {
+    background-color: inherit;
     position: relative;
     float: left;
     border: 1px solid red;

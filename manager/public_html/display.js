@@ -34,17 +34,17 @@ function handleTrackChange() {
     var b = null;
     
     function _findEvent(slot, track) {
-        console.log("_findEvent: searching for " + track + "." + slot);
+        console.debug("_findEvent: searching for " + track + "." + slot);
         for (var j = 0; j < gameState.events.length; j++) {
             var e = gameState.events[j];
             for (var i = 0; i < e.length; i++) {
                 if (e[i].time == slot && e[i].platform == track) {
-                    console.log("_findEvent: found at " + j + ", " + i);
+                    console.debug("_findEvent: found at " + j + ", " + i);
                     return e[i];
                 }
             }
         }
-        console.log("_findEvent: not found");
+        console.debug("_findEvent: not found");
         return null;
     }
     

@@ -435,8 +435,7 @@ function changePlatformNr(n, check){ //Change Platform Number of an Line. Bug: W
 	gameState.acceptedContracts[n].platform = check;
 	displayContracts();
 	createEvents ();
-	createTable ();	//Bug!!! I can interrupt prompt and set platform to null.
-	displayTable();
+        updatePlatformsEvent();
         closeSelectPlatform ();
 }
 
@@ -445,8 +444,7 @@ function changePlatformNrEvent(contract, event, newplatform) {
 	gameState.events[contract][event].platform = newplatform;
         checkCollision(contract, event);
 	displayContracts();
-	createTable();
-	displayTable();
+        updatePlatformsEvent();
         closeSelectPlatform();
 }
 
@@ -454,8 +452,7 @@ function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new p
 
 	gameState.numPlatforms++;
 	changeMoney(-10000);
-	createTable (); //Missing: Data for new Table
-	displayTable ();
+        updatePlatformsEvent();
 	alert ("New Platform added");
 	//alert ("The new platform will be available tomorrow"); //ToDO: Bug!!! I can set platform value to not existing platform
 }
@@ -526,8 +523,7 @@ function acceptContract(n, platform) {
 	displayContracts();
 	displayContractsOffered();
 	createEvents ();
-	createTable ();
-	displayTable ();
+        updatePlatformsEvent();
         closeSelectPlatform ();
 	//ToDO: Update Table!
 }

@@ -1,16 +1,24 @@
-function dayChangeEvent() {
+function updatePlatformsEvent() {
     
-    gameState.time = 0;
-    changeDay(1);
-    createDayTraffic();
-    createEvents();
+    console.debug("updatePlatformsEvent: got triggered");
     createTable();
     displayTable();
     setUpSortable();
 }
 
+function dayChangeEvent() {
+    
+    console.debug("dayChangeEvent: got triggered");
+    gameState.time = 0;
+    changeDay(1);
+    createDayTraffic();
+    createEvents();
+    updatePlatformsEvent();
+}
+
 function timeChangeEvent() {
     
+    console.debug("timeChangeEvent: got triggered");
     timeColor(gameState.time);
     advanceTimeslider(gameState.time);
 

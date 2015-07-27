@@ -1,6 +1,4 @@
 function Contract(ptype, plineNo) {
-    this.successReward = 0;
-    this.punishment = 0;
     this.refusePunishment = 0;
     this.acceptReward = 0;
     

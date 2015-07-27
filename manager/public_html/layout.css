@@ -129,12 +129,15 @@ td.slot {
     
 }
 */
+
 #track0 {
 	margin: 0;
 	padding: 0;
 	width: 100%;
 }
 
+tr#track0 td {
+    width: 8em;
 }
 
 #main {

@@ -23,10 +23,47 @@ function closeSelectPlatform (){
 function toggleAutoscroll() {
     gameState.autoScroll = gameState.autoScroll ? false : true;
 }
-function setUpSortable() {
-    for (var i = 0; i < gameState.numPlatforms; i++) {
-        $("#track" + i).sortable({
-            connectWith: ".column"
-        });
+function handleTrackChange() {
+    var e = gameState.events[2];
+    var a = null;
+    var b = null;
+    
+    for (var i = 0; i < e.length; i++) {
+        console.log("" + e[i].time + " ==? " + gameState.lastTrackChangeSlotStart);
+        if (e[i].time == gameState.lastTrackChangeSlotStart) {
+            a = e[i];
+        }
+    }
+    for (var i = 0; i < e.length; i++) {
+        if (e[i].time == gameState.lastTrackChangeSlotStop) {
+            b = e[i];
+        }
+    }
+    
+    if (a != null && b != null) {
+        console.log("Conflict");
+    } else if (a != null && b == null) {
+        console.log("HERE");
+    } else {
+        console.log("Makes no sense");
     }
 }
+function trackChangeStartedEvent(event, ui) {
+    gameState.lastTrackChangeTrackStart = event.target.id;
+    gameState.lastTrackChangeSlotStart = ui.item.index();
+}
+function trackChangeStoppedEvent(event, ui) {
+    gameState.lastTrackChangeTrackStop = event.target.id;
+    gameState.lastTrackChangeSlotStop = ui.item.index();
+    handleTrackChange();
+}
+function setUpSortable() {
+    for (var i = 0; i <= gameState.numPlatforms; i++) {
+        $("#track" + i).sortable({
+            connectWith: ".column",
+            start: trackChangeStartedEvent,
+            stop: trackChangeStoppedEvent
+        });
+        $("#track" + i).disableSelection();
+    }
+ }

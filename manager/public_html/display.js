@@ -30,24 +30,29 @@ function toggleAutoscroll() {
     }
 }
 function handleTrackChange() {
-    var e = gameState.events[2];
     var a = null;
     var b = null;
     
-    for (var i = 0; i < e.length; i++) {
-        console.log("" + e[i].time + " ==? " + gameState.lastTrackChangeSlotStart);
-        if (e[i].time == gameState.lastTrackChangeSlotStart) {
-            a = e[i];
+    function _findEvent(slot, track) {
+        console.log("_findEvent: searching for " + track + "." + slot);
+        for (var j = 0; j < gameState.events.length; j++) {
+            var e = gameState.events[j];
+            for (var i = 0; i < e.length; i++) {
+                if (e[i].time == slot && e[i].platform == track) {
+                    console.log("_findEvent: found at " + j + ", " + i);
+                    return e[i];
+                }
+            }
         }
-    }
-    for (var i = 0; i < e.length; i++) {
-        if (e[i].time == gameState.lastTrackChangeSlotStop) {
-            b = e[i];
-        }
+        console.log("_findEvent: not found");
+        return null;
     }
     
+    a = _findEvent(gameState.lastTrackChangeSlotStart, gameState.lastTrackChangeTrackStart);
+    b = _findEvent(gameState.lastTrackChangeSlotStop, gameState.lastTrackChangeTrackStop);
+    
     if (a != null && b != null) {
-        console.log("Conflict");
+        alert("Conflict! Train at target position!");
     } else if (a != null && b == null) {
         console.log("HERE");
     } else {
@@ -55,11 +60,11 @@ function handleTrackChange() {
     }
 }
 function trackChangeStartedEvent(event, ui) {
-    gameState.lastTrackChangeTrackStart = event.target.id;
+    gameState.lastTrackChangeTrackStart = event.target.id.substr(5);
     gameState.lastTrackChangeSlotStart = ui.item.index();
 }
 function trackChangeStoppedEvent(event, ui) {
-    gameState.lastTrackChangeTrackStop = event.target.id;
+    gameState.lastTrackChangeTrackStop = event.target.id.substr(5);
     gameState.lastTrackChangeSlotStop = ui.item.index();
     handleTrackChange();
 }

@@ -77,4 +77,14 @@ function setUpSortable() {
         });
         $("#track" + i).disableSelection();
     }
- }
+
+}
+//function displayHover(id){
+    //take id of contract and write information down here
+  //  document.getElementById("hover").style.setProperty("display", "inherit"); 
+//}
+//function closeHover (){
+  //  document.getElementById("hover").style.setProperty("display", "none");
+//}
+// }
+

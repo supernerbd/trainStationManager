@@ -388,9 +388,9 @@ function displayTable (){ //Display main table. ToDo: Changeable Platforms
 				}
 			}
 		} else {
-			content += "<tr class='column' id='track" + i + "'>";
+			content += "<tr class='column' id='track" + i + "'>"; 
 			for (var j=0; j<gameState.table[i].length; j++){
-				content += "<td id='" + i +"." + j + "' class='slot'>" + gameState.table[i][j] + "</td>";
+				content += "<td id='" + i +"." + j + "' class='slot'>" + gameState.table[i][j] + "</td>"; //Hier on hover!
 			}
 			content += "</tr>";
 		}

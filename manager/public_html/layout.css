@@ -116,6 +116,14 @@ td.slot {
     padding-bottom: 10px;
 }
 
+/*#hover {
+    border: 1px solid red;
+    float: right;
+    width: 30%;
+    height: 20%;
+    
+}
+*/
 #track0 {
 	list-style-type: none;
 	margin: 0;

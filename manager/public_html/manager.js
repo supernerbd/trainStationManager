@@ -75,15 +75,14 @@ function advanceTimeslider(t) {
 	}
 }
 
-function timeColor(x){
-	var i=x;
-	var i2 = i-1;
-		document.getElementById("0."+[i]).setAttribute('style', 'background-color: red');
-		if (i2>=0){
-		document.getElementById("0."+[i2]).setAttribute('style', 'background-color: grey');
-		}
-	//Setzt aktuelle Tabellen-Zelle rot und alte Tabellenzelle grau.
+function timeColor(n) {
+
+    for (var i = 0; i < n - 1; i++) {
+        document.getElementById("0." + i).setAttribute('style', 'background-color: grey');
+    }
+    document.getElementById("0." + i).setAttribute('style', 'background-color: red');
 }
+
 function displayTime(nr){
 	var first = (nr/20);
 	first = Math.floor(first);

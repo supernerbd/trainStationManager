@@ -332,7 +332,7 @@ function createEvents() {
                         }
                         
 			var e = gameState.events[j][z] = new TrainEvent();
-			e.html = displayTrain(c.type) + "<br>" + c.lineNo;
+			e.html = displayTrain(c.type) + "<br>" + c.lineNo; //Add here showInfo(j) in ShowInfo. Nochmal mit Niklas sprechen, weil hier ein div nötig wird. Oder an id sortable anhängen, nur wo wird das vergeben? Abruf von gameState.acceptedContracts[j]...
 			e.time = x;
                         e.platform = c.platform;
                         e.lineNo = c.lineNo;
@@ -471,8 +471,8 @@ function displayContracts() {
 		content += "<table><tr><th>Type</th><th>Line Nr</th>"
                             + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
                             + "<th>Tact</th><th>Starting Time</th>"
-                            + "<th><button type='button' id='platformChange' onclick='selectPlatform ("
-                            + (c.lineNo - 1) + ")'>Platform (Change)</button></th></tr><tr>";
+                            + "<th><div class='buttonTable' id='platformChange' onclick='selectPlatform ("
+                            + (c.lineNo - 1) + ")'>Platform (Change)</div></th></tr><tr>";
 
                 content += "<td>" + displayTrain(c.type) + "</td>"
                             + "<td>" + c.lineNo + "</td>"
@@ -497,8 +497,8 @@ function displayContractsOffered() {
                 
 		content += "<table><tr><th>Type</th><th>Line Nr</th>"
                             + "<th>Reward</th><th>Fee</th><th>Refuse Fee</th><th>Accept Reward</th>"
-                            + "<th>Tact</th><th>Starting Time</th><th><button type='button' id='accept' onclick='selectPlatformContract("
-                            + i + ")'>Accept</button></th></tr><tr>";
+                            + "<th>Tact</th><th>Starting Time</th><th><div class='buttonTable' id='accept' onclick='selectPlatformContract("
+                            + i + ")'>Accept</div></th></tr><tr>";
                 
                 content += "<td>" + displayTrain(c.type) + "</td>"
                             + "<td>" + c.lineNo + "</td>"
@@ -509,8 +509,8 @@ function displayContractsOffered() {
                             + "<td>" + c.tact + "</td>"
                             + "<td>" + displayTime(c.startingTime) + "</td>";
                         
-		content += "<td><button type='button' id='refuse' onclick='refuseContract("
-                            + i + ")'>Refuse</button></td></tr></table>";
+		content += "<td><div class='buttonTable' id='refuse' onclick='refuseContract("
+                            + i + ")'>Refuse</div></td></tr></table>";
 	}
         
 	document.getElementById("contractsoffered").innerHTML = content;
@@ -545,35 +545,30 @@ function refuseContract(n) {
 }
 
 function selectPlatformContract(n) {
-    var content = "<table><tr>";
+    var content = "";
 
     openSelectPlatform();
     for (var i=1; i <= gameState.numPlatforms; i++){
-        content += "<td onclick='acceptContract(" + n + "," + i+ ")'>" + i + "</td>";
+        content += "<div class='buttonpl' onclick='acceptContract(" + n + "," + i+ ")'>" + i + "</div>";
     }
-    content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
 function selectPlatform(n) {
-    var content = "<table><tr>";
-
+    var content = "";
     openSelectPlatform ();
     for (var i=1; i <= gameState.numPlatforms; i++){
-        content += "<td onclick='changePlatformNr(" + n + "," + i + ")'>" + i + "</td>";
+        content += "<div class='buttonpl' onclick='changePlatformNr(" + n + "," + i + ")'>" + i + "</div>";
     }
-    content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
 function selectPlatformEvent(i, j){
-    var content = "<table><tr>";
-
+    var content = "";
     openSelectPlatform();
     for (var x=1; x <= gameState.numPlatforms; x++){
-        content += "<td onclick='changePlatformNrEvent(" + i + "," + j + "," + x + ")'>" + x + "</td>";
+        content += "<div class='buttonpl' onclick='changePlatformNrEvent(" + i + "," + j + "," + x + ")'>" + x + "</div>";
     }
-    content += "</tr></table>";
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 

@@ -22,6 +22,12 @@ function closeSelectPlatform (){
 }
 function toggleAutoscroll() {
     gameState.autoScroll = gameState.autoScroll ? false : true;
+    if (gameState.autoScroll===true){
+        document.getElementById("toggleautoscroll").style.setProperty("background-image", "url('pic/autoscroll-on.png')");
+    }
+    else {
+       document.getElementById("toggleautoscroll").style.setProperty("background-image", "url('pic/autoscroll-off.png')");
+    }
 }
 function handleTrackChange() {
     var e = gameState.events[2];

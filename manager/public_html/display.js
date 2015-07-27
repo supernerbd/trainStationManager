@@ -52,12 +52,18 @@ function handleTrackChange() {
     b = _findEvent(gameState.lastTrackChangeSlotStop, gameState.lastTrackChangeTrackStop);
     
     if (a != null && b != null) {
+        console.debug("handleTrackChange: conflict, target position already has schedule");
         alert("Conflict! Train at target position!");
     } else if (a != null && b == null) {
-        console.log("HERE");
+        a.rescheduleReason = 'm';
+        a.origTime = a.time;
+        a.time = gameState.lastTrackChangeSlotStop;
+        console.debug("handleTrackChange: updated event");
     } else {
-        console.log("Makes no sense");
+        console.debug("handleTrackChange: player's change makes no sense");
     }
+    
+    updatePlatformsEvent();
 }
 function trackChangeStartedEvent(event, ui) {
     gameState.lastTrackChangeTrackStart = event.target.id.substr(5);

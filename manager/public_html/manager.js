@@ -287,6 +287,7 @@ function checkCollision(contract, event) {
                             + " and " + e.type + "-" + r.lineNo
                             + " involved.");
                     e.platform = 0;
+                    e.rescheduleReason = 'c';
                 }
             }
         }
@@ -344,22 +345,27 @@ function createEvents() {
         addDayTraffic();
 }
 
-function insertTableData() { 
+function insertTableData() {
 
 	for (var i = 0; i<gameState.events.length; i++){ //For every contract
-		//In Tabelle eintragen gameState.table[x][y]
 		for (var j = 0; j < gameState.events[i].length; j++){ //for every event in contract
 			var platform = gameState.events[i][j].platform;
 			var time = gameState.events[i][j].time;
 			if (platform === 0) {
 				gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
-                                                                    + i + "," + j + ")'><small>Line"
+                                                                    + i + "," + j + ")'>Line "
                                                                     + gameState.events[i][j].lineNo
-                                                                    + "<br>" + displayTime(time) +"</small></div>";
+                                                                    + " @" + displayTime(time) + "</div>";
 			} else {
-				gameState.table[platform][time] = gameState.events[i][j].html;
+                                gameState.table[platform][time] = gameState.events[i][j].html;
+
 			}
-			//platform und time bestimmen platz in der Tabelle, display ist inhalt der eigefügt werden soll 
+                        if (gameState.events[i][j].rescheduleReason !== null) {
+                                gameState.table[platform][time] =
+                                        "<div class='reschedule'>"
+                                        + gameState.table[platform][time]
+                                        + "</div>";
+                        }
 		}
 	}
 }

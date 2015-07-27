@@ -7,6 +7,9 @@ function TrainEvent() {
     this.fee = 0;
     this.type = 0;
     
+    this.origTime = -1;
+    this.rescheduleReason = null;
+    
     return this;
 }
 

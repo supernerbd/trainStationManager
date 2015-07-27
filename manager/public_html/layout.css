@@ -125,19 +125,11 @@ td.slot {
 }
 */
 #track0 {
-	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	width: 100%;
 }
 
-#track0 li {
-	margin: 3px 3px 3px 0;
-	padding: 1px;
-	float: left;
-	width: 8em;
-	height: 4em;
-	text-align: center;
 }
 
 #main {

@@ -364,3 +364,7 @@ tr#track0 td {
     width: 100%;
     height: 100%;
 }
+
+.moveable {
+    cursor: move;
+}

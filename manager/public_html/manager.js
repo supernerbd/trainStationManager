@@ -303,7 +303,7 @@ function createTable (){ //Create main table. Without any Data
 			if (i===0){
 				table[i][j]=false;
 			} else {
-				table[i][j]= "<br>  ";
+				table[i][j]="<br>";
 			}
 		}
 	}
@@ -394,7 +394,13 @@ function displayTable() {
 		} else {
 			content += "<tr class='column' id='track" + i + "'>"; 
 			for (var j=0; j<gameState.table[i].length; j++){
-				content += "<td id='" + i +"." + j + "' class='slot'>" + gameState.table[i][j] + "</td>"; //Hier on hover!
+				content += "<td id='" + i + "." + j + "' class='slot"
+					+ ((gameState.table[i][j].length > 4) ? " moveable" : "")
+					+ "'>" + gameState.table[i][j] + "</td>";
+				/*
+				 * ToDo:
+				 * add onhover or onclick event to show details on desktop version of app
+				 */
 			}
 			content += "</tr>";
 		}

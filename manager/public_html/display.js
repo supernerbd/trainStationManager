@@ -86,6 +86,7 @@ function handleTrackChange() {
                             + " to platform " + gameState.lastTrackChangeTrackStop);
             var slot = parseInt(gameState.lastTrackChangeUI.item.children()[0].id.substr(4));
             gameState.events[gameState.events.length-1][slot].platform = gameState.lastTrackChangeTrackStop;
+            gameState.dayTraffic[slot].platform = gameState.lastTrackChangeTrackStop; // see note below...
             /*
 	     * XXX/TODO/FIXME:
 	     * checkCollision()
@@ -108,6 +109,12 @@ function handleTrackChange() {
                     a.origTime = a.time;
                     a.time = gameState.lastTrackChangeSlotStop;
                     a.platform = gameState.lastTrackChangeTrackStop;
+                    /*
+                     * XXX/FIXME: if this is day traffic, we need to change data structure
+                     *      in dayTraffic[], too, since attributes hold duplicated and may
+                     *      be added in again on addDayTaffic(), which might be called
+                     *      for example on adding a new train line by closing a contract...
+                     */
                     console.debug("handleTrackChange: platform change: updated event");
                     changeMoney(-gameBalancing.trainTypes[a.type].contract.reschedulePunishment);
                     console.debug("handleTrackChange: platform change: punished conductor");

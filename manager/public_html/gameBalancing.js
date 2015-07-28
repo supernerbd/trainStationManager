@@ -3,10 +3,10 @@ function GameBalancing() {
         {
             "name": "ICE",
             "contract": {
-                "reward": 300,
+                "reward": 500,
                 "fee": 3000,
                 "refusePunishment": 3000,
-                "acceptReward": 100,
+                "acceptReward": 0,
                 "reschedulePunishment": 200
             },
             "delay": {
@@ -34,7 +34,7 @@ function GameBalancing() {
                 "reward": 100,
                 "fee": 1000,
                 "refusePunishment": 1000,
-                "acceptReward": 0,
+                "acceptReward": 500,
                 "reschedulePunishment": 50
             },
             "delay": {
@@ -55,9 +55,9 @@ function GameBalancing() {
     ];
     this.startMoney = 5000;
     this.startPlatform = 2;
-    this.platformCosts=-20000;
+    this.platformCosts=-30000;
     this.startContracts=0;
-    this.iceCosts=-1000;
-    this.reCosts=-1000;
+    this.iceCosts=-20000;
+    this.reCosts=-10000;
     return this;
 }

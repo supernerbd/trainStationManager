@@ -9,8 +9,8 @@ function go () { //Start program
         return;
     }
 
-    changeMoney(10100);
-    startPlaformNr(3);
+    changeMoney(gameBalancing.startMoney);
+    startPlaformNr(gameBalancing.startPlatform);
 
     var n = 3;
     for (var i = 0; i < n; i++) {

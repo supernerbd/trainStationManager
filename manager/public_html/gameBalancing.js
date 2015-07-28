@@ -31,6 +31,7 @@ function GameBalancing() {
             "name": "ST"
         }
     ];
-    
+    this.startMoney = 10100;
+    this.startPlatform = 3;
     return this;
 }

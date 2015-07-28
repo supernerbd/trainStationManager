@@ -552,7 +552,7 @@ function acceptContract(n, platform) {
         if (v<=3){
             type=2;
         }
-        if (v<=7){
+        if (v<=7&&v>3){
             type=1;
         }
         else {

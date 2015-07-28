@@ -248,12 +248,13 @@ function createDayTraffic(){ //Create Day Traffic, save it to gameState. Use fun
     for (var i = 0; i <= n; i++) {
         var e = gameState.dayTraffic[i] = new TrainEvent();
         
-        e.html = displayTrain(3) + "<br>" + n;
+        e.html = displayTrain(3) + "<br>" + (i+1);
         e.time = 3 * (Math.floor((Math.random() * 100) + 1));
         e.platform = 0;
-        e.lineNo = 0;
-        e.reward = gameBalancing.trainTypes[3].contract.reward;
-        e.fee = gameBalancing.trainTypes[3].contract.fee;
+        e.lineNo = i + 1;
+        e.type = 3;
+        e.reward = gameBalancing.trainTypes[e.type].contract.reward;
+        e.fee = gameBalancing.trainTypes[e.type].contract.fee;
     }
 }
 function addDayTraffic() {
@@ -267,10 +268,10 @@ function addDayTraffic() {
         e.html = t.html;
         e.time = t.time;
         e.platform = t.platform;
-        e.lineNo = i;
+        e.lineNo = t.lineNo;
         e.reward = t.reward;
         e.fee = t.fee;
-        e.type = 3;
+        e.type = t.type;
     }
 }
 
@@ -331,7 +332,7 @@ function createEvents() {
                         }
                         
 			var e = gameState.events[j][z] = new TrainEvent();
-			e.html = displayTrain(c.type) + "<br>" + c.lineNo; //Add here showInfo(j) in ShowInfo. Nochmal mit Niklas sprechen, weil hier ein div nötig wird. Oder an id sortable anhängen, nur wo wird das vergeben? Abruf von gameState.acceptedContracts[j]...
+			e.html = displayTrain(c.type) + "<br>" + c.lineNo;
 			e.time = x;
                         e.platform = c.platform;
                         e.lineNo = c.lineNo;

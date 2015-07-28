@@ -9,10 +9,10 @@ function go () { //Start program
         return;
     }
 
-    changeMoney(10100);
-    startPlaformNr(3);
+    changeMoney(gameBalancing.startMoney);
+    startPlaformNr(gameBalancing.startPlatform);
 
-    var n = 3;
+    var n = gameBalancing.startContracts;
     for (var i = 0; i < n; i++) {
         gameState.acceptedContracts[i] = createNewContract (i, gameState.nextLine);
         gameState.acceptedContracts[i].platform = n - i;
@@ -236,8 +236,8 @@ function createDayTraffic(){ //Create Day Traffic, save it to gameState. Use fun
         e.time = 3 * (Math.floor((Math.random() * 100) + 1));
         e.platform = 0;
         e.lineNo = 0;
-        e.reward = 400;
-        e.fee = 1000;
+        e.reward = gameBalancing.trainTypes[3].contract.reward;
+        e.fee = gameBalancing.trainTypes[3].contract.fee;
     }
 }
 function addDayTraffic() {
@@ -399,6 +399,13 @@ function displayTable() {
 function changeMoney(amount){ //Change Money value and display and loosing condition 
 
 	gameState.money += amount; // set new amount to gameState.
+        document.getElementById("moneyChange").innerHTML=amount;
+        if (amount>=0){
+            document.getElementById("moneyChange").style.setProperty("color","green");
+        }
+        else{
+            document.getElementById("moneyChange").style.setProperty("color", "red");
+        }
 	document.getElementById("money").innerHTML = gameState.money; //replace money display to new amount
 	if (gameState.money <= 0) {
 		stop();
@@ -449,7 +456,7 @@ function changePlatformNrEvent(contract, event, newplatform) {
 function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new platforms
 
 	gameState.numPlatforms++;
-	changeMoney(-10000);
+	changeMoney(gameBalancing.platformCosts);
         updatePlatformsEvent();
 	alert ("New Platform added");
 	//alert ("The new platform will be available tomorrow"); //ToDO: Bug!!! I can set platform value to not existing platform

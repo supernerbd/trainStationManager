@@ -43,9 +43,16 @@ function GameBalancing() {
             }
         },
         {
-            "name": "ST"
+            "name": "ST",
+            "contract": {
+                "reward": 400,
+                "fee": 1000 
+            }
         }
     ];
-    
+    this.startMoney = 5000;
+    this.startPlatform = 2;
+    this.platformCosts=-20000;
+    this.startContracts=0;
     return this;
 }

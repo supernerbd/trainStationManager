@@ -399,6 +399,13 @@ function displayTable() {
 function changeMoney(amount){ //Change Money value and display and loosing condition 
 
 	gameState.money += amount; // set new amount to gameState.
+        document.getElementById("moneyChange").innerHTML=amount;
+        if (amount>=0){
+            document.getElementById("moneyChange").style.setProperty("color","green");
+        }
+        else{
+            document.getElementById("moneyChange").style.setProperty("color", "red");
+        }
 	document.getElementById("money").innerHTML = gameState.money; //replace money display to new amount
 	if (gameState.money <= 0) {
 		stop();

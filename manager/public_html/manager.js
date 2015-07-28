@@ -251,10 +251,10 @@ function addDayTraffic() {
         e.html = t.html;
         e.time = t.time;
         e.platform = t.platform;
-        e.lineNo = t.lineNo;
+        e.lineNo = i;
         e.reward = t.reward;
         e.fee = t.fee;
-        e.type = t.type;
+        e.type = 3;
     }
 }
 
@@ -338,7 +338,8 @@ function insertTableData() {
 			var time = gameState.events[i][j].time;
 			if (platform === 0) {
 				gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
-                                                                    + i + "," + j + ")'>Line "
+                                                                    + i + "," + j + ")'>"
+                                                                    + gameBalancing.trainTypes[gameState.events[i][j].type].name
                                                                     + gameState.events[i][j].lineNo
                                                                     + " @" + displayTime(time) + "</div>";
 			} else {

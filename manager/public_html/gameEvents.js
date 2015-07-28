@@ -45,6 +45,9 @@ function generateDelaysEvent() {
     
     for (var i = 0; i < gameState.events.length; i++) {
         for (var j = 0; j < gameState.events[i].length; j++) {
+            if (gameState.events[i][j].time <= gameState.time) {
+                break;
+            }
             if (gameState.events[i][j].platform !== 0 && gameBalancing.trainTypes[gameState.events[i][j].type].delay) {
                 if (Math.random() < gameBalancing.trainTypes[gameState.events[i][j].type].delay.probablity) {
                     console.debug("generateDelaysEvent: delaying train event " + i + "." + j

@@ -54,5 +54,7 @@ function GameBalancing() {
     this.startPlatform = 2;
     this.platformCosts=-20000;
     this.startContracts=0;
+    this.iceCosts=-1000;
+    this.reCosts=-1000;
     return this;
 }

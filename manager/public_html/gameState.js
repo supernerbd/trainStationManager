@@ -11,7 +11,10 @@ function GameState() {
 	this.events = new Array();
 	this.dayTraffic = new Array();
 	this.time = 0;
-
+        this.rb = true;
+        this.re = false;
+        this.ice = false;
+        
         this.autoScroll = true;
         
         this.lastTrackChangeTrackStart = null;

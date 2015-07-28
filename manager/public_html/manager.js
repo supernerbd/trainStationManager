@@ -59,6 +59,15 @@ function fchangespeed (y) { //Change Real-Time running of Game-Loop
 	gameState.speed = y; //set speed into gameState
 }
 
+function addICE(){
+    changeMoney(gameBalancing.iceCosts);
+    gameState.ice=true;
+}
+
+function addRE(){
+    changeMoney(gameBalancing.reCosts);
+    gameState.re=true;
+}
 function advanceTimeslider(t) {
         
         document.getElementById("timeslider-slider").style.setProperty("left", getCurrentSlotAbsPos() + "px");
@@ -168,7 +177,14 @@ return 0; //ToDo think of an algorithm to define delays.
 }
 
 function createNewContract (type, lineNo){ //Create new Contract, displayed at contractsoffered.
-	var contract = new Contract(type, lineNo);
+    if (type===0 && gameState.ice===false){
+        type=1;
+    }
+    if (type===1 && gameState.re===false){
+        type=2;
+    }
+    
+    var contract = new Contract(type, lineNo);
         
         contract.reward = gameBalancing.trainTypes[type].contract.reward;
         contract.fee = gameBalancing.trainTypes[type].contract.fee;
@@ -519,8 +535,19 @@ function displayContractsOffered() {
 function acceptContract(n, platform) {
 	var tomove = gameState.offeredContracts[n];
 	var length = gameState.acceptedContracts.length;
-
-	gameState.offeredContracts[n] = createNewContract(tomove.type, gameState.nextLine);
+        var v = Math.floor((Math.random() * 10) + 1);
+        var type; //random type!
+        if (v<=3){
+            type=2;
+        }
+        if (v<=7){
+            type=1;
+        }
+        else {
+            type=0;
+        }
+        gameState.offeredContracts[n] = createNewContract(type, gameState.nextLine);
+	//gameState.offeredContracts[n] = createNewContract(tomove.type, gameState.nextLine);
 	gameState.nextLine++;
 	gameState.acceptedContracts[length] = new Array ();
 	gameState.acceptedContracts[length] = tomove;

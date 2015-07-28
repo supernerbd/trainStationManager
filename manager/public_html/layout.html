@@ -33,23 +33,18 @@
 <body>
 <div id="main">
 
-	<div id="timeline" onscroll="timelineTrackScroll()">
-		Timeline goes here
-	</div>
+	<div id="timeline" onscroll="timelineTrackScroll()"></div>
 
-	<div id="gleis0">
-		
-	</div>
+	<div id="gleis0"></div>
 
 	<div id="gleise" onscroll="tracksTrackScroll()">
-		<div id="table">
-		</div>
+		<div id="table"></div>
 	</div>
 
 	<div id="control">
-                <div class="button" id="start" onclick="go ()">Start</div>
-                <div class="button" id="openContracts" onclick="openContracts ()"></div>
-                <div class="button" id="openShop" onclick="openShop ()"></div>
+            <div class="button" id="start" onclick="go()">Start</div>
+            <div class="button" id="openContracts" onclick="openContracts()"></div>
+            <div class="button" id="openShop" onclick="openShop()"></div>
             <div class="slider">
                 <label for="amount">Speed</label>
                 <input type="text" id="amount" readonly>
@@ -70,7 +65,7 @@
 </div>
 <div id="selectPlatform" class="invisible">
         <div id="selectPlatform-close" onclick="closeSelectPlatform ()"><b>X Close</b></div>
-        <div id="selectPlatform-inner"> </div>
+        <div id="selectPlatform-inner"></div>
 </div>
 <div id="contracts" class="invisible">
 	<!--<div id="selectPlatform" style="width: 40%; height: 40%; position: absolute; top: 10%; left: 10%; z-index: 3; border: 1px solid blue; background-color: #eeeeee;" class="invisible">
@@ -79,12 +74,8 @@
         </div>-->
         <div id="contract-title"><b>Contracts</b></div>
 	<div id="contract-close" onclick="closeContracts()"><b>X Close</b></div>
-	<div id="contractsoffered">
-        content
-        </div>
-        <div id="contractstaken">
-        content
-        </div>
+	<div id="contractsoffered"></div>
+	<div id="contractstaken"></div>
 </div>
 <!--<div id="hover" >
     <div id="hover-close" onclick="closeHover ()"><b>X Close</b></div>

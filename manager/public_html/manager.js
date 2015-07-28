@@ -12,7 +12,7 @@ function go () { //Start program
     changeMoney(gameBalancing.startMoney);
     startPlaformNr(gameBalancing.startPlatform);
 
-    var n = 3;
+    var n = gameBalancing.startContracts;
     for (var i = 0; i < n; i++) {
         gameState.acceptedContracts[i] = createNewContract (i, gameState.nextLine);
         gameState.acceptedContracts[i].platform = n - i;
@@ -236,8 +236,8 @@ function createDayTraffic(){ //Create Day Traffic, save it to gameState. Use fun
         e.time = 3 * (Math.floor((Math.random() * 100) + 1));
         e.platform = 0;
         e.lineNo = 0;
-        e.reward = 400;
-        e.fee = 1000;
+        e.reward = gameBalancing.trainTypes[3].contract.reward;
+        e.fee = gameBalancing.trainTypes[3].contract.fee;
     }
 }
 function addDayTraffic() {

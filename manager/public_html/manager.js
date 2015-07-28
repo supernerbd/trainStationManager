@@ -582,6 +582,7 @@ function gameLoopCalc() {
 
     if (gameState.time<=380) {
         timeChangeEvent();
+        makeStuffInterestingEvent();
     } else {
         dayChangeEvent();
     }

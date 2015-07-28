@@ -33,3 +33,14 @@ function scrollToPercent(x) {
 
 	tl.scrollLeft = tracks.scrollLeft = gameState.time * sw + advance;
 }
+
+function searchArray(array, attribute, value) {
+    
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].valueOf(attribute) == value) {
+                return array[i];
+            }
+        }
+        
+        return null;
+}

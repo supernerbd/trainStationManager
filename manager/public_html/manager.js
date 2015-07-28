@@ -99,85 +99,13 @@ function timeColor(n) {
     document.getElementById("0." + i).setAttribute('style', 'background-color: red');
 }
 
-function displayTime(nr){
-	var first = (nr/20);
-	first = Math.floor(first);
-	first = first +4;
-	var second = "";
-	var third = "";
-	var result;
-	var x = nr%20;
-	switch (x){
-		case 0:
-		third = 0;
-		break;
-		case 1:
-		third = 3;
-		break;
-		case 2:
-		third = 6;
-		break;
-		case 3:
-		third = 9;
-		break;
-		case 4:
-		third = 12;
-		break;
-		case 5:
-		third = 15;
-		break;
-		case 6:
-		third = 18;
-		break;
-		case 7:
-		third = 21;
-		break;
-		case 8:
-		third = 24;
-		break;
-		case 9:
-		third = 27;
-		break;
-		case 10:
-		third = 30;
-		break;
-		case 11:
-		third =33;
-		break;
-		case 12:
-		third = 36;
-		break;
-		case 13:
-		third = 39;
-		break;
-		case 14:
-		third = 42;
-		break;
-		case 15:
-		third = 45;
-		break;
-		case 16:
-		third = 48;
-		break;
-		case 17:
-		third = 51;
-		break;
-		case 18:
-		third = 54;
-		break;
-		case 19:
-		third = 57;
-		break;
-	}
-	if (third <10){
-		second = 0;
-	}
-	first.toString();
-	second.toString();
-	third.toString();
-	result = first + "."+ second + third;
-	return result;
+function displayTime(n) {
+	var hours = Math.floor(n / 20) + 4; // Train station opens for business at 4am
+	var minutes = (n % 20) * 3; // Three minute intervals
+
+	return "" + hours + "." + ((minutes < 10) ? "0" : "") + minutes;
 }
+
 //Game Play functions
 function delay() {
 return 0; //ToDo think of an algorithm to define delays.

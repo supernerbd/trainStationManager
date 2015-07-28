@@ -98,7 +98,7 @@ function timeColor(n) {
     }
     document.getElementById("0." + i).setAttribute('style', 'background-color: red');
 }
-
+[]
 function displayTime(n) {
 	var hours = Math.floor(n / 20) + 4; // Train station opens for business at 4am
 	var minutes = (n % 20) * 3; // Three minute intervals
@@ -193,11 +193,15 @@ function createDayTraffic(){ //Create Day Traffic, save it to gameState. Use fun
     }
 }
 function addDayTraffic() {
-    var add = gameState.events.length;
+    var last = gameState.events.length - 1;
+    
+    if (gameState.daysPlayed === 1) {
+        last++;
+    }
 
-    gameState.events[add] = new Array();
+    gameState.events[last] = new Array();
     for (var i = 0; i < gameState.dayTraffic.length; i++) {
-        var e = gameState.events[add][i] = new TrainEvent();
+        var e = gameState.events[last][i] = new TrainEvent();
         var t = gameState.dayTraffic[i];
         
         e.html = t.html;

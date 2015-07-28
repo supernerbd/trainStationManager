@@ -80,16 +80,16 @@ function handleTrackChange() {
             + " from platform " + gameState.lastTrackChangeTrackStart
             + " to " + gameState.lastTrackChangeTrackStop);
     
-        if (gameState.lastTrackChangeSlotStart === 0) {
-            a = gameState.events[gameState.events.length-1][gameState.lastTrackChangeSlotStart];
-            
-            console.debug("handleTrackChange: platform0 change: moving to platform " + gameState.lastTrackChangeTrackStop);
-            a.platform = gameState.lastTrackChangeTrackStop;
+        if (gameState.lastTrackChangeTrackStart === 0) {
+            console.debug("handleTrackChange: platform0 change:"
+                            + " moving " + gameState.lastTrackChangeSlotStart
+                            + " to platform " + gameState.lastTrackChangeTrackStop);
+            var slot = parseInt(gameState.lastTrackChangeUI.item.children()[0].id.substr(4));
+            gameState.events[gameState.events.length-1][slot].platform = gameState.lastTrackChangeTrackStop;
             /*
 	     * XXX/TODO/FIXME:
 	     * checkCollision()
 	     */
-            
         } else {
             a = _findEvent(gameState.lastTrackChangeSlotStart, gameState.lastTrackChangeTrackStart);
             b = _findEvent(gameState.lastTrackChangeSlotStop, gameState.lastTrackChangeTrackStop);
@@ -121,10 +121,12 @@ function handleTrackChange() {
 function trackChangeStartedEvent(event, ui) {
     
     console.debug("trackChangeStartedEvent: got triggered");
-    gameState.lastTrackChangeTrackStart = event.target.id.substr(5);
+    gameState.lastTrackChangeTrackStart = parseInt(event.target.id.substr(5));
     gameState.lastTrackChangeTrackStop = null;
     gameState.lastTrackChangeSlotStart = ui.item.index();
     gameState.lastTrackChangeSlotStop = null;
+    gameState.lastTrackChangeEvent = event;
+    gameState.lastTrackChangeUI = ui;
 }
 function trackChangeStoppedEvent(event, ui) {
     
@@ -135,7 +137,7 @@ function trackChangeStoppedEvent(event, ui) {
 function trackChangeReceiveEvent(event, ui) {
     
     console.debug("trackChangeReceiveEvent: got triggered");
-    gameState.lastTrackChangeTrackStop = event.target.id.substr(5);
+    gameState.lastTrackChangeTrackStop = parseInt(event.target.id.substr(5));
 }
 function setUpSortable() {
     for (var i = 0; i <= gameState.numPlatforms; i++) {

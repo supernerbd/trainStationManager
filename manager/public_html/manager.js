@@ -296,7 +296,7 @@ function insertTableData() {
                             ;
                         } else {
                             if (platform === 0) {
-                                    gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
+                                    gameState.table[platform][time] = "<div id='pl0." + j + "' class='buttonpl0' onclick='selectPlatformEvent("
                                                                         + i + "," + j + ")'>"
                                                                         + gameBalancing.trainTypes[gameState.events[i][j].type].name
                                                                         + gameState.events[i][j].lineNo

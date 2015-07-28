@@ -21,6 +21,8 @@ function GameState() {
         this.lastTrackChangeTrackStop = null;
         this.lastTrackChangeSlotStart = null;
         this.lastTrackChangeSlotStop = null;
+        this.lastTrackChangeUI = null;
+        this.lastTrackChangeEvent = null;
         
 	return this;
 }

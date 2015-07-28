@@ -35,9 +35,9 @@ function GameBalancing() {
             }
         }
     ];
-    this.startMoney = 10100;
-    this.startPlatform = 3;
-    this.platformCosts=-10000;
-    this.startContracts=3;
+    this.startMoney = 5000;
+    this.startPlatform = 2;
+    this.platformCosts=-20000;
+    this.startContracts=0;
     return this;
 }

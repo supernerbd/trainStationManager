@@ -631,4 +631,5 @@ function timelineTrackScroll() {
 
 // gameState.acceptedContracts[0] could be undefined!
 window.gameState = new GameState();
+window.gameBalancing = new GameBalancing();
 fchangespeed (5);

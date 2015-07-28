@@ -46,7 +46,10 @@ function GameBalancing() {
             "name": "ST",
             "contract": {
                 "reward": 400,
-                "fee": 1000 
+                "fee": 1000,
+                "refusePunishment": 0,
+                "acceptReward": 0,
+                "reschedulePunishment": 200
             }
         }
     ];

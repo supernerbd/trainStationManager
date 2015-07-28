@@ -60,13 +60,20 @@ function fchangespeed (y) { //Change Real-Time running of Game-Loop
 }
 
 function addICE(){
-    changeMoney(gameBalancing.iceCosts);
-    gameState.ice=true;
+    if(gameState.re===false){
+        alert("You need RE's before having a chance to get ICE's");
+    }
+    else{
+        changeMoney(gameBalancing.iceCosts);
+        gameState.ice=true;
+        alert("You now get ICE Contracts");
+    }
 }
 
 function addRE(){
     changeMoney(gameBalancing.reCosts);
     gameState.re=true;
+    alert("You now get RE Contracts");
 }
 function advanceTimeslider(t) {
         

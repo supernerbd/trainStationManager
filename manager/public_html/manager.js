@@ -169,27 +169,12 @@ return 0; //ToDo think of an algorithm to define delays.
 
 function createNewContract (type, lineNo){ //Create new Contract, displayed at contractsoffered.
 	var contract = new Contract(type, lineNo);
-
-        switch (type){
-	case 0: //ICE
-            contract.reward = 300;
-            contract.fee = 3000;
-            contract.refusePunishment = 3000;
-            contract.acceptReward = 100;
-            break;
-	case 1: //RE
-            contract.reward = 200;
-            contract.fee = 2000;
-            contract.refusePunishment = 2000;
-            contract.acceptReward = 0;
-            break;
-	case 2: //RB
-            contract.reward = 100;
-            contract.fee = 1000;
-            contract.refusePunishment = 1000;
-            contract.acceptReward = 0;
-            break;
-	}
+        
+        contract.reward = gameBalancing.trainTypes[type].contract.reward;
+        contract.fee = gameBalancing.trainTypes[type].contract.fee;
+        contract.refusePunishment = gameBalancing.trainTypes[type].contract.refusePunishment;
+        contract.acceptReward = gameBalancing.trainTypes[type].contract.acceptReward;
+        
 	//tact and start time
 	var tact;
 	var startTime;
@@ -578,24 +563,9 @@ function selectPlatformEvent(i, j){
     document.getElementById("selectPlatform-inner").innerHTML = content;
 }
 
-function displayTrain(train){
-	var type;
-
-	switch (train){
-		case 0:
-		type = "ICE";
-		break;
-		case 1: 
-		type = "RE";
-		break;
-		case 2:
-		type = "RB";
-		break;
-                case 3:
-		type = "ST";
-		break;
-	}
-	return type;
+function displayTrain(train) {
+    
+    return gameBalancing.trainTypes[train].name;
 }
 
 //Game Loop functions

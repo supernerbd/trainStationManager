@@ -33,5 +33,6 @@ function GameBalancing() {
     ];
     this.startMoney = 10100;
     this.startPlatform = 3;
+    this.platformCosts=-10000;
     return this;
 }

@@ -449,7 +449,7 @@ function changePlatformNrEvent(contract, event, newplatform) {
 function addNewPlatform(){ //Add new Platform. ToDo: Add values to getting new platforms
 
 	gameState.numPlatforms++;
-	changeMoney(-10000);
+	changeMoney(gameBalancing.platformCosts);
         updatePlatformsEvent();
 	alert ("New Platform added");
 	//alert ("The new platform will be available tomorrow"); //ToDO: Bug!!! I can set platform value to not existing platform

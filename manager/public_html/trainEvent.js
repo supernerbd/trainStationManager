@@ -10,6 +10,8 @@ function TrainEvent() {
     this.origTime = -1;
     this.rescheduleReason = null;
     
+    this.hide = false;
+
     return this;
 }
 

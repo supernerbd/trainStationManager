@@ -353,21 +353,25 @@ function insertTableData() {
 		for (var j = 0; j < gameState.events[i].length; j++){ //for every event in contract
 			var platform = gameState.events[i][j].platform;
 			var time = gameState.events[i][j].time;
-			if (platform === 0) {
-				gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
-                                                                    + i + "," + j + ")'>"
-                                                                    + gameBalancing.trainTypes[gameState.events[i][j].type].name
-                                                                    + gameState.events[i][j].lineNo
-                                                                    + " @" + displayTime(time) + "</div>";
-			} else {
-                                gameState.table[platform][time] = gameState.events[i][j].html;
+                        if (gameState.events[i][j].hide) {
+                            ;
+                        } else {
+                            if (platform === 0) {
+                                    gameState.table[platform][time] = "<div class='buttonpl0' onclick='selectPlatformEvent("
+                                                                        + i + "," + j + ")'>"
+                                                                        + gameBalancing.trainTypes[gameState.events[i][j].type].name
+                                                                        + gameState.events[i][j].lineNo
+                                                                        + " @" + displayTime(time) + "</div>";
+                            } else {
+                                    gameState.table[platform][time] = gameState.events[i][j].html;
 
-			}
-                        if (gameState.events[i][j].rescheduleReason !== null) {
-                                gameState.table[platform][time] =
-                                        "<div class='reschedule'>"
-                                        + gameState.table[platform][time]
-                                        + "</div>";
+                            }
+                            if (gameState.events[i][j].rescheduleReason !== null) {
+                                    gameState.table[platform][time] =
+                                            "<div class='reschedule'>"
+                                            + gameState.table[platform][time]
+                                            + "</div>";
+                            }
                         }
 		}
 	}

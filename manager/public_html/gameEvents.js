@@ -31,6 +31,7 @@ function timeChangeEvent() {
                                     changeMoney(gameState.events[i][j].reward);
                             } else {
                                     changeMoney(-gameState.events[i][j].fee);
+                                    gameState.events[i][j].hide = true;
                             }
                     }
             }
@@ -71,4 +72,9 @@ function makeStuffInterestingEvent() {
     if (gameState.time % 5 === 0) {
         generateDelaysEvent();
     }
+}
+
+function cleanUpEventsEvent() {
+    
+    console.debug("cleanUpEventsEvent: got triggered");
 }

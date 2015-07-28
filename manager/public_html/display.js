@@ -81,33 +81,37 @@ function handleTrackChange() {
             + " to " + gameState.lastTrackChangeTrackStop);
     
         if (gameState.lastTrackChangeSlotStart === 0) {
-            /* 
-             * TODO/XXX: FIXME
-             * 
-             */
-            a = gameState.events[gameState.events.length-1][gameState.lastTrackChangeSlotStart-1];
+            a = gameState.events[gameState.events.length-1][gameState.lastTrackChangeSlotStart];
+            
+            console.debug("handleTrackChange: platform0 change: moving to platform " + gameState.lastTrackChangeTrackStop);
+            a.platform = gameState.lastTrackChangeTrackStop;
+            /*
+	     * XXX/TODO/FIXME:
+	     * checkCollision()
+	     */
+            
         } else {
             a = _findEvent(gameState.lastTrackChangeSlotStart, gameState.lastTrackChangeTrackStart);
-        }
-        b = _findEvent(gameState.lastTrackChangeSlotStop, gameState.lastTrackChangeTrackStop);
-        
-        if (a == null) {
-            console.debug("handleTrackChange: platform change: empty source slot");
-        } else if (a != null && b != null) {
-            console.debug("handleTrackChange: platform change: target slot not empty");
-        } else {
-            console.debug("handleTrackChange: platform change: moving platform and maybe slot");
-            
-            if (a.time <= gameState.time || gameState.lastTrackChangeSlotStop < a.time) {
-                console.debug("handleTrackChange: platform change: move in or into past or arriving earlier doesn't make sense");
+            b = _findEvent(gameState.lastTrackChangeSlotStop, gameState.lastTrackChangeTrackStop);
+
+            if (a == null) {
+                console.debug("handleTrackChange: platform change: empty source slot");
+            } else if (a != null && b != null) {
+                console.debug("handleTrackChange: platform change: target slot not empty");
             } else {
-                a.rescheduleReason = 'm';
-                a.origTime = a.time;
-                a.time = gameState.lastTrackChangeSlotStop;
-                a.platform = gameState.lastTrackChangeTrackStop;
-                console.debug("handleTrackChange: platform change: updated event");
-                changeMoney(-gameBalancing.trainTypes[a.type].contract.reschedulePunishment);
-                console.debug("handleTrackChange: platform change: punished conductor");
+                console.debug("handleTrackChange: platform change: moving platform and maybe slot");
+
+                if (a.time <= gameState.time || gameState.lastTrackChangeSlotStop < a.time) {
+                    console.debug("handleTrackChange: platform change: move in or into past or arriving earlier doesn't make sense");
+                } else {
+                    a.rescheduleReason = 'm';
+                    a.origTime = a.time;
+                    a.time = gameState.lastTrackChangeSlotStop;
+                    a.platform = gameState.lastTrackChangeTrackStop;
+                    console.debug("handleTrackChange: platform change: updated event");
+                    changeMoney(-gameBalancing.trainTypes[a.type].contract.reschedulePunishment);
+                    console.debug("handleTrackChange: platform change: punished conductor");
+                }
             }
         }
     }

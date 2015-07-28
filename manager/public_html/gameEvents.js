@@ -4,6 +4,7 @@ function updatePlatformsEvent() {
     createTable();
     displayTable();
     setUpSortable();
+    timeColor(gameState.time);
 }
 
 function dayChangeEvent() {

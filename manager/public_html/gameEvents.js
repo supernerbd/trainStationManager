@@ -56,7 +56,7 @@ function generateDelaysEvent() {
                                 + " on platform " + gameState.events[i][j].platform);
                         
                     gameState.events[i][j].origTime = gameState.events[i][j].time;
-                    gameState.events[i][j].time += Math.floor(Math.random() * gameBalancing.trainTypes[gameState.events[i][j].type].delay.factor / 3);
+                    gameState.events[i][j].time += Math.floor(Math.random() * gameBalancing.trainTypes[gameState.events[i][j].type].delay.factor / 3) + 1;
                     console.debug("generateDelaysEvent: new time is " + gameState.events[i][j].time
                                     + "(" + displayTime(gameState.events[i][j].time) + ")");
                     gameState.events[i][j].rescheduleReason = 'd';

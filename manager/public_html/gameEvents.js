@@ -4,6 +4,7 @@ function updatePlatformsEvent() {
     createTable();
     displayTable();
     setUpSortable();
+    timeColor(gameState.time);
 }
 
 function dayChangeEvent() {
@@ -35,4 +36,39 @@ function timeChangeEvent() {
             }
     }
     gameState.time++;
+}
+
+function generateDelaysEvent() {
+    
+    console.debug("generateDelaysEvent: got triggered");
+    
+    for (var i = 0; i < gameState.events.length; i++) {
+        for (var j = 0; j < gameState.events[i].length; j++) {
+            if (gameState.events[i][j].platform !== 0 && gameBalancing.trainTypes[gameState.events[i][j].type].delay) {
+                if (Math.random() < gameBalancing.trainTypes[gameState.events[i][j].type].delay.probablity) {
+                    console.debug("generateDelaysEvent: delaying train event " + i + "." + j
+                                + "(Line " + gameState.events[i][j].type + "/" + gameState.events[i][j].lineNo + ")"
+                                + " @" + displayTime(gameState.events[i][j].time)
+                                + " on platform " + gameState.events[i][j].platform);
+                        
+                    gameState.events[i][j].origTime = gameState.events[i][j].time;
+                    gameState.events[i][j].time += Math.floor(Math.random() * gameBalancing.trainTypes[gameState.events[i][j].type].delay.factor / 3);
+                    console.debug("generateDelaysEvent: new time is " + gameState.events[i][j].time
+                                    + "(" + displayTime(gameState.events[i][j].time) + ")");
+                    gameState.events[i][j].rescheduleReason = 'd';
+                    break;
+                }
+            }
+        }
+    }
+    updatePlatformsEvent();
+}
+
+function makeStuffInterestingEvent() {
+    
+    console.debug("makeStuffInterestingEvent: got triggered");
+    
+    if (gameState.time % 5 === 0) {
+        generateDelaysEvent();
+    }
 }

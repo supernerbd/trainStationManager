@@ -6,7 +6,12 @@ function GameBalancing() {
                 "reward": 300,
                 "fee": 3000,
                 "refusePunishment": 3000,
-                "acceptReward": 100
+                "acceptReward": 100,
+                "reschedulePunishment": 200
+            },
+            "delay": {
+                "probablity": 0.2,
+                "factor": 50
             }
         },
         {
@@ -15,7 +20,12 @@ function GameBalancing() {
                 "reward": 200,
                 "fee": 2000,
                 "refusePunishment": 2000,
-                "acceptReward": 0
+                "acceptReward": 0,
+                "reschedulePunishment": 100
+            },
+            "delay": {
+                "probablity": 0.1,
+                "factor": 30
             }
         },
         {
@@ -24,7 +34,12 @@ function GameBalancing() {
                 "reward": 100,
                 "fee": 1000,
                 "refusePunishment": 1000,
-                "acceptReward": 0
+                "acceptReward": 0,
+                "reschedulePunishment": 50
+            },
+            "delay": {
+                "probablity": 0.05,
+                "factor": 10
             }
         },
         {

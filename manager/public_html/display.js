@@ -55,14 +55,21 @@ function handleTrackChange() {
         console.debug("handleTrackChange: conflict, target position already has schedule");
         alert("Conflict! Train at target position!");
     } else if (a != null && b == null) {
-        a.rescheduleReason = 'm';
-        a.origTime = a.time;
-        a.time = gameState.lastTrackChangeSlotStop;
-        console.debug("handleTrackChange: updated event");
+        if (a.time <= gameState.time || gameState.lastTrackChangeSlotStop < a.time) {
+            console.debug("handleTrackChange: move in or into past or arriving earlier doesn't make sense");
+        } else {
+            a.rescheduleReason = 'm';
+            a.origTime = a.time;
+            a.time = gameState.lastTrackChangeSlotStop;
+            console.debug("handleTrackChange: updated event");
+            changeMoney(-gameBalancing.trainTypes[a.type].contract.reschedulePunishment);
+            console.debug("handleTrackChange: punished conductor");
+        }
     } else {
         console.debug("handleTrackChange: player's change makes no sense");
     }
     
+
     updatePlatformsEvent();
 }
 function trackChangeStartedEvent(event, ui) {

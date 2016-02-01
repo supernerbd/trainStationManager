@@ -1,0 +1,114 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30.01.2016, 13:17:11
+    Author     : Admin
+*/
+#container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+}
+.view{
+    display: none;
+    width: 100%;
+    height: 80%;
+    position: fixed;
+    top: 20%;
+    left: 0px;
+}
+#buttonDiv{
+    width: 100%;
+    height: 20%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+.button, #info{
+    float: left;
+    height: 100%;
+    width: 20%
+}
+#main, #buttonMain{
+    background-color: green;
+}
+#contractsOffert, #buttonContractsOffert{
+    background-color: yellow;
+}
+#upgrades, #buttonUpgrades{
+    background-color: red;
+}
+#contractsTaken, #buttonContractsTaken{
+    background-color: blue;
+}
+#day{
+    float: left;
+    width: 30%;
+    height: 50%;
+}
+#money{
+    float: left;
+    width: 30%;
+    height: 50%;
+}
+#moneyChange{
+    float: left;
+    width: 30%;
+    height: 50%;
+}
+#slider{
+    width: 100%;
+    height: 49%;
+}
+#slider input{
+    width: 100%;
+}
+canvas{
+    width: 100%;
+    height: 100%;
+}
+.upgrades{
+    width: 19%;
+    height: 33%;
+    float: left;
+    border: 1px solid black;
+}
+.contractsOuter{
+    width: 19%;
+    height: 33%;
+    float: left;
+    border: 1px solid black;
+}
+.contracts{
+    float: left;
+    width: 30%;
+    height: 30%;
+}
+.contractsOuter h1, .contracts h5{
+    padding: 0px;
+    margin: 0px;
+}
+#overlay{
+    z-index: 2;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    opacity: 0.9;
+    display: none;
+}
+#overlayContent{
+    margin: auto;
+    margin-top: 10%;
+    width: 40%;
+    height: 50%;
+    background-color: black;
+    z-index: 3;
+    opacity: 1;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script data-main="init" src="require.js"></script>
+        <link href="index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="overlay"><div id="overlayContent"></div></div>
+        <div id="container">
+            <div class="view" id="main"><canvas>Your device seems to be not able to use this technology. Please upgrade!</canvas></div>
+            <div class="view" id="upgrades">Upgrades</div>
+            <div class="view" id="contractsOffert">Contracts Offert</div>
+            <div class="view" id="contractsTaken">Contracts Taken</div>
+            <div id="buttonDiv">
+                <div class="button" id="buttonMain">Main</div>
+                <div class="button" id="buttonUpgrades">Upgrades</div>
+                <div class="button" id="buttonContractsOffert">Contracts Offert</div>
+                <div class="button" id="buttonContractsTaken">Contracts Taken</div>
+                <div id="info">
+                    <div id="day">0</div>
+                    <div id="moneyChange">0</div>
+                    <div id="money">0</div>
+                    <div id="slider"><input id="timeSlider" type="range" max="10" min="1" value="1" /></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

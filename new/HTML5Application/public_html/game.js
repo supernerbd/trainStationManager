@@ -10,6 +10,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
    var gameState;
    var balancing;
    var LEVEL;
+   //var moneyChanges = [];
    
    function Event(id,time,track,fee,reward,contract,level,trainName,lineNo){
        this.contract=contract;
@@ -42,7 +43,23 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
     };
     
     function changeMoney(amount){
-        console.log("change money");
+        $("#moneyChange").text(amount+" $");
+        if(amount>0){
+            $("#moneyChange").css("color", "green");
+        }
+        else{
+            $("#moneyChange").css("color", "red");
+        }
+        game.gameState.money += amount;
+        $("#money").text(game.gameState.money+" $");
+        if(game.gameState.money<0){
+            game.gameState.stopped=true;
+            //show Game Over
+            var htmlString="<h1>Game Over</h1>";
+            $("#overlayContent").html(htmlString);
+            $("#overlay").fadeIn(200);
+            $("#overlay").css("color", "white");
+        }
     };
     
     function changeDay(){
@@ -93,27 +110,25 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         setTimeout(function (){gameLoopCalc();}, game.balancing.standardTime/game.gameState.speed);
     }
     
-    function gameLoopCalc(){
+    function gameLoopCalc(){        
         if (game.gameState.stopped===true) {
         return;
         }
 
         if (game.gameState.time<380) {
-            //change time and delays
-            //check if fees or rewards apply
-                                /*for (var i = 0; i < gameState.events.length; i++){ //actual calc things
-                                var jlength = gameState.events[i].length;
-                                for (var j = 0; j<jlength; j++){
-                                        if (gameState.time === gameState.events[i][j].time){
-                                                if (gameState.events[i][j].platform !== 0){
-                                                        changeMoney(gameState.events[i][j].reward);
-                                                } else {
-                                                        changeMoney(-gameState.events[i][j].fee);
-                                                        gameState.events[i][j].hide = true;
-                                                }
-                                        }
-                                }
-                        }*/
+            //change delays
+            
+            //fees and rewards
+            $.each(game.gameState.table, function(i,event){
+                 if(event.time===game.gameState.time){
+                     if(event.track!==0){
+                         game.changeMoney(event.reward);
+                     }
+                     else{
+                         game.changeMoney(event.fee);
+                     }
+                 }
+            });
             draw.createTable();
             game.gameState.time++;
             //console.log("the time is "+ui.displayTime(game.gameState.time));

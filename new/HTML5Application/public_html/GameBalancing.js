@@ -14,10 +14,10 @@ define(function() {
                 "level": "LARGE",
                 "contract": {
                     "reward": 500,
-                    "fee": 3000,
-                    "refusePunishment": 3000,
+                    "fee": -3000,
+                    "refusePunishment": -3000,
                     "acceptReward": 0,
-                    "reschedulePunishment": 200
+                    "reschedulePunishment": -200
                 },
                 "delay": {
                     "probablity": 0.2,
@@ -29,10 +29,10 @@ define(function() {
                 "level": "MEDIUM",
                 "contract": {
                     "reward": 200,
-                    "fee": 2000,
-                    "refusePunishment": 2000,
+                    "fee": -2000,
+                    "refusePunishment": -2000,
                     "acceptReward": 0,
-                    "reschedulePunishment": 100
+                    "reschedulePunishment": -100
                 },
                 "delay": {
                     "probablity": 0.1,
@@ -44,10 +44,10 @@ define(function() {
                 "level": "BASIC",
                 "contract": {
                     "reward": 100,
-                    "fee": 1000,
-                    "refusePunishment": 1000,
+                    "fee": -1000,
+                    "refusePunishment": -1000,
                     "acceptReward": 500,
-                    "reschedulePunishment": 50
+                    "reschedulePunishment": -50
                 },
                 "delay": {
                     "probablity": 0.05,
@@ -59,10 +59,10 @@ define(function() {
                 "level": "BASIC",
                 "contract": {
                     "reward": 400,
-                    "fee": 1000,
+                    "fee": -1000,
                     "refusePunishment": 0,
                     "acceptReward": 0,
-                    "reschedulePunishment": 200
+                    "reschedulePunishment": -200
                 }
             }
         ];

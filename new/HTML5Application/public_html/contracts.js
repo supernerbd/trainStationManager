@@ -166,7 +166,7 @@ define(['jquery', 'Contract'], function($, Contract) {
         $("#contractsTaken").html(htmlString);
         $.each(game.gameState.acceptedContracts, function(i,contract){
             $("#changeTrack"+contract.id).click(function(){
-                        upgrades.selectTrack(contract.id);
+                        upgrades.changeTrack(contract.id);
            });
         });
     };

@@ -123,6 +123,8 @@ define(['jquery'], function($) {
             if(event.time<=after && event.time>=before){
                 event.x = (timeslotWidth)+((event.time-now)*timeslotWidth);
                 event.y = 50+(DRAW.TRACKHEIGHT*event.track); //track+...
+                event.height = DRAW.TRACKHEIGHT;
+                event.width = timeslotWidth;
                 events[events.length]=event;
             }
         });

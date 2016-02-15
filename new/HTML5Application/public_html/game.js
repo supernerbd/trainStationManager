@@ -33,6 +33,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
        }
        
        this.gameState.stopped=false;
+       changeMoney(this.balancing.startMoney);
        changeDay();
        gameLoop();
    };
@@ -63,6 +64,8 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
     };
     
     function changeDay(){
+        resetEvents();
+        createEvents();
         game.gameState.time = 0;
         game.gameState.daysPlayed++;
         $("#day").text("Day "+game.gameState.daysPlayed);
@@ -78,7 +81,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
             }
        });
        //add day traffic here
-       this.gameState.events = eventCollision(events);
+       game.gameState.events = eventCollision(events);
     };
     
     function addEvents(contractId){
@@ -90,6 +93,30 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
             id++;
         }
         this.gameState.events = eventCollision(events);
+    }
+    
+    function resetEvents(){
+        game.gameState.events = [];
+    }
+    
+    function changeEvent(id){
+        $.each(game.gameState.table, function(i,event){
+            if(event.id===id){
+                //todo: html string and click handler
+                console.log(event.id);
+            }
+        });
+    }
+    
+    function changeEvents(contractId){
+        var track = game.gameState.acceptedContracts[contractId].track;
+        var events = game.gameState.events;
+        $.each(events, function(i,event){
+            if(event.contract===contractId){
+                event.track=track;
+            }
+        });
+        game.gameState.events = eventCollision(events);
     }
     
     function eventCollision(events){
@@ -145,6 +172,8 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
       balancing: balancing,
       changeMoney: changeMoney,
       createEvents: createEvents,
-      addEvents: addEvents
+      addEvents: addEvents,
+      changeEvent: changeEvent,
+      changeEvents: changeEvents
     };
 });

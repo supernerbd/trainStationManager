@@ -123,10 +123,28 @@ define(['jquery'], function($) {
        $("#overlay").fadeIn(200);
     };
     
+    function changeTrack(id){
+        var htmlString ="";
+        $.each(game.gameState.tracks, function(i,track){
+            htmlString+="<button id='track"+track.id+"'>Track "+track.id+"</button>";
+        });
+        $("#overlayContent").html(htmlString);
+        $.each(game.gameState.tracks, function(i,track){
+           $("#track"+track.id).click(function(){
+                game.gameState.acceptedContracts[id].track = track.id;
+                $("#overlay").fadeOut(200);
+                contracts.showContractsTaken();
+                game.changeEvents(id);
+           });
+       });
+       $("#overlay").fadeIn(200);
+    };
+    
     return{
       init: init,
       addTrack: addTrack,
       selectTrack: selectTrack,
+      changeTrack: changeTrack,
       LEVEL: LEVEL
     };
 });

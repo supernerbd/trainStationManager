@@ -51,6 +51,7 @@ define(['jquery'], function($) {
                 showMainMenu();
             } 
          });
+         document.querySelector("canvas").addEventListener("click", function(e){canvasClick(e);});
      }
      
      function showMainMenu(){
@@ -72,6 +73,35 @@ define(['jquery'], function($) {
             });
          }
      }
+     
+     function canvasClick(e){
+         var mouse = getMouse(e);
+         //console.log("click@"+mouse.x+" "+mouse.y);
+         $.each(game.gameState.table, function(i,event){
+             if(event.x>0){
+                if(pointInside(event,mouse)){
+                    //console.log("inside");
+                    game.changeEvent(event.id);
+                }
+             }  
+         });
+     }
+     
+     function getMouse(e){
+	var mouse = {};
+	mouse.x = e.pageX - e.target.offsetLeft;
+	mouse.y = e.pageY - $("#buttonDiv").innerHeight()//e.target.offsetTop;
+	return mouse;
+    }
+    
+    function pointInside(button,m){ //is mouse click in box?
+	if( m.x >= button.x && m.x <= button.x + button.width && m.y >= button.y && m.y <= button.y + button.height ){
+		return true;
+	}
+	else{
+		return false;
+	}
+    };
      
      function displayTime(n) {
 	var hours = Math.floor(n / 20) + 4; // Train station opens for business at 4am

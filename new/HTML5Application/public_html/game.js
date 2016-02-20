@@ -77,7 +77,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
        var id=0;
        $.each(game.gameState.acceptedContracts, function(i,contract){
             for (var x = contract.startingTime; x <= 380; x += (20 * contract.tact)) {
-                events[events.length] = new Event(id,x,contract.track,contract.fee,contract.reward,contract.id,contract.level,contract.trainName,contract.lineNo);
+                events[events.length] = new Event(id,x,contract.track,contract.reschedulePunishment,contract.reward,contract.id,contract.level,contract.trainName,contract.lineNo);
                 id++;
             }
        });
@@ -90,7 +90,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         var id=this.gameState.events.length;
         var contract=game.gameState.acceptedContracts[contractId];
         for (var x = contract.startingTime; x <= 380; x += (20 * contract.tact)) {
-            events[events.length] = new Event(id,x,contract.track,contract.fee,contract.reward,contract.id,contract.level,contract.trainName,contract.lineNo);
+            events[events.length] = new Event(id,x,contract.track,contract.reschedulePunishment,contract.reward,contract.id,contract.level,contract.trainName,contract.lineNo);
             id++;
         }
         this.gameState.events = eventCollision(events);
@@ -136,53 +136,85 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                 $("#overlay").fadeIn(200);
                 $("#overlay").css("color", "white");
                 //event handler
-                /*$("#buttonResumeGame").click(function(){
-                $("#overlay").fadeOut(200);
-                
-            });*/
-                switch(event.delay){
+                switch(event.delay){ //bug: need to check that player can't schedule around current time
                     case 0:                        
                         $("#delay1").click(function(){
-                            
+                            event.delay=1;
+                            event.time+=1;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay2").click(function(){
-                            
+                            event.delay=2;
+                            event.time+=2;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay3").click(function(){
-                            
+                            event.delay=3;
+                            event.time+=3;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         break;
                     case 1:
                         $("#delay0").click(function(){
-                            
+                            event.delay=0;
+                            event.time-=1;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay2").click(function(){
-                            
+                            event.delay=2;
+                            event.time+=1;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay3").click(function(){
-                            
+                            event.delay=3;
+                            event.time+=2;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         break;
                     case 2:
                         $("#delay0").click(function(){
-                            
+                            event.delay=0;
+                            event.time-=2;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay1").click(function(){
-                            
+                            event.delay=1;
+                            event.time-=1;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay3").click(function(){
-                            
+                            event.delay=3;
+                            event.time+=1;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         break;
                     case 3:
                         $("#delay0").click(function(){
-                            
+                            event.delay=0;
+                            event.time-=3;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay1").click(function(){
-                            
+                            event.delay=1;
+                            event.time-=2;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         $("#delay2").click(function(){
-                            
+                            event.delay=2;
+                            event.time-=1;
+                            changeMoney(event.fee);
+                            $("#overlay").fadeOut(200);
                         });
                         break;
                 }

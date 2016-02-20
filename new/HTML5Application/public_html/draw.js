@@ -148,6 +148,9 @@ define(['jquery'], function($) {
         ctx.font = "18px sansserif"; //font size on screen size
         $.each(game.gameState.table, function(i,event){
             ctx.save();
+            if(event.delay!==0){
+                ctx.fillStyle="orange";
+            }
             ctx.fillRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
             ctx.strokeRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
             ctx.fillStyle = "black";

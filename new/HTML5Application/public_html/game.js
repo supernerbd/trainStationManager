@@ -22,6 +22,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
        this.fee=fee;
        this.reward=reward;
        this.id=id;
+       this.delay=0;
    }
    
    function init(){
@@ -103,7 +104,109 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         $.each(game.gameState.table, function(i,event){
             if(event.id===id){
                 //todo: html string and click handler
-                console.log(event.id);
+                var htmlString="";
+                var trackCounter=0;
+                switch(event.delay){
+                    case 0:
+                        htmlString+="<div class='delay' id='delay1'>Delay 3 Min</div><div class='delay' id='delay2'>Delay 6 Min</div><div class='delay' id='delay3'>Delay 9 Min</div>";
+                        break;
+                    case 1:
+                        htmlString+="<div class='delay' id='delay0'>Back to normal</div><div class='delay' id='delay2'>Delay 6 Min</div><div class='delay' id='delay3'>Delay 9 Min</div>";
+                        break;
+                    case 2: 
+                        htmlString+="<div class='delay' id='delay0'>Back to normal</div><div class='delay' id='delay1'>Delay 3 Min</div><div class='delay' id='delay3'>Delay 9 Min</div>";
+                        break;
+                    case 3:
+                        htmlString+="<div class='delay' id='delay0'>Back to normal</div><div class='delay' id='delay1'>Delay 3 Min</div><div class='delay' id='delay2'>Delay 6 Min</div>";
+                        break;
+                }
+                for (var i=0;game.gameState.tracks.length>i;i++){
+                    if(!changeEventCollision(i, event.time) && trackCounter<=4){
+                        if(i===0){
+                            htmlString+="<div class='track' id='track"+i+"'>Change to not scheduled</div>";
+                        }
+                        else{
+                            htmlString+="<div class='track' id='track"+i+"'>Change to Track "+i+"</div>";
+                        }
+                        trackCounter++;
+                    }
+                }
+                htmlString+="<div id='close'>Close</div>";
+                $("#overlayContent").html(htmlString);
+                $("#overlay").fadeIn(200);
+                $("#overlay").css("color", "white");
+                //event handler
+                /*$("#buttonResumeGame").click(function(){
+                $("#overlay").fadeOut(200);
+                
+            });*/
+                switch(event.delay){
+                    case 0:                        
+                        $("#delay1").click(function(){
+                            
+                        });
+                        $("#delay2").click(function(){
+                            
+                        });
+                        $("#delay3").click(function(){
+                            
+                        });
+                        break;
+                    case 1:
+                        $("#delay0").click(function(){
+                            
+                        });
+                        $("#delay2").click(function(){
+                            
+                        });
+                        $("#delay3").click(function(){
+                            
+                        });
+                        break;
+                    case 2:
+                        $("#delay0").click(function(){
+                            
+                        });
+                        $("#delay1").click(function(){
+                            
+                        });
+                        $("#delay3").click(function(){
+                            
+                        });
+                        break;
+                    case 3:
+                        $("#delay0").click(function(){
+                            
+                        });
+                        $("#delay1").click(function(){
+                            
+                        });
+                        $("#delay2").click(function(){
+                            
+                        });
+                        break;
+                }
+                trackCounter=0;
+                $.each(game.gameState.tracks, function(i,track){
+                    if(!changeEventCollision(track.id, event.time) && trackCounter<=4){
+                        $("#track"+track.id).click(function(){
+                           changeTrackEvent(event.id,track.id);
+                           $("#overlay").fadeOut(200);
+                        });
+                        trackCounter++;
+                    }
+                });
+                $("#close").click(function(){
+                    $("#overlay").fadeOut(200);
+                });
+            }
+        });
+    }
+    
+    function changeTrackEvent(eventId, toTrack){
+        $.each(game.gameState.table, function(i,event){
+            if(eventId===event.id){
+                event.track = toTrack;
             }
         });
     }
@@ -117,6 +220,15 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
             }
         });
         game.gameState.events = eventCollision(events);
+    }
+    
+    function changeEventCollision(track, time){
+        for (var i=0;game.gameState.table.length>i;i++){
+            if(game.gameState.table[i].time===time&&game.gameState.table[i].track===track){
+                return true;
+            }
+        }
+        return false;
     }
     
     function eventCollision(events){

@@ -114,17 +114,29 @@ define(['jquery', 'Contract'], function($, Contract) {
     };
     
     function acceptContract(id){
-        console.log("accept");
         var contract = game.gameState.offeredContracts[id];
-        contract.id = game.gameState.nextContractId;
-        game.gameState.acceptedContracts[game.gameState.nextContractId] = contract;
-        upgrades.selectTrack(game.gameState.nextContractId);
-        game.gameState.nextContractId++;
-        game.changeMoney(contract.acceptReward);
-        contract = createContract(id);
-        game.gameState.offeredContracts[id]=contract;
-        showContractsOffert();
-        showContractsTaken();
+        if(contract.level===game.gameState.stationLevel || game.gameState.stationLevel === LEVEL.LARGE || (contract.level === LEVEL.BASIC && game.gameState.stationLevel === LEVEL.MEDIUM )){
+            console.log("accept");
+            contract.id = game.gameState.nextContractId;
+            game.gameState.acceptedContracts[game.gameState.nextContractId] = contract;
+            upgrades.selectTrack(game.gameState.nextContractId);
+            game.gameState.nextContractId++;
+            game.changeMoney(contract.acceptReward);
+            contract = createContract(id);
+            game.gameState.offeredContracts[id]=contract;
+            showContractsOffert();
+            showContractsTaken();
+        }
+        else{
+            var htmlString = "<h1>You need to buy a Station Upgrade first</h1>";
+            htmlString+="<div id='close'>Close</div>";
+                $("#overlayContent").html(htmlString);
+                $("#overlay").fadeIn(200);
+                $("#overlay").css("color", "white");
+            $("#close").click(function(){
+                    $("#overlay").fadeOut(200);
+            });
+        }
     };
     
     function refuseContract(id){ 

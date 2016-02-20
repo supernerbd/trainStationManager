@@ -39,11 +39,11 @@ define(['jquery'], function($) {
    
     function init(){
         game.gameState.stationLevel = LEVEL.BASIC;
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Short Track", "A short (150m) track", TYPE.TRACK, LEVEL.BASIC, game.balancing.shortTrack);
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Medium Track", "A medium (350m) track", TYPE.TRACK, LEVEL.MEDIUM, game.balancing.mediumTrack, [3]);
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Long Track", "A long (500m) track", TYPE.TRACK, LEVEL.LARGE, game.balancing.longTrack, [4]);
+        //upgrades[upgrades.length] = new Upgrade(upgrades.length, "Short Track", "A short (150m) track", TYPE.TRACK, LEVEL.BASIC, game.balancing.shortTrack);
+        //upgrades[upgrades.length] = new Upgrade(upgrades.length, "Medium Track", "A medium (350m) track", TYPE.TRACK, LEVEL.MEDIUM, game.balancing.mediumTrack, [3]);
+        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Long Track", "A long (500m) track", TYPE.TRACK, LEVEL.LARGE, game.balancing.longTrack); //, [4]
         upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 1", "Updates the station", TYPE.STATION, LEVEL.MEDIUM, game.balancing.upgrade1);
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 2", "Updates the station", TYPE.STATION, LEVEL.LARGE, game.balancing.upgrade2, [3]);
+        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 2", "Updates the station", TYPE.STATION, LEVEL.LARGE, game.balancing.upgrade2, [1]); //3
         showUpgrades();
     };
     

@@ -287,8 +287,6 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         }
 
         if (game.gameState.time<380) {
-            //change delays
-            
             //fees and rewards
             $.each(game.gameState.table, function(i,event){
                  if(event.time===game.gameState.time){
@@ -309,6 +307,18 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         gameLoop();
     }
     
+    function createOutsideDelay(trainName){
+        var delay = "0"; //just 0 is false. If I want a possible delay at every iteration I could use 0 instead of "0"
+        $.each(game.balancing.trainTypes, function(i,type){
+            if(trainName===type.name){
+                if (Math.random() < type.delay.probablity){
+                    delay = Math.floor(Math.random() * type.delay.factor / 3) + 1;
+                }
+            }
+        });
+        return delay;
+    }
+    
     return{
       init: init,
       initGameState: initGameState,
@@ -318,6 +328,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
       createEvents: createEvents,
       addEvents: addEvents,
       changeEvent: changeEvent,
-      changeEvents: changeEvents
+      changeEvents: changeEvents,
+      createOutsideDelay: createOutsideDelay
     };
 });

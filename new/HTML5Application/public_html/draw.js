@@ -121,6 +121,12 @@ define(['jquery'], function($) {
         var after = game.gameState.time + (DRAW.TIMESLOTS-3);
         $.each(game.gameState.events, function(i,event){
             if(event.time<=after && event.time>=before){
+                //outside delays
+                if(!event.outsideDelay){
+                    event.outsideDelay = game.createOutsideDelay(event.trainName);
+                    event.time+=parseInt(event.outsideDelay,10);
+                }
+                //draw
                 event.x = (timeslotWidth)+((event.time-now)*timeslotWidth);
                 event.y = 50+(DRAW.TRACKHEIGHT*event.track); //track+...
                 event.height = DRAW.TRACKHEIGHT;
@@ -130,16 +136,7 @@ define(['jquery'], function($) {
         });
         game.gameState.table = events;
     };
-    /*this.contract=contract;
-       this.level=level;
-       this.trainName=trainName;
-       this.lineNo=lineNo;
-       this.track=track;
-       this.time=time;
-       this.fee=fee;
-       this.reward=reward;
-       this.id=id;
-       */
+    
     function drawTable(){
         ctx.strokeStyle = "black";
         ctx.fillStyle = "red";
@@ -148,6 +145,9 @@ define(['jquery'], function($) {
         ctx.font = "18px sansserif"; //font size on screen size
         $.each(game.gameState.table, function(i,event){
             ctx.save();
+            if(event.outsideDelay!=="0"){
+                ctx.fillStyle="yellow";
+            }
             if(event.delay!==0){
                 ctx.fillStyle="orange";
             }

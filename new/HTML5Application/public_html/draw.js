@@ -11,7 +11,14 @@ define(['jquery'], function($) {
    var canvas;
    var ctx;
    var timeslotWidth;
-   var drawObj;
+   //view is for scrolling. But at the moment scrolling is not possible because 
+   //events have sealed x and y values. Instead we cap the Track number at 10 tracks.
+   //we need 600px height at least for the canvas
+  /* var view = Object.seal({
+       currentTop: 0,
+       currentBottom: 0,
+       viewableTracks: 0
+   });*/
    
    //constants
     var CANVAS = Object.seal({
@@ -19,7 +26,7 @@ define(['jquery'], function($) {
         WIDTH: 0 
     });
     
-    var DRAW = Object.freeze({
+    var DRAW = Object.seal({
         TIMESLOTS: 30,
         TRACKHEIGHT: 50
     });
@@ -37,6 +44,18 @@ define(['jquery'], function($) {
         //drawing
         timeslotWidth = Math.floor(CANVAS.WIDTH/DRAW.TIMESLOTS);
         
+        if(timeslotWidth < 60){
+            DRAW.TIMESLOTS = 20;
+            timeslotWidth = Math.floor(CANVAS.WIDTH/DRAW.TIMESLOTS);
+            if(timeslotWidth < 60){
+                DRAW.TIMESLOTS = 13;
+                timeslotWidth = Math.floor(CANVAS.WIDTH/DRAW.TIMESLOTS);
+            }
+        }
+        
+    /*    view.viewableTracks = Math.floor(CANVAS.HEIGHT/DRAW.TRACKHEIGHT)-1;
+        view.currentBottom = view.viewableTracks;
+        console.log(view);*/
         //start animation
         animation();
     };
@@ -144,19 +163,21 @@ define(['jquery'], function($) {
         ctx.textBaseline = "hanging";
         ctx.font = "18px sansserif"; //font size on screen size
         $.each(game.gameState.table, function(i,event){
-            ctx.save();
-            if(event.outsideDelay!=="0"){
-                ctx.fillStyle="yellow";
-            }
-            if(event.delay!==0){
-                ctx.fillStyle="orange";
-            }
-            ctx.fillRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
-            ctx.strokeRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
-            ctx.fillStyle = "black";
-            ctx.fillText(event.trainName,event.x+timeslotWidth/2,event.y+2);
-            ctx.fillText(event.lineNo,event.x+timeslotWidth/2,event.y+25);
-            ctx.restore();
+           // if(track.id>=view.currentTop && track.id<=view.currentBottom){
+                ctx.save();
+                if(event.outsideDelay!=="0"){
+                    ctx.fillStyle="yellow";
+                }
+                if(event.delay!==0){
+                    ctx.fillStyle="orange";
+                }
+                ctx.fillRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
+                ctx.strokeRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
+                ctx.fillStyle = "black";
+                ctx.fillText(event.trainName,event.x+timeslotWidth/2,event.y+2);
+                ctx.fillText(event.lineNo,event.x+timeslotWidth/2,event.y+25);
+                ctx.restore();
+            //}
         });
     };
     
@@ -168,33 +189,35 @@ define(['jquery'], function($) {
         ctx.font = "18px sansserif"; //font size on screen size
         var x = timeslotWidth;
         $.each(game.gameState.tracks, function(i,track){
-            if(track.id===0){
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(0,100);
-                ctx.lineTo(CANVAS.WIDTH,100);
-                ctx.stroke();
-                
-                ctx.fillStyle="black";
-                ctx.fillText("Not scheduled",x,75);
-                ctx.restore();
-            }
-            else{
-                //vertical lines
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(0,50+DRAW.TRACKHEIGHT*(i+1));
-                ctx.lineTo(CANVAS.WIDTH,50+DRAW.TRACKHEIGHT*(i+1));
-                ctx.stroke();
-                //rects
-                if(i%2!==0){
-                    ctx.fillRect(0,DRAW.TRACKHEIGHT*(i+1),CANVAS.WIDTH,50);
+           // if(track.id>=view.currentTop && track.id<=view.currentBottom){
+                if(track.id===0){
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(0,100);
+                    ctx.lineTo(CANVAS.WIDTH,100);
+                    ctx.stroke();
+
+                    ctx.fillStyle="black";
+                    ctx.fillText("Not scheduled",x,75);
+                    ctx.restore();
                 }
-                //text
-                ctx.fillStyle="black";
-                ctx.fillText("Track: "+i,x,75+DRAW.TRACKHEIGHT*(i));
-                ctx.restore();
-            }
+                else{
+                    //vertical lines
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(0,50+DRAW.TRACKHEIGHT*(i+1));
+                    ctx.lineTo(CANVAS.WIDTH,50+DRAW.TRACKHEIGHT*(i+1));
+                    ctx.stroke();
+                    //rects
+                    if(i%2!==0){
+                        ctx.fillRect(0,DRAW.TRACKHEIGHT*(i+1),CANVAS.WIDTH,50);
+                    }
+                    //text
+                    ctx.fillStyle="black";
+                    ctx.fillText("Track: "+i,x,75+DRAW.TRACKHEIGHT*(i));
+                    ctx.restore();
+                }
+           // }
         });
     };
     

@@ -18,6 +18,8 @@ define(['jquery'], function($) {
       LARGE: "LARGE"
    });
    
+   var MAXTRACKS = 11;
+   
     function Upgrade(id, name, description, type, level, costs, prerequisites){
        
        this.id = id;
@@ -70,7 +72,7 @@ define(['jquery'], function($) {
                 }
             }
             else{
-                if(upgrade.purchased){
+                if(upgrade.purchased || (upgrade.type === TYPE.TRACK && game.gameState.tracks.length>=MAXTRACKS)){
                     $("#buttonUpgrade"+upgrade.id).text("Already Bought");
                     $("#upgrade"+upgrade.id).css("background-color", "grey");
                 } 
@@ -80,14 +82,21 @@ define(['jquery'], function($) {
                     });
                 }
             }
+           /* if(upgrade.type === TYPE.TRACK){ //&& game.gameState.tracks.length>MAXTRACKS){
+                $("#buttonUpgrade"+upgrade.id).text("Max Tracks");
+                $("#upgrade"+upgrade.id).css("background-color", "grey");
+            }*/
         });
     };
     
     function buyUpgrade(id){
         console.log("bought "+id);
         if(upgrades[id].type===TYPE.TRACK){
-            addTrack(upgrades[id].level);
-            game.changeMoney(upgrades[id].costs);
+            if(game.gameState.tracks.length<MAXTRACKS){
+                addTrack(upgrades[id].level);
+                game.changeMoney(upgrades[id].costs);
+                showUpgrades();
+            }
         }
         if(upgrades[id].type===TYPE.STATION){
             game.gameState.stationLevel = upgrades[id].level;

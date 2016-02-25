@@ -7,6 +7,26 @@ and open the template in the editor.
     Created on : 30.01.2016, 13:17:11
     Author     : Admin
 */
+*{
+	font-family: 'Kurale', serif;
+	text-align: center;
+}
+button{
+	color: white;
+	background-color: black;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: 1px solid white;
+	margin: 10px;
+}
+button:hover{
+	color: black;
+	background-color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: 1px solid black;
+	margin: 10px;
+}
 #container{
     width: 100%;
     height: 100%;
@@ -34,16 +54,41 @@ and open the template in the editor.
     width: 20%
 }
 #main, #buttonMain{
-    background-color: green;
+    background-color: white;
 }
 #contractsOffert, #buttonContractsOffert{
-    background-color: yellow;
+    background-color: white;
 }
 #upgrades, #buttonUpgrades{
-    background-color: red;
+    background-color: white;
 }
 #contractsTaken, #buttonContractsTaken{
-    background-color: blue;
+    background-color: white;
+}
+#buttonMain{
+	 background-image: url("img/ic_train_black_48px.svg");
+	 background-repeat: no-repeat;
+	 background-size: 43%;
+	 background-position: center;
+	 
+}
+#buttonContractsOffert{
+	background-image: url("img/ic_assignment_black_48px.svg");
+	background-repeat: no-repeat;
+	background-size: 43%;
+	background-position: center;
+}
+#buttonUpgrades{
+	background-image: url("img/ic_update_black_48px.svg");
+	background-repeat: no-repeat;
+	background-size: 43%;
+	background-position: center;
+}
+#buttonContractsTaken{
+	background-image: url("img/ic_assignment_turned_in_black_48px.svg");
+	background-repeat: no-repeat;
+	background-size: 43%;
+	background-position: center;
 }
 #day{
     float: left;
@@ -73,13 +118,11 @@ canvas{
 }
 .upgrades{
     width: 19%;
-    height: 33%;
     float: left;
     border: 1px solid black;
 }
 .contractsOuter{
     width: 19%;
-    height: 33%;
     float: left;
     border: 1px solid black;
 }
@@ -111,4 +154,26 @@ canvas{
     background-color: black;
     z-index: 3;
     opacity: 1;
+}
+#close{
+	float: left;
+	border: 1px solid white;
+	width: 100%;
+	height: 33%;
+}
+.track{
+	float: left;
+	border: 1px solid white;
+	width: 20%;
+	height: 33%;
+}
+.delay{
+	float: left;
+	border: 1px solid white;
+	width: 33%;
+	height: 33%;
+}
+.delay:hover, .track:hover, #close:hover{
+	color: black;
+	background-color: white;
 }

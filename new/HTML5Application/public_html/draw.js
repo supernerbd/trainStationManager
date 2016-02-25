@@ -41,6 +41,7 @@ define(['jquery'], function($) {
 	ctx = canvas.getContext('2d');
         ctx.fillStyle="white";
         ctx.fillRect(0,0,CANVAS.WIDTH,CANVAS.HEIGHT);
+		//ctx.font = "25px 'Kurale' serif";
         //drawing
         timeslotWidth = Math.floor(CANVAS.WIDTH/DRAW.TIMESLOTS);
         
@@ -88,7 +89,7 @@ define(['jquery'], function($) {
             var x = timeslotWidth*i;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.font = "25px sansserif"; //font size on screen size
+            ctx.font = "22px Kurale"; //font size on screen size
             if(i<2){
                 if(game.gameState.time<5){
                     ctx.fillText("00:00",x+timeslotWidth/2,25);
@@ -158,18 +159,18 @@ define(['jquery'], function($) {
     
     function drawTable(){
         ctx.strokeStyle = "black";
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "green";
         ctx.textAlign = "center";
         ctx.textBaseline = "hanging";
-        ctx.font = "18px sansserif"; //font size on screen size
+       ctx.font = "18px Kurale"; //font size on screen size
         $.each(game.gameState.table, function(i,event){
            // if(track.id>=view.currentTop && track.id<=view.currentBottom){
                 ctx.save();
                 if(event.outsideDelay!=="0"){
-                    ctx.fillStyle="yellow";
+                    ctx.fillStyle="orange";
                 }
                 if(event.delay!==0){
-                    ctx.fillStyle="orange";
+                    ctx.fillStyle="red";
                 }
                 ctx.fillRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
                 ctx.strokeRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
@@ -186,7 +187,7 @@ define(['jquery'], function($) {
         ctx.fillStyle = "grey";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = "18px sansserif"; //font size on screen size
+        ctx.font = "18px Kurale"; //font size on screen size
         var x = timeslotWidth;
         $.each(game.gameState.tracks, function(i,track){
            // if(track.id>=view.currentTop && track.id<=view.currentBottom){

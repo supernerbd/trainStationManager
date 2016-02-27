@@ -177,3 +177,14 @@ canvas{
 	color: black;
 	background-color: white;
 }
+.plus{
+    color: green;
+}
+.minus{
+    color: red;
+}
+ul,li{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}

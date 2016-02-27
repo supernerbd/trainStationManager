@@ -44,15 +44,21 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         this.balancing = new GameBalancing;
     };
     
-    function changeMoney(amount){
-        $("#moneyChange").text(amount+" $");
-        if(amount>0){
-            $("#moneyChange").css("color", "green");
-        }
-        else{
-            $("#moneyChange").css("color", "red");
-        }
+    function changeMoney(amount){ //game.gameState.moneyStack amount+" $"
         game.gameState.money += amount;
+        game.gameState.moneyStack.shift();
+        game.gameState.moneyStack[2] = amount;
+            var htmlString="<ul>";
+        for (var i=2; i>=0; i--){
+            if(game.gameState.moneyStack[i]>0){
+                htmlString+="<li class='plus'>"+game.gameState.moneyStack[i]+"</li>";
+            }
+            else{
+                htmlString+="<li class='minus'>"+game.gameState.moneyStack[i]+"</li>";
+            }   
+        }
+        htmlString+="</ul>";
+        $("#moneyChange").html(htmlString);
         $("#money").text(game.gameState.money+" $");
         if(game.gameState.money<0){
             game.gameState.stopped=true;

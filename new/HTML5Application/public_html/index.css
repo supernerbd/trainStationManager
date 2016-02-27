@@ -65,6 +65,9 @@ button:hover{
 #contractsTaken, #buttonContractsTaken{
     background-color: white;
 }
+#contractsTaken{
+    overflow: auto;
+}
 #buttonMain{
 	 background-image: url("img/ic_train_black_48px.svg");
 	 background-repeat: no-repeat;
@@ -170,7 +173,7 @@ canvas{
 .delay{
 	float: left;
 	border: 1px solid white;
-	width: 33%;
+	width: 32%;
 	height: 33%;
 }
 .delay:hover, .track:hover, #close:hover{
@@ -187,4 +190,41 @@ ul,li{
     list-style-type: none;
     padding: 0px;
     margin: 0px;
+}
+#wrongRes{
+    display: none;
+}
+@media screen and (max-width: 899px){
+    #wrongRes{
+        display: inherit;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        color: white;
+        background-image: url("img/ic_report_problem_white_48px.svg");
+        background-repeat: no-repeat;
+	background-size: 43%;
+	background-position: center;
+        z-index: 4;
+        position: fixed;
+    }
+}
+@media screen and (max-height: 759px){
+    #wrongRes{
+        display: inherit;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+         background-color: black;
+        color: white;
+        background-image: url("img/ic_report_problem_white_48px.svg");
+        background-repeat: no-repeat;
+	background-size: 43%;
+	background-position: center;
+        z-index: 4;
+        position: fixed;
+    }
 }

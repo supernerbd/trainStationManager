@@ -145,6 +145,9 @@ define(['jquery'], function($) {
                 if(!event.outsideDelay){
                     event.outsideDelay = game.createOutsideDelay(event.trainName);
                     event.time+=parseInt(event.outsideDelay,10);
+                    if(game.delayCollision(event.track, event.time, event.id)){
+                        event.track=0;
+                    }
                 }
                 //draw
                 event.x = (timeslotWidth)+((event.time-now)*timeslotWidth);
@@ -163,6 +166,20 @@ define(['jquery'], function($) {
         ctx.textAlign = "center";
         ctx.textBaseline = "hanging";
        ctx.font = "18px Kurale"; //font size on screen size
+       $.each(game.gameState.table, function(i,event){
+            ctx.save();
+            ctx.fillStyle = "rgba(0, 128, 0, .5)";
+            if(event.outsideDelay!=="0"){
+                ctx.fillStyle="rgba(255, 165, 0, .5)";
+            }
+            if(event.delay!==0){
+                ctx.fillStyle="rgba(255, 0, 0, .5)";
+            }
+            ctx.fillRect(event.x-timeslotWidth,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
+            ctx.fillRect(event.x+timeslotWidth,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
+            ctx.restore();
+       });
+       
         $.each(game.gameState.table, function(i,event){
            // if(track.id>=view.currentTop && track.id<=view.currentBottom){
                 ctx.save();
@@ -173,7 +190,7 @@ define(['jquery'], function($) {
                     ctx.fillStyle="red";
                 }
                 ctx.fillRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
-                ctx.strokeRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);
+                ctx.strokeRect(event.x,event.y,timeslotWidth,DRAW.TRACKHEIGHT);             
                 ctx.fillStyle = "black";
                 ctx.fillText(event.trainName,event.x+timeslotWidth/2,event.y+2);
                 ctx.fillText(event.lineNo,event.x+timeslotWidth/2,event.y+25);

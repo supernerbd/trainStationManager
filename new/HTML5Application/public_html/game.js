@@ -146,82 +146,154 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                 switch(event.delay){ //bug: need to check that player can't schedule around current time
                     case 0:                        
                         $("#delay1").click(function(){
-                            event.delay=1;
-                            event.time+=1;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time+1, event.id)){
+                                $("#delay1").text("Not possible");
+                                $("#delay1").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=1;
+                                event.time+=1;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay2").click(function(){
-                            event.delay=2;
-                            event.time+=2;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time+2, event.id)){
+                                $("#delay2").text("Not possible");
+                                $("#delay2").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=2;
+                                event.time+=2;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay3").click(function(){
-                            event.delay=3;
-                            event.time+=3;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time+3, event.id)){
+                                $("#delay3").text("Not possible");
+                                $("#delay3").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=3;
+                                event.time+=3;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         break;
                     case 1:
                         $("#delay0").click(function(){
-                            event.delay=0;
-                            event.time-=1;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time-1, event.id)){
+                                $("#delay0").text("Not possible");
+                                $("#delay0").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=0;
+                                event.time-=1;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay2").click(function(){
-                            event.delay=2;
-                            event.time+=1;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time+1, event.id)){
+                                $("#delay2").text("Not possible");
+                                $("#delay2").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=2;
+                                event.time+=1;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay3").click(function(){
-                            event.delay=3;
-                            event.time+=2;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time+2, event.id)){
+                                $("#delay3").text("Not possible");
+                                $("#delay3").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=3;
+                                event.time+=2;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         break;
                     case 2:
                         $("#delay0").click(function(){
-                            event.delay=0;
-                            event.time-=2;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time-2, event.id)){
+                                $("#delay0").text("Not possible");
+                                $("#delay0").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=0;
+                                event.time-=2;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay1").click(function(){
-                            event.delay=1;
-                            event.time-=1;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time-1, event.id)){
+                                $("#delay1").text("Not possible");
+                                $("#delay1").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=1;
+                                event.time-=1;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay3").click(function(){
-                            event.delay=3;
-                            event.time+=1;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time+1, event.id)){
+                                $("#delay3").text("Not possible");
+                                $("#delay3").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=3;
+                                event.time+=1;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         break;
                     case 3:
                         $("#delay0").click(function(){
-                            event.delay=0;
-                            event.time-=3;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time-3, event.id)){
+                                $("#delay0").text("Not possible");
+                                $("#delay0").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=0;
+                                event.time-=3;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay1").click(function(){
-                            event.delay=1;
-                            event.time-=2;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time-2, event.id)){
+                                $("#delay1").text("Not possible");
+                                $("#delay1").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=1;
+                                event.time-=2;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         $("#delay2").click(function(){
-                            event.delay=2;
-                            event.time-=1;
-                            changeMoney(event.reschedulePunishment);
-                            $("#overlay").fadeOut(200);
+                            if(delayCollision(event.track, event.time-1, event.id)){
+                                $("#delay2").text("Not possible");
+                                $("#delay2").css("background-color", "red");
+                            }
+                            else{
+                                event.delay=2;
+                                event.time-=1;
+                                changeMoney(event.reschedulePunishment);
+                                $("#overlay").fadeOut(200);
+                            }
                         });
                         break;
                 }
@@ -263,7 +335,19 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
     
     function changeEventCollision(track, time){
         for (var i=0;game.gameState.table.length>i;i++){
-            if(game.gameState.table[i].time===time&&game.gameState.table[i].track===track){
+            if((game.gameState.table[i].time===time||game.gameState.table[i].time===time-1||game.gameState.table[i].time===time+1)&&game.gameState.table[i].track===track){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    function delayCollision(track, time, id){
+        if(time<=game.gameState.time+3){
+            return true;
+        }
+        for (var i=0;game.gameState.table.length>i;i++){
+            if((game.gameState.table[i].time===time||game.gameState.table[i].time===time-1||game.gameState.table[i].time===time+1)&&game.gameState.table[i].track===track&&game.gameState.table[i].id!==id){
                 return true;
             }
         }
@@ -275,7 +359,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         var b=events;
         for (var i=0; i<a.length;i++){
             for (var j=0; j<b.length;j++){
-                if(a[i].id!=b[j].id && a[i].track==b[j].track && a[i].time==b[j].time && a[i].track!=0){
+                if(a[i].id!=b[j].id && a[i].track==b[j].track && (a[i].time==b[j].time || a[i].time-1==b[j].time || a[i].time+1==b[j].time) && a[i].track!=0){ //just add time-1/time+1?
                     console.log("Collision between "+a[i].id+" and"+b[j].id+" at track "+events[j].track+" at time"+events[j].time);
                     events[j].track = 0;
                 }
@@ -336,6 +420,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
       addEvents: addEvents,
       changeEvent: changeEvent,
       changeEvents: changeEvents,
-      createOutsideDelay: createOutsideDelay
+      createOutsideDelay: createOutsideDelay,
+      delayCollision: delayCollision
     };
 });

@@ -20,7 +20,7 @@ define(['jquery'], function($) {
    
    var MAXTRACKS = 11;
    
-    function Upgrade(id, name, description, type, level, costs, prerequisites){
+    function Upgrade(id, name, description, type, level, costs, maintenance, prerequisites){
        
        this.id = id;
        this.name = name;
@@ -30,6 +30,7 @@ define(['jquery'], function($) {
        this.costs = costs; //basis costs
        this.purchased = false;
        this.prerequisites = prerequisites || false; //[]
+       this.maintenance = maintenance;
        
        return this;
    }
@@ -43,20 +44,20 @@ define(['jquery'], function($) {
         game.gameState.stationLevel = LEVEL.BASIC;
         //upgrades[upgrades.length] = new Upgrade(upgrades.length, "Short Track", "A short (150m) track", TYPE.TRACK, LEVEL.BASIC, game.balancing.shortTrack);
         //upgrades[upgrades.length] = new Upgrade(upgrades.length, "Medium Track", "A medium (350m) track", TYPE.TRACK, LEVEL.MEDIUM, game.balancing.mediumTrack, [3]);
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Long Track", "A long (500m) track", TYPE.TRACK, LEVEL.LARGE, game.balancing.longTrack); //, [4]
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 1", "Updates the station", TYPE.STATION, LEVEL.MEDIUM, game.balancing.upgrade1);
-        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 2", "Updates the station", TYPE.STATION, LEVEL.LARGE, game.balancing.upgrade2, [1]); //3
+        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Long Track", "A long (500m) track", TYPE.TRACK, LEVEL.LARGE, game.balancing.longTrack, game.balancing.maintenanceLongTrack); //, [4]
+        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 1", "Updates the station", TYPE.STATION, LEVEL.MEDIUM, game.balancing.upgrade1, game.balancing.maintenanceUpgrade1);
+        upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 2", "Updates the station", TYPE.STATION, LEVEL.LARGE, game.balancing.upgrade2,game.balancing.maintenanceUpgrade2, [1]); //3
     };
     
     function showUpgrades(){ //
         var htmlString ="";
         $.each(upgrades, function(i,upgrade){
             if(upgrade.type!==TYPE.TRACK){
-                htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+upgrade.costs+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
+                htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+upgrade.costs+"</p><p>Maintenance Costs: "+upgrade.maintenance+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
             }
             else{
                 var costs = upgrade.costs+(upgrade.costs*(game.balancing.increasingTrackCosts*(game.gameState.tracks.length)));
-                htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+costs+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
+                htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+costs+"</p><p>Maintenance Costs: "+upgrade.maintenance+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
             }
         });
         $("#upgrades").html(htmlString);
@@ -154,12 +155,48 @@ define(['jquery'], function($) {
        $("#overlay").fadeIn(200);
     };
     
+    function maintenanceCosts(){
+        $.each(upgrades, function(i,upgrade){
+            if(upgrade.purchased || upgrade.type===TYPE.TRACK){
+                if(upgrade.type===TYPE.TRACK){
+                    for(var i=0; i<game.gameState.tracks.length-1; i++){
+                        game.changeMoney(upgrade.maintenance);
+                        console.log("maintenanceCostsTrack");
+                    }
+                }
+                else{
+                    game.changeMoney(upgrade.maintenance);
+                    console.log("maintenanceCosts");
+                }
+            }
+        });
+    };
+    
+    function predictMaintenanceCosts(){
+        var costs=0;
+        $.each(upgrades, function(i,upgrade){
+            if(upgrade.purchased || upgrade.type===TYPE.TRACK){
+                if(upgrade.type===TYPE.TRACK){
+                    for(var i=0; i<game.gameState.tracks.length-1; i++){
+                        costs+=upgrade.maintenance;
+                    }
+                }
+                else{
+                    costs+=upgrade.maintenance;
+                }
+            }
+        });
+        return costs;
+    };
+    
     return{
       init: init,
       addTrack: addTrack,
       selectTrack: selectTrack,
       changeTrack: changeTrack,
       LEVEL: LEVEL,
-      showUpgrades: showUpgrades
+      showUpgrades: showUpgrades,
+      maintenanceCosts: maintenanceCosts,
+      predictMaintenanceCosts: predictMaintenanceCosts
     };
 });

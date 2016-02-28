@@ -73,6 +73,9 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
     };
     
     function changeDay(){
+        if(game.gameState.daysPlayed>=1){
+            upgrades.maintenanceCosts();
+        }
         resetEvents();
         createEvents();
         game.gameState.time = 0;

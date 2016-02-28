@@ -20,7 +20,7 @@ define(function() {
                     "reschedulePunishment": -500
                 },
                 "delay": {
-                    "probablity": 0.2,
+                    "probablity": 0.1,
                     "factor": 30
                 }
             },
@@ -50,7 +50,7 @@ define(function() {
                     "reschedulePunishment": -50
                 },
                 "delay": {
-                    "probablity": 0.05,
+                    "probablity": 0.2,
                     "factor": 10
                 }
             },
@@ -74,11 +74,14 @@ define(function() {
         this.longTrack = -15000;
         this.upgrade1 = -10000;
         this.upgrade2 = -50000;
+        this.maintenanceLongTrack = -1000;
+        this.maintenanceUpgrade1 = -1000;
+        this.maintenanceUpgrade2 = -1000;
         this.startContracts=0;
         this.startContractsOffert = 10;
         this.iceCosts=-20000;
         this.reCosts=-10000;
-        this.refusePunishmentDown = 80; //%
+        this.refusePunishmentDown = 50; //%
         this.increasingTrackCosts = .5;
         this.standardTime = 3000;
         return this;

@@ -85,13 +85,22 @@ define(['jquery'], function($) {
      
      function showStartMenu(){
          $("#overlay").fadeIn(200);
-         var htmlString="<button id='buttonStartGame'>Start Game</button>";
-            $("#overlayContent").html(htmlString);
-            $("#buttonStartGame").click(function(){
-                $("#overlay").fadeOut(200);
-                startMenu=false;
-                game.init();
-            });
+         var htmlString="";
+         htmlString+="<h1>Welcome!</h1 class='onboarding'><p>Your new job is the Manager of this little train station. If you make the right decisions it will grow and be eventually the bigget station in the city!";
+         htmlString+=" Your primary job is to keep cash positive. The CEO of your railway company doesn't except a station with less than 0$ at any given time. So be aware. ";
+         htmlString+="<br>You have got several tools to run this station:</p>";
+         htmlString+="<p class='onboarding'>- The track overview: This tool gives you the overview of the trains running at the current time. With a click on a train event you can change the track or delay the entrance of the train. Beware: If you delay a train it costs a fee. There is also a big fee in case a train is marked as not scheduled. Green events are on time. Orange one are delayed, but not because of you. There is no penalty for these trains. Red events were delayed by you. You already payed a fee and will again, if you change the delay. </p>";
+         htmlString+="<p class='onboarding'>- The upgrade view: Here you can upgrade your station. Construct new tracks (you can get up to 10) or update your station. Each upgrade costs an amount of money and a daily maintenance fee. This fee is due at the end of each day.</p>";
+         htmlString+="<p class='onboarding'>- The offert Contracts view shows the contracts you can accept or refuse. Refusing a contract may cost a fee. You need to sign contracts, to get your station into the railway schedules.</p>";
+         htmlString+="<p class='onboarding'>- The contracts taken view: Shows all accepted contracts.</p>";
+         htmlString+="<p class='onboarding'>- The balance sheet: With a click on your current amount of money you can see a balance sheet. Check it from time to time to see how you are doing.</p>";
+         htmlString+="<button id='buttonStartGame'>Start Game</button>";
+         $("#overlayContent").html(htmlString);
+         $("#buttonStartGame").click(function(){
+              $("#overlay").fadeOut(200);
+              startMenu=false;
+              game.init();
+         });
      }
      /*Welcome!
       * You are the Manager of this little Train Station. Nurture it right and it will flourish. Your primäry Job is to keep cash positive. 

@@ -152,9 +152,9 @@ canvas{
 #overlayContent{
     color: white;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 5%;
     width: 40%;
-    height: 50%;
+    height: 62%;
     background-color: black;
     z-index: 3;
     opacity: 1;
@@ -197,6 +197,9 @@ ul,li{
 }
 #wrongRes{
     display: none;
+}
+.onboarding{
+    font-size: 80%;
 }
 @media screen and (max-width: 899px){
     #wrongRes{

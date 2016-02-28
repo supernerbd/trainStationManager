@@ -74,12 +74,20 @@ define(['jquery'], function($) {
          $("#overlay").fadeIn(200);
          mainMenu = true;
             game.gameState.stopped=true;
-            var htmlString="<button id='buttonResumeGame'>Resume Game</button>";
+            var htmlString="<button id='save'>Save Game</button><br><button id='load'>Load Game</button><p id='infobar'> </p><br><button id='buttonResumeGame'>Resume Game</button>";
             $("#overlayContent").html(htmlString);
             $("#buttonResumeGame").click(function(){
                 $("#overlay").fadeOut(200);
                 mainMenu=false;
                 game.gameState.stopped= false;
+            });
+            $("#save").click(function(){
+                store.save();
+                $("#infobar").text("Game saved!");
+            });
+            $("#load").click(function(){
+                store.load();
+                $("#infobar").text("Game loaded!");
             });
      }
      

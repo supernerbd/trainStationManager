@@ -11,5 +11,6 @@ define(function(require) {
     window.game = require('game');
     window.contracts = require('contracts');
     window.upgrades = require('upgrades');
+    window.store = require('store');
     setup.setup();
 });

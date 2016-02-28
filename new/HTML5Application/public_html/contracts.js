@@ -186,6 +186,7 @@ define(['jquery', 'Contract'], function($, Contract) {
     return{
       init: init,
       getRandomType: getRandomType,
-      showContractsTaken: showContractsTaken
+      showContractsTaken: showContractsTaken,
+      showContractsOffert: showContractsOffert
     };
 });

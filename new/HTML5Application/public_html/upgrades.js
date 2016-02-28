@@ -100,7 +100,7 @@ define(['jquery'], function($) {
         if(upgrades[id].type===TYPE.TRACK){
             if(game.gameState.tracks.length<MAXTRACKS){
                 addTrack(upgrades[id].level);
-                game.changeMoney(upgrades[id].costs+(upgrades[id].costs*(game.balancing.increasingTrackCosts*(game.gameState.tracks.length-1))));
+                game.changeMoney(upgrades[id].costs+(upgrades[id].costs*(game.balancing.increasingTrackCosts*(game.gameState.tracks.length-1))), "upgrades");
                 showUpgrades();
             }
         }
@@ -108,7 +108,7 @@ define(['jquery'], function($) {
             game.gameState.stationLevel = upgrades[id].level;
             upgrades[id].purchased = true;
             
-            game.changeMoney(upgrades[id].costs);
+            game.changeMoney(upgrades[id].costs, "upgrades");
             showUpgrades();
         }
     };
@@ -160,12 +160,12 @@ define(['jquery'], function($) {
             if(upgrade.purchased || upgrade.type===TYPE.TRACK){
                 if(upgrade.type===TYPE.TRACK){
                     for(var i=0; i<game.gameState.tracks.length-1; i++){
-                        game.changeMoney(upgrade.maintenance);
+                        game.changeMoney(upgrade.maintenance, "maintenance");
                         console.log("maintenanceCostsTrack");
                     }
                 }
                 else{
-                    game.changeMoney(upgrade.maintenance);
+                    game.changeMoney(upgrade.maintenance, "maintenance");
                     console.log("maintenanceCosts");
                 }
             }

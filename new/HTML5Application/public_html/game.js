@@ -26,6 +26,16 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
        this.reschedulePunishment=reschedulePunishment;
    }
    
+   function Billing(){
+       this.maintenance = 0;
+       this.upgrades = 0;
+       this.refuseContract = 0;
+       this.reschedule=0;
+       this.notScheduled = 0;
+       this.rewards = 0;
+       this.day = 0;
+   }
+   
    function init(){
        LEVEL=upgrades.LEVEL;
        
@@ -36,8 +46,8 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
        upgrades.showUpgrades();
        
        this.gameState.stopped=false;
-       changeMoney(this.balancing.startMoney);
        changeDay();
+       changeMoney(this.balancing.startMoney, "rewards");
        gameLoop();
    };
    
@@ -46,7 +56,15 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         this.balancing = new GameBalancing;
     };
     
-    function changeMoney(amount){ 
+    function changeMoney(amount, reason){
+        
+        if(!reason){
+            console.log("noreason");
+        }
+        else{
+            game.gameState.billing[0][reason]+=amount;
+        }
+        
         game.gameState.money += amount;
         game.gameState.moneyStack.shift();
         game.gameState.moneyStack[2] = amount;
@@ -65,10 +83,13 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         if(game.gameState.money<0){
             game.gameState.stopped=true;
             //show Game Over
-            var htmlString="<h1>Game Over</h1>";
+            var htmlString="<h1>Game Over</h1><p>Try it again!</p><button id='restart'>Restart Game</button>";
             $("#overlayContent").html(htmlString);
             $("#overlay").fadeIn(200);
             $("#overlay").css("color", "white");
+            $("#restart").click(function(){
+                document.location.reload();
+            });
         }
     };
     
@@ -76,12 +97,36 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         if(game.gameState.daysPlayed>=1){
             upgrades.maintenanceCosts();
         }
+        
+        if(game.gameState.billing.length<3){
+            var b = new Billing();
+            game.gameState.billing.unshift(b);
+            game.gameState.billing[0].day = game.gameState.daysPlayed+1;
+        }
+        else{
+            var b = new Billing();
+            game.gameState.billing.unshift(b);
+            game.gameState.billing[0].day = game.gameState.daysPlayed+1;
+            game.gameState.billing.pop();
+        }
+        
         resetEvents();
         createEvents();
         game.gameState.time = 0;
         game.gameState.daysPlayed++;
         $("#day").text("Day "+game.gameState.daysPlayed);
     };
+    
+    function getBalance(day){
+        var balance;
+        if(day===0){
+            balance = upgrades.predictMaintenanceCosts() + game.gameState.billing[day].upgrades + game.gameState.billing[day].refuseContract + game.gameState.billing[day].reschedule + game.gameState.billing[day].notScheduled + game.gameState.billing[day].rewards;
+        }
+        else{
+            balance = game.gameState.billing[day].maintenance + game.gameState.billing[day].upgrades + game.gameState.billing[day].refuseContract + game.gameState.billing[day].reschedule + game.gameState.billing[day].notScheduled + game.gameState.billing[day].rewards;
+        }
+        return balance;
+    }
     
     function createEvents(){
        var events=[];
@@ -157,7 +202,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=1;
                                 event.time+=1;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -169,7 +214,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=2;
                                 event.time+=2;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -181,7 +226,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=3;
                                 event.time+=3;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -195,7 +240,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=0;
                                 event.time-=1;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -207,7 +252,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=2;
                                 event.time+=1;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -219,7 +264,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=3;
                                 event.time+=2;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -233,7 +278,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=0;
                                 event.time-=2;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -245,7 +290,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=1;
                                 event.time-=1;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -257,7 +302,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=3;
                                 event.time+=1;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -271,7 +316,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=0;
                                 event.time-=3;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -283,7 +328,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=1;
                                 event.time-=2;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -295,7 +340,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                             else{
                                 event.delay=2;
                                 event.time-=1;
-                                changeMoney(event.reschedulePunishment);
+                                changeMoney(event.reschedulePunishment, "reschedule");
                                 $("#overlay").fadeOut(200);
                             }
                         });
@@ -372,6 +417,53 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         return events;
     }
     
+        function showMoneyOverview(){
+         $("#overlay").fadeIn(200);
+         var htmlString;
+        switch(game.gameState.billing.length){
+            case 1:
+                htmlString = "<table><tr><td> </td><td>Current Day</td></tr>";
+                htmlString+="<tr><td>Maintenance</td><td>"+upgrades.predictMaintenanceCosts()+"</td></tr>";
+                htmlString+="<tr><td>Upgrades</td><td>"+game.gameState.billing[0].upgrades+"</td></tr>";
+                htmlString+="<tr><td>Refused Contracts</td><td>"+game.gameState.billing[0].refuseContract+"</td></tr>";
+                htmlString+="<tr><td>Rescheduled</td><td>"+game.gameState.billing[0].reschedule+"</td></tr>";
+                htmlString+="<tr><td>Not Scheduled</td><td>"+game.gameState.billing[0].notScheduled+"</td></tr>";
+                htmlString+="<tr><td>Rewards</td><td>"+game.gameState.billing[0].rewards+"</td></tr>";
+                htmlString+="<tr><td>Balance</td><td>"+getBalance(0)+"</td></tr>";
+                htmlString+="</table>";
+            break;
+            case 2:
+                htmlString = "<table><tr><td> </td><td>Current Day</td><td>Day "+game.gameState.billing[1].day+"</td></tr>";
+                htmlString+="<tr><td>Maintenance</td><td>"+upgrades.predictMaintenanceCosts()+"</td><td>"+game.gameState.billing[1].maintenance+"</td></tr>";
+                htmlString+="<tr><td>Upgrades</td><td>"+game.gameState.billing[0].upgrades+"</td><td>"+game.gameState.billing[1].upgrades+"</td></tr>";
+                htmlString+="<tr><td>Refused Contracts</td><td>"+game.gameState.billing[0].refuseContract+"</td><td>"+game.gameState.billing[1].refuseContract+"</td></tr>";
+                htmlString+="<tr><td>Rescheduled</td><td>"+game.gameState.billing[0].reschedule+"</td><td>"+game.gameState.billing[1].reschedule+"</td></tr>";
+                htmlString+="<tr><td>Not Scheduled</td><td>"+game.gameState.billing[0].notScheduled+"</td><td>"+game.gameState.billing[1].notScheduled+"</td></tr>";
+                htmlString+="<tr><td>Rewards</td><td>"+game.gameState.billing[0].rewards+"</td><td>"+game.gameState.billing[1].rewards+"</td></tr>";
+                htmlString+="<tr><td>Balance</td><td>"+getBalance(0)+"</td><td>"+getBalance(1)+"</td></tr>";
+                htmlString+="</table>";
+            break;
+            case 3:
+                htmlString = "<table><tr><td> </td><td>Current Day</td><td>Day "+game.gameState.billing[1].day+"</td><td>Day "+game.gameState.billing[2].day+"</td></tr>";
+                htmlString+="<tr><td>Maintenance</td><td>"+upgrades.predictMaintenanceCosts()+"</td><td>"+game.gameState.billing[1].maintenance+"</td><td>"+game.gameState.billing[2].maintenance+"</td></tr>";
+                htmlString+="<tr><td>Upgrades</td><td>"+game.gameState.billing[0].upgrades+"</td><td>"+game.gameState.billing[1].upgrades+"</td><td>"+game.gameState.billing[2].upgrades+"</td></tr>";
+                htmlString+="<tr><td>Refused Contracts</td><td>"+game.gameState.billing[0].refuseContract+"</td><td>"+game.gameState.billing[1].refuseContract+"</td><td>"+game.gameState.billing[2].refuseContract+"</td></tr>";
+                htmlString+="<tr><td>Rescheduled</td><td>"+game.gameState.billing[0].reschedule+"</td><td>"+game.gameState.billing[1].reschedule+"</td><td>"+game.gameState.billing[2].reschedule+"</td></tr>";
+                htmlString+="<tr><td>Not Scheduled</td><td>"+game.gameState.billing[0].notScheduled+"</td><td>"+game.gameState.billing[1].notScheduled+"</td><td>"+game.gameState.billing[2].notScheduled+"</td></tr>";
+                htmlString+="<tr><td>Rewards</td><td>"+game.gameState.billing[0].rewards+"</td><td>"+game.gameState.billing[1].rewards+"</td><td>"+game.gameState.billing[2].rewards+"</td></tr>";
+                htmlString+="<tr><td>Balance</td><td>"+getBalance(0)+"</td><td>"+getBalance(1)+"</td><td>"+getBalance(2)+"</td></tr>";
+                htmlString+="</table>";
+            break;
+        }
+        htmlString+="<p><b>Attention:</b> Maintenance costs are due at the end of each day. The maintenance costs for the current day are only an prediction and can change in case upgrades are bought. Remember to always be cash positive. You'll lose this game if your amount of cash falls below 0$.</p>";
+        htmlString+="<div id='close'>Close</div>";
+        $("#overlayContent").html(htmlString);
+        $("#close").click(function(){
+            $("#overlay").fadeOut(200);
+        });
+        console.log("moneyOverview");
+    }
+    
     function gameLoop(){
         setTimeout(function (){gameLoopCalc();}, game.balancing.standardTime/game.gameState.speed);
     }
@@ -387,10 +479,10 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
                 $.each(game.gameState.table, function(i,event){
                      if(event.time===game.gameState.time){
                          if(event.track!==0){
-                             game.changeMoney(event.reward);
+                             game.changeMoney(event.reward, "rewards");
                          }
                          else{
-                             game.changeMoney(event.fee);
+                             game.changeMoney(event.fee, "notScheduled");
                          }
                      }
                 });
@@ -427,6 +519,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
       changeEvent: changeEvent,
       changeEvents: changeEvents,
       createOutsideDelay: createOutsideDelay,
-      delayCollision: delayCollision
+      delayCollision: delayCollision,
+      showMoneyOverview: showMoneyOverview
     };
 });

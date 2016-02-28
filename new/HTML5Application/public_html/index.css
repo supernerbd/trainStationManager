@@ -150,6 +150,7 @@ canvas{
     display: none;
 }
 #overlayContent{
+    color: white;
     margin: auto;
     margin-top: 10%;
     width: 40%;
@@ -157,6 +158,9 @@ canvas{
     background-color: black;
     z-index: 3;
     opacity: 1;
+}
+#overlayContent table{
+    margin-left: 25%;
 }
 #close{
 	float: left;

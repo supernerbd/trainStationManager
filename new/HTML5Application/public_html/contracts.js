@@ -121,7 +121,7 @@ define(['jquery', 'Contract'], function($, Contract) {
             game.gameState.acceptedContracts[game.gameState.nextContractId] = contract;
             upgrades.selectTrack(game.gameState.nextContractId);
             game.gameState.nextContractId++;
-            game.changeMoney(contract.acceptReward);
+            game.changeMoney(contract.acceptReward, "rewards");
             contract = createContract(id);
             game.gameState.offeredContracts[id]=contract;
             showContractsOffert();
@@ -142,7 +142,7 @@ define(['jquery', 'Contract'], function($, Contract) {
     function refuseContract(id){ 
         console.log("refuse");
         var contract = game.gameState.offeredContracts[id];
-        game.changeMoney(contract.refusePunishment);
+        game.changeMoney(contract.refusePunishment, "refuseContract");
         contract = createContract(id);
         game.gameState.offeredContracts[id]=contract;
         showContractsOffert();

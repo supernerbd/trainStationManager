@@ -8,8 +8,12 @@
 define(['jquery'], function($) {
      
      var currentScreen;
+     var mainMenu;
+     var startMenu;
      
      function init(){
+         mainMenu=false;
+         startMenu=true;
          currentScreen = "main";
          $("#"+currentScreen).fadeIn(100);
          //set click event listeners for buttons
@@ -41,14 +45,26 @@ define(['jquery'], function($) {
                  $("#"+currentScreen).fadeIn(100);
              }
          });
+         $("#day, #moneyChange, #money").click(function(){
+             game.showMoneyOverview();
+         });
          $("#timeSlider").change(function(){
              game.gameState.speed = $("#timeSlider").val();
              console.log($("#timeSlider").val());
          });
-         showMainMenu();
+         showStartMenu();
          window.addEventListener("keyup",function(e){
             if(e.keyCode===27){//esc
-                showMainMenu();
+                if(startMenu===false){
+                    if(mainMenu){
+                       $("#overlay").fadeOut(200);
+                       mainMenu=false;
+                       game.gameState.stopped= false;
+                   }
+                   else{
+                       showMainMenu();
+                   }
+               }
             } 
          });
          document.querySelector("canvas").addEventListener("click", function(e){canvasClick(e);});
@@ -56,24 +72,33 @@ define(['jquery'], function($) {
      
      function showMainMenu(){
          $("#overlay").fadeIn(200);
-         if(!game.gameState || game.gameState.stopped){
-            var htmlString="<button id='buttonStartGame'>Start Game</button>";
-            $("#overlayContent").html(htmlString);
-            $("#buttonStartGame").click(function(){
-                $("#overlay").fadeOut(200);
-                game.init();
-            });
-         }
-         else{ 
+         mainMenu = true;
             game.gameState.stopped=true;
             var htmlString="<button id='buttonResumeGame'>Resume Game</button>";
             $("#overlayContent").html(htmlString);
             $("#buttonResumeGame").click(function(){
                 $("#overlay").fadeOut(200);
+                mainMenu=false;
                 game.gameState.stopped= false;
             });
-         }
      }
+     
+     function showStartMenu(){
+         $("#overlay").fadeIn(200);
+         var htmlString="<button id='buttonStartGame'>Start Game</button>";
+            $("#overlayContent").html(htmlString);
+            $("#buttonStartGame").click(function(){
+                $("#overlay").fadeOut(200);
+                startMenu=false;
+                game.init();
+            });
+     }
+     /*Welcome!
+      * You are the Manager of this little Train Station. Nurture it right and it will flourish. Your primäry Job is to keep cash positive. 
+      * The CEOs of your Railway Company don't except a Station with less than 0 $ at any time. So be aware.
+      * To run this Stations your Tools are: ...
+      * Always keep the maintenance costs in mind. They are due at the end of each day. 
+      */
      
      function canvasClick(e){
          var mouse = getMouse(e);

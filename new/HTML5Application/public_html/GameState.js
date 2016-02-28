@@ -5,6 +5,7 @@ define(function() {
 	this.daysPlayed = 0;
 	this.money = 0;
         this.moneyStack = [0,0,0];
+        this.billing = new Array();
 	this.offeredContracts = new Array();
         this.nextContractId = 0;
 	this.numTracks = 0;

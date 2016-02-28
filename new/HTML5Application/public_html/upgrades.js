@@ -46,13 +46,18 @@ define(['jquery'], function($) {
         upgrades[upgrades.length] = new Upgrade(upgrades.length, "Long Track", "A long (500m) track", TYPE.TRACK, LEVEL.LARGE, game.balancing.longTrack); //, [4]
         upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 1", "Updates the station", TYPE.STATION, LEVEL.MEDIUM, game.balancing.upgrade1);
         upgrades[upgrades.length] = new Upgrade(upgrades.length, "Station Update 2", "Updates the station", TYPE.STATION, LEVEL.LARGE, game.balancing.upgrade2, [1]); //3
-        showUpgrades();
     };
     
-    function showUpgrades(){
+    function showUpgrades(){ //
         var htmlString ="";
         $.each(upgrades, function(i,upgrade){
-           htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+upgrade.costs+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
+            if(upgrade.type!==TYPE.TRACK){
+                htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+upgrade.costs+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
+            }
+            else{
+                var costs = upgrade.costs+(upgrade.costs*(game.balancing.increasingTrackCosts*(game.gameState.tracks.length)));
+                htmlString+="<div class='upgrades' id='upgrade"+upgrade.id+"'><h1>"+upgrade.name+"</h1><p>"+upgrade.description+"</p><p>Costs: "+costs+"</p><button id='buttonUpgrade"+upgrade.id+"'>Buy</button></div>";
+            }
         });
         $("#upgrades").html(htmlString);
         $.each(upgrades, function(i,upgrade){
@@ -94,7 +99,7 @@ define(['jquery'], function($) {
         if(upgrades[id].type===TYPE.TRACK){
             if(game.gameState.tracks.length<MAXTRACKS){
                 addTrack(upgrades[id].level);
-                game.changeMoney(upgrades[id].costs);
+                game.changeMoney(upgrades[id].costs+(upgrades[id].costs*(game.balancing.increasingTrackCosts*(game.gameState.tracks.length-1))));
                 showUpgrades();
             }
         }
@@ -154,6 +159,7 @@ define(['jquery'], function($) {
       addTrack: addTrack,
       selectTrack: selectTrack,
       changeTrack: changeTrack,
-      LEVEL: LEVEL
+      LEVEL: LEVEL,
+      showUpgrades: showUpgrades
     };
 });

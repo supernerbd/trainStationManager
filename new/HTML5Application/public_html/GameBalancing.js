@@ -13,30 +13,30 @@ define(function() {
                 "name": "ICE",
                 "level": "LARGE",
                 "contract": {
-                    "reward": 500,
-                    "fee": -3000,
-                    "refusePunishment": -3000,
+                    "reward": 1000,
+                    "fee": -20000,
+                    "refusePunishment": -10000,
                     "acceptReward": 0,
-                    "reschedulePunishment": -200
+                    "reschedulePunishment": -500
                 },
                 "delay": {
                     "probablity": 0.2,
-                    "factor": 50
+                    "factor": 30
                 }
             },
             {
                 "name": "RE",
                 "level": "MEDIUM",
                 "contract": {
-                    "reward": 200,
-                    "fee": -2000,
-                    "refusePunishment": -2000,
+                    "reward": 300,
+                    "fee": -10000,
+                    "refusePunishment": -5000,
                     "acceptReward": 0,
-                    "reschedulePunishment": -100
+                    "reschedulePunishment": -150
                 },
                 "delay": {
                     "probablity": 0.1,
-                    "factor": 30
+                    "factor": 20
                 }
             },
             {
@@ -44,7 +44,7 @@ define(function() {
                 "level": "BASIC",
                 "contract": {
                     "reward": 100,
-                    "fee": -1000,
+                    "fee": -5000,
                     "refusePunishment": -1000,
                     "acceptReward": 500,
                     "reschedulePunishment": -50
@@ -71,14 +71,15 @@ define(function() {
        // this.platformCosts=-30000;
         this.shortTrack = -30000;
         this.mediumTrack = -100000;
-        this.longTrack = -200000;
-        this.upgrade1 = -100000;
-        this.upgrade2 = -1000000;
+        this.longTrack = -15000;
+        this.upgrade1 = -10000;
+        this.upgrade2 = -50000;
         this.startContracts=0;
         this.startContractsOffert = 10;
         this.iceCosts=-20000;
         this.reCosts=-10000;
-        this.refusePunishmentDown = 10; //%
+        this.refusePunishmentDown = 80; //%
+        this.increasingTrackCosts = .5;
         this.standardTime = 3000;
         return this;
     };

@@ -33,6 +33,7 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
        for(var i=0; i<this.balancing.startTracks; i++){
            upgrades.addTrack(LEVEL.BASIC);
        }
+       upgrades.showUpgrades();
        
        this.gameState.stopped=false;
        changeMoney(this.balancing.startMoney);

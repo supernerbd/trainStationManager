@@ -64,12 +64,13 @@ define(['jquery'], function($) {
                 game.init();
             });
          }
-         else{ //pause/unpause?
+         else{ 
+            game.gameState.stopped=true;
             var htmlString="<button id='buttonResumeGame'>Resume Game</button>";
             $("#overlayContent").html(htmlString);
             $("#buttonResumeGame").click(function(){
                 $("#overlay").fadeOut(200);
-                
+                game.gameState.stopped= false;
             });
          }
      }

@@ -46,17 +46,17 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
         this.balancing = new GameBalancing;
     };
     
-    function changeMoney(amount){ //game.gameState.moneyStack amount+" $"
+    function changeMoney(amount){ 
         game.gameState.money += amount;
         game.gameState.moneyStack.shift();
         game.gameState.moneyStack[2] = amount;
             var htmlString="<ul>";
         for (var i=2; i>=0; i--){
             if(game.gameState.moneyStack[i]>0){
-                htmlString+="<li class='plus'>"+game.gameState.moneyStack[i]+"</li>";
+                htmlString+="<li class='plus'>"+game.gameState.moneyStack[i]+" $</li>";
             }
             else{
-                htmlString+="<li class='minus'>"+game.gameState.moneyStack[i]+"</li>";
+                htmlString+="<li class='minus'>"+game.gameState.moneyStack[i]+" $</li>";
             }   
         }
         htmlString+="</ul>";
@@ -378,28 +378,30 @@ define(['jquery', 'GameState', 'GameBalancing'], function($, GameState, GameBala
     
     function gameLoopCalc(){        
         if (game.gameState.stopped===true) {
-        return;
-        }
-
-        if (game.gameState.time<380) {
-            //fees and rewards
-            $.each(game.gameState.table, function(i,event){
-                 if(event.time===game.gameState.time){
-                     if(event.track!==0){
-                         game.changeMoney(event.reward);
-                     }
-                     else{
-                         game.changeMoney(event.fee);
-                     }
-                 }
-            });
-            draw.createTable();
-            game.gameState.time++;
-            //console.log("the time is "+ui.displayTime(game.gameState.time));
-        } else {
-            changeDay();
-        }
         gameLoop();
+        }
+        else{
+
+            if (game.gameState.time<380) {
+                //fees and rewards
+                $.each(game.gameState.table, function(i,event){
+                     if(event.time===game.gameState.time){
+                         if(event.track!==0){
+                             game.changeMoney(event.reward);
+                         }
+                         else{
+                             game.changeMoney(event.fee);
+                         }
+                     }
+                });
+                draw.createTable();
+                game.gameState.time++;
+                //console.log("the time is "+ui.displayTime(game.gameState.time));
+            } else {
+                changeDay();
+            }
+            gameLoop();
+        }
     }
     
     function createOutsideDelay(trainName){

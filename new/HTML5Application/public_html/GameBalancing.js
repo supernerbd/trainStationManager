@@ -66,17 +66,17 @@ define(function() {
                 }
             }
         ];
-        this.startMoney = 5000;
+        this.startMoney = 15000;
         this.startTracks = 2;
        // this.platformCosts=-30000;
         this.shortTrack = -30000;
         this.mediumTrack = -100000;
-        this.longTrack = -15000;
-        this.upgrade1 = -10000;
+        this.longTrack = -5000;
+        this.upgrade1 = -16000;
         this.upgrade2 = -50000;
-        this.maintenanceLongTrack = -1000;
-        this.maintenanceUpgrade1 = -1000;
-        this.maintenanceUpgrade2 = -1000;
+        this.maintenanceLongTrack = -5000;
+        this.maintenanceUpgrade1 = -8000;
+        this.maintenanceUpgrade2 = -10000;
         this.startContracts=0;
         this.startContractsOffert = 10;
         this.iceCosts=-20000;

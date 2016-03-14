@@ -145,7 +145,8 @@ define(['jquery'], function($) {
                 if(!event.outsideDelay){
                     event.outsideDelay = game.createOutsideDelay(event.trainName);
                     event.time+=parseInt(event.outsideDelay,10);
-                    if(game.delayCollision(event.track, event.time, event.id)){
+                    //if(game.delayCollision(event.track, event.time, event.id)){
+                    if(event.outsideDelay!=="0"){
                         event.track=0;
                     }
                 }
